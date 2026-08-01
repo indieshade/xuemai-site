@@ -29,3 +29,12 @@ test("renders the promotional poster route", async () => {
   assert.match(html, /动态学习路径/);
   assert.match(html, /2590930875/);
 });
+
+test("renders the short-video product card route", async () => {
+  const response = await render("/card");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /short-video-card/);
+  assert.match(html, /WINDOWS ALPHA/);
+  assert.match(html, /2590930875/);
+});
