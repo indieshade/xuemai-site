@@ -41,7 +41,7 @@ export default function Home() {
           <p className="hero-lead">从一个词、一本书或一份资料开始。学脉陪你解释、阅读、练习和回顾，也把沿途形成的理解慢慢整理下来。</p>
           <div className="hero-actions">
             <a className="button-primary" href="#how">看看它怎样工作 <span aria-hidden="true">↓</span></a>
-            <a className="button-secondary" href="#alpha">Windows Alpha · 0.1.0</a>
+            <a className="button-secondary" href="#alpha">Windows Alpha · 0.1.0-alpha.4</a>
           </div>
           <div className="hero-notes" aria-label="产品特点">
             <span>不绑定单一模型</span><span>学习数据默认保存在本机</span><span>路径会随学习变化</span>

@@ -18,6 +18,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /把一个模糊的念头/);
   assert.match(html, /学习不是一问一答/);
   assert.match(html, /Windows x64/);
+  assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.4/);
   assert.doesNotMatch(html, /HelpMeLearn|codex-preview|SkeletonPreview/);
 });
 
@@ -36,5 +37,6 @@ test("renders the short-video product card route", async () => {
   const html = await response.text();
   assert.match(html, /short-video-card/);
   assert.match(html, /WINDOWS ALPHA/);
+  assert.match(html, /0\.1\.0-ALPHA\.4/);
   assert.match(html, /2590930875/);
 });
