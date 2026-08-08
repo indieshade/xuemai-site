@@ -1,3 +1,5 @@
+import ContactCard from "./ContactCard";
+
 const learningSteps = [
   {
     label: "从模糊处开始",
@@ -31,7 +33,7 @@ export default function Home() {
           <a href="#product">产品界面</a>
           <a href="#alpha">Alpha 测试</a>
         </div>
-        <a className="nav-cta" href="#alpha">申请测试 <span aria-hidden="true">↗</span></a>
+        <a className="nav-cta" href="#contact">联系作者 <span aria-hidden="true">↓</span></a>
       </nav>
 
       <section className="hero" id="top">
@@ -41,7 +43,7 @@ export default function Home() {
           <p className="hero-lead">从一个词、一本书或一份资料开始。学脉陪你解释、阅读、练习和回顾，也把沿途形成的理解慢慢整理下来。</p>
           <div className="hero-actions">
             <a className="button-primary" href="#how">看看它怎样工作 <span aria-hidden="true">↓</span></a>
-            <a className="button-secondary" href="#alpha">Windows Alpha · 0.1.0-alpha.4</a>
+            <a className="button-secondary" href="#contact">Windows Alpha · 0.1.0-alpha.5</a>
           </div>
           <div className="hero-notes" aria-label="产品特点">
             <span>不绑定单一模型</span><span>学习数据默认保存在本机</span><span>路径会随学习变化</span>
@@ -129,9 +131,12 @@ export default function Home() {
         <div className="alpha-copy">
           <span>Windows x64 · Alpha</span><h2>来走一段，<br />看看学习会留下什么。</h2>
           <p>当前版本面向早期体验者。安装包尚未进行商业签名，也暂时没有自动更新。</p>
-          <div className="alpha-actions"><a className="button-primary" href="tencent://message/?uin=2590930875">联系测试 ↗</a><code>反馈 QQ · 2590930875</code></div>
+          <div className="alpha-actions"><a className="button-primary" href="#contact">获取测试方式 ↓</a><code>暂不开放在线下载</code></div>
         </div>
-        <div className="alpha-meta"><div><span>版本</span><strong>0.1.0-alpha.4</strong></div><div><span>平台</span><strong>Windows x64</strong></div><div><span>数据</span><strong>本地优先</strong></div></div>
+        <aside className="alpha-aside">
+          <div className="alpha-meta"><div><span>版本</span><strong>0.1.0-alpha.5</strong></div><div><span>平台</span><strong>Windows x64</strong></div><div><span>数据</span><strong>本地优先</strong></div></div>
+          <ContactCard />
+        </aside>
       </section>
 
       <footer>
