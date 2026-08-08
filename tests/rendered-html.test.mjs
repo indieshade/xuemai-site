@@ -23,6 +23,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.5/);
   assert.match(html, /当前不开放在线下载/);
   assert.match(html, /2590930875/);
+  assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
   assert.doesNotMatch(html, /HelpMeLearn|codex-preview|SkeletonPreview/);
 });
 

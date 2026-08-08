@@ -73,11 +73,11 @@ export default function Home() {
 
       <section className="manifesto" id="how">
         <div className="manifesto-kicker">学习不是一问一答</div>
-        <p>普通 AI 对话记住的是消息。<br />学脉想记住的是，<em>你怎样一步步形成理解。</em></p>
+        <p>普通 AI 对话记住的是消息。学脉想记住的是，<em>你怎样一步步形成理解。</em></p>
       </section>
 
       <section className="steps-section">
-        <div className="section-heading"><span>一段真实学习如何发生</span><h2>你专注眼前的内容，<br />系统维护背后的脉络。</h2></div>
+        <div className="section-heading"><span>一段真实学习如何发生</span><h2>你专注眼前的内容，系统维护背后的脉络。</h2></div>
         <div className="steps-grid">
           {learningSteps.map((step, index) => (
             <article className="step-card" key={step.title}>
@@ -90,7 +90,7 @@ export default function Home() {
       <section className="product-section" id="product">
         <div className="product-copy">
           <span className="section-label">交互式学习</span>
-          <h2>不是给你一份课程表，<br />而是陪你把这一段走完。</h2>
+          <h2>不是给你一份课程表，而是陪你把这一段走完。</h2>
           <p>学脉会根据当下内容选择合适的教学动作。解释可以停下来细看，问题可以自由回答，必要时也会出现更贴合内容的选项。</p>
           <ul><li><i />支持 PDF 与文本资料</li><li><i />保存原文和对话摘录</li><li><i />节点完成后留下可回看的学习历程</li></ul>
         </div>
@@ -103,7 +103,7 @@ export default function Home() {
       <section className="product-section product-section-reverse">
         <div className="product-copy">
           <span className="section-label violet">兴趣罗盘</span>
-          <h2>还不知道学什么，<br />也可以先走近一点。</h2>
+          <h2>还不知道学什么，也可以先走近一点。</h2>
           <p>兴趣罗盘会从你当前在意的领域逐步缩小范围，生成三个可以立即进入的方向。它不是一次测试，也不会把这次选择当成结论。</p>
           <ul><li><i />从粗到细探索领域、行业和概念</li><li><i />由当前选择的 AI 引擎动态生成</li><li><i />保留探索记录，随时回来看看</li></ul>
         </div>
@@ -115,7 +115,7 @@ export default function Home() {
 
       <section className="engine-section">
         <div className="engine-heading">
-          <span className="section-label">你的学习空间</span><h2>AI 可以换，<br />走过的学习仍然留下。</h2>
+          <span className="section-label">你的学习空间</span><h2>AI 可以换，走过的学习仍然留下。</h2>
           <p>连接你已经在用的本地 CLI，或直接配置兼容模型 API。模型负责生成与推理，学脉负责旅程、资料、活动和本地数据。</p>
         </div>
         <div className="engine-console">
@@ -130,7 +130,7 @@ export default function Home() {
       <section className="alpha-section" id="alpha">
         <div className="alpha-path" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="alpha-copy">
-          <span>Windows x64 · Alpha</span><h2>来走一段，<br />看看学习会留下什么。</h2>
+          <span>Windows x64 · Alpha</span><h2>来走一段，看看学习会留下什么。</h2>
           <p>当前版本面向早期体验者。安装包尚未进行商业签名，也暂时没有自动更新。</p>
           <div className="alpha-actions"><a className="button-primary" href="#contact">获取测试方式 ↓</a><code>暂不开放在线下载</code></div>
         </div>
