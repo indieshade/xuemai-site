@@ -38,14 +38,10 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /xuemai-site
         run: npm test
 
-      - name: Disable Jekyll processing
-        run: touch out/.nojekyll
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: out
-          include-hidden-files: true
 
   deploy:
     environment:
