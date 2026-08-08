@@ -3,19 +3,19 @@ import { siteAsset } from "./site-path";
 
 const learningSteps = [
   {
-    label: "从模糊处开始",
-    title: "一个词，也足够开始",
-    body: "先进入主题，再从你的真实反应中理解兴趣、基础和方向。目标可以在学习里慢慢变清楚。",
+    label: "系统规划",
+    title: "根据当前状态，安排下一步学什么",
+    body: "从你的主题、材料和回答里判断：现在该解释、追问、阅读，还是练习。学习不必靠你一个人排进度。",
   },
   {
-    label: "保持思考",
-    title: "在解释、阅读和练习之间切换",
-    body: "需要理解时给出解释，需要辨别时提出问题，需要迁移时带你进入新的情境。",
+    label: "交互学习",
+    title: "在回应里参与，而不只是看答案",
+    body: "系统会在解释、阅读和练习之间切换；你每一次回答和选择，都会成为下一步互动的依据。",
   },
   {
-    label: "留下脉络",
-    title: "下次回来，不必重新开始",
-    body: "学习节点、摘录和概念联系会逐渐形成，已经走过的路仍然可以继续。",
+    label: "脉络总结",
+    title: "把已经形成的理解整理回来",
+    body: "学习节点、摘录、练习和概念联系会逐渐沉淀成可回看的脉络，帮助你知道自己走到了哪里。",
   },
 ];
 
@@ -39,15 +39,15 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-pulse" />本地优先的桌面学习系统</div>
-          <h1>把一个模糊的念头，<span>变成一段真正走过的学习。</span></h1>
-          <p className="hero-lead">从一个词、一本书或一份资料开始。学脉陪你解释、阅读、练习和回顾，也把沿途形成的理解慢慢整理下来。</p>
+          <div className="eyebrow"><span className="eyebrow-pulse" />本地优先的交互式 AI 学习系统</div>
+          <h1><span className="hero-title-system">交互式 AI</span><span className="hero-title-system hero-title-system-tail">学习系统，</span><span className="hero-title-promise">陪你真正学下去。</span></h1>
+          <p className="hero-lead">学脉会根据你正在学的内容，持续安排解释、追问、阅读、练习和复习。你不必独自在聊天记录、笔记与待办之间拼凑计划；系统规划下一步，也持续总结这段学习已经形成的脉络。</p>
           <div className="hero-actions">
-            <a className="button-primary" href="#how">看看它怎样工作 <span aria-hidden="true">↓</span></a>
+            <a className="button-primary" href="#how">看看它怎样辅助学习 <span aria-hidden="true">↓</span></a>
             <a className="button-secondary" href="#contact">Windows Alpha · 0.1.0-alpha.5</a>
           </div>
           <div className="hero-notes" aria-label="产品特点">
-            <span>不绑定单一模型</span><span>学习数据默认保存在本机</span><span>路径会随学习变化</span>
+            <span>系统规划下一步</span><span>交互式推进学习</span><span>持续总结学习脉络</span>
           </div>
         </div>
 
@@ -72,12 +72,12 @@ export default function Home() {
       </section>
 
       <section className="manifesto" id="how">
-        <div className="manifesto-kicker">学习不是一问一答</div>
-        <p>普通 AI 对话记住的是消息。学脉想记住的是，<em>你怎样一步步形成理解。</em></p>
+        <div className="manifesto-kicker">AI 不只回答，也参与学习</div>
+        <p><span className="manifesto-sentence">学脉不只是对话框。</span><br className="desktop-break" /><span className="manifesto-sentence">它会安排学习、<br className="mobile-break" />邀请回应，</span><br className="desktop-break" /><em className="manifesto-sentence">把每一步汇成<br className="mobile-break" />学习脉络。</em></p>
       </section>
 
       <section className="steps-section">
-        <div className="section-heading"><span>一段真实学习如何发生</span><h2>你专注眼前的内容，系统维护背后的脉络。</h2></div>
+        <div className="section-heading"><span>系统如何陪你把学习推进下去</span><h2>系统规划下一步，<br className="desktop-break" />也总结学习脉络。</h2></div>
         <div className="steps-grid">
           {learningSteps.map((step, index) => (
             <article className="step-card" key={step.title}>
@@ -90,33 +90,33 @@ export default function Home() {
       <section className="product-section" id="product">
         <div className="product-copy">
           <span className="section-label">交互式学习</span>
-          <h2>不是给你一份课程表，而是陪你把这一段走完。</h2>
-          <p>学脉会根据当下内容选择合适的教学动作。解释可以停下来细看，问题可以自由回答，必要时也会出现更贴合内容的选项。</p>
-          <ul><li><i />支持 PDF 与文本资料</li><li><i />保存原文和对话摘录</li><li><i />节点完成后留下可回看的学习历程</li></ul>
+          <h2>AI 不只回答。<br className="desktop-break" />它会带你互动学习。</h2>
+          <p>学脉不把学习当成单次问答。它会根据当前内容选择合适的教学动作：需要理解时解释，需要辨别时提问，需要迁移时带你练习；你的回应会继续影响后面的安排。</p>
+          <ul><li><i />系统根据当前学习状态安排下一步互动</li><li><i />在对话、阅读和练习之间自然切换</li><li><i />把每一次互动沉淀进学习脉络</li></ul>
         </div>
         <div className="product-shot conversation-shot">
-          <div className="shot-caption"><span>01</span> 在对话、阅读与练习之间自然切换</div>
+          <div className="shot-caption"><span>01</span> 根据当前学习状态，安排下一步互动</div>
           <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉学习对话截图" />
         </div>
       </section>
 
       <section className="product-section product-section-reverse">
         <div className="product-copy">
-          <span className="section-label violet">兴趣罗盘</span>
-          <h2>还不知道学什么，也可以先走近一点。</h2>
-          <p>兴趣罗盘会从你当前在意的领域逐步缩小范围，生成三个可以立即进入的方向。它不是一次测试，也不会把这次选择当成结论。</p>
-          <ul><li><i />从粗到细探索领域、行业和概念</li><li><i />由当前选择的 AI 引擎动态生成</li><li><i />保留探索记录，随时回来看看</li></ul>
+          <span className="section-label violet">系统规划学习的起点</span>
+          <h2>还没想好学什么，<br className="desktop-break" />系统先帮你定起点。</h2>
+          <p>兴趣罗盘会从你当下在意的内容逐步缩小范围，生成几个可立即进入的学习方向。它不是一次测试，而是系统为接下来一段学习做的起点规划。</p>
+          <ul><li><i />从粗到细探索领域、行业和概念</li><li><i />由你选择的 AI 引擎动态生成方向</li><li><i />保留探索记录，作为下一次规划的依据</li></ul>
         </div>
         <div className="product-shot compass-shot">
-          <div className="shot-caption"><span>02</span> 从兴趣进入一段具体的学习</div>
+          <div className="shot-caption"><span>02</span> 从兴趣出发，规划一段具体的学习</div>
           <img src={siteAsset("/screenshots/interest-compass.png")} alt="学脉兴趣罗盘截图" />
         </div>
       </section>
 
       <section className="engine-section">
         <div className="engine-heading">
-          <span className="section-label">你的学习空间</span><h2>AI 可以换，走过的学习仍然留下。</h2>
-          <p>连接你已经在用的本地 CLI，或直接配置兼容模型 API。模型负责生成与推理，学脉负责旅程、资料、活动和本地数据。</p>
+          <span className="section-label">学习脉络，始终由你保存</span><h2>AI 可以换。<br className="desktop-break" />学习脉络一直在。</h2>
+          <p>你可以按自己已有的习惯连接本地 CLI 或模型 API。引擎负责生成与推理；学习的计划、节点、材料、练习和总结，始终由学脉保留在本地。</p>
         </div>
         <div className="engine-console">
           <div className="console-top"><span>AI 引擎</span><small>由你选择</small></div>

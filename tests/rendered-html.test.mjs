@@ -18,7 +18,9 @@ test("renders the 学脉 landing page", async () => {
   const html = await response.text();
   assert.match(html, /<title>学脉/);
   assert.match(html, /把一个模糊的念头/);
-  assert.match(html, /学习不是一问一答/);
+  assert.match(html, /交互式 AI 学习系统/);
+  assert.match(html, /系统规划下一步/);
+  assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
   assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.5/);
   assert.match(html, /当前不开放在线下载/);
