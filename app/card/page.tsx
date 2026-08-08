@@ -1,4 +1,5 @@
 import "./card.css";
+import { siteAsset } from "../site-path";
 
 export default function ProductCard() {
   return (
@@ -9,7 +10,7 @@ export default function ProductCard() {
 
         <header className="name-card-header">
           <div className="name-card-brand">
-            <img src="/xuemai-icon.png" alt="学脉" />
+            <img src={siteAsset("/xuemai-icon.png")} alt="学脉" />
             <span>INDIE SHADE PRODUCT</span>
           </div>
           <span className="name-card-version">WINDOWS ALPHA · 0.1.0-ALPHA.5</span>

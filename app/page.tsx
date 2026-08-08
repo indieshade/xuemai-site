@@ -1,4 +1,5 @@
 import ContactCard from "./ContactCard";
+import { siteAsset } from "./site-path";
 
 const learningSteps = [
   {
@@ -25,7 +26,7 @@ export default function Home() {
     <main>
       <nav className="nav-shell" aria-label="主导航">
         <a className="brand" href="#top" aria-label="学脉首页">
-          <img src="/xuemai-icon.png" alt="" />
+          <img src={siteAsset("/xuemai-icon.png")} alt="" />
           <span>学脉</span>
         </a>
         <div className="nav-links">
@@ -59,11 +60,11 @@ export default function Home() {
           </div>
           <div className="app-window hero-window">
             <div className="window-bar">
-              <div className="window-brand"><img src="/xuemai-icon.png" alt="" /><span>学脉</span></div>
+              <div className="window-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><span>学脉</span></div>
               <div className="window-stage">学习阶段 3 / 4 · 尝试应用</div>
               <div className="window-status"><i /> AI 可用</div>
             </div>
-            <img className="window-screenshot" src="/screenshots/learning-dialogue.png" alt="学脉交互式学习对话界面" />
+            <img className="window-screenshot" src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉交互式学习对话界面" />
           </div>
           <div className="floating-note note-one"><small>系统正在记住</small><strong>你能把“冲突”用在新的情境里</strong></div>
           <div className="floating-note note-two"><span>✓</span><div><small>一段学习已经形成</small><strong>下次从这里继续</strong></div></div>
@@ -95,7 +96,7 @@ export default function Home() {
         </div>
         <div className="product-shot conversation-shot">
           <div className="shot-caption"><span>01</span> 在对话、阅读与练习之间自然切换</div>
-          <img src="/screenshots/learning-dialogue.png" alt="学脉学习对话截图" />
+          <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉学习对话截图" />
         </div>
       </section>
 
@@ -108,7 +109,7 @@ export default function Home() {
         </div>
         <div className="product-shot compass-shot">
           <div className="shot-caption"><span>02</span> 从兴趣进入一段具体的学习</div>
-          <img src="/screenshots/interest-compass.png" alt="学脉兴趣罗盘截图" />
+          <img src={siteAsset("/screenshots/interest-compass.png")} alt="学脉兴趣罗盘截图" />
         </div>
       </section>
 
@@ -140,7 +141,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><img src="/xuemai-icon.png" alt="" /><div><strong>学脉</strong><span>Indie Shade Product · Created by 影下独作</span></div></div>
+        <div className="footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><div><strong>学脉</strong><span>Indie Shade Product · Created by 影下独作</span></div></div>
         <p>把一个模糊的念头，变成一段真正走过的学习。</p><span>© 2026 影下独作</span>
       </footer>
     </main>

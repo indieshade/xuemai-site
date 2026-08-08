@@ -38,9 +38,16 @@ yarn-error.log*
 next-env.d.ts
 /dist/
 /.wrangler/
+/output/
 /outputs/
 /work/
 
 # local preview and browser QA
 /.playwright-cli/
 /dev-server.log
+
+# local promotion workspace (never publish with the website)
+/content/
+/scripts/
+/video/
+/宣发工作台.md
