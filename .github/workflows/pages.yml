@@ -34,8 +34,6 @@ jobs:
         run: npm ci
 
       - name: Build static website
-        env:
-          NEXT_PUBLIC_BASE_PATH: /xuemai-site
         run: npm test
 
       - name: Upload Pages artifact
