@@ -22,8 +22,10 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /系统规划下一步/);
   assert.match(html, /学习脉络/);
   assert.match(html, /向下滚动，/);
-  assert.match(html, /截自一次真实的经济学学习/);
-  assert.match(html, /利润最大化/);
+  assert.match(html, /截自一次真实的《国富论》学习/);
+  assert.match(html, /读懂《国富论》的核心论证/);
+  assert.match(html, /已记录的理解/);
+  assert.match(html, /特权垄断/);
   assert.match(html, /交互式学习，/);
   assert.match(html, /走出专属于你的学习脉络/);
   assert.match(html, /Windows x64/);

@@ -11,48 +11,71 @@ type DialogueMessage = {
 
 const messages: DialogueMessage[] = [
   {
-    id: "question-1",
+    id: "division-question",
     role: "learner",
     phase: 0,
-    content: "如果要高效学习，先学什么比较好呢？",
+    content:
+      "我认为分工主要是把串行的任务拆解为了更高效的小任务，以及识别到可以并行的任务，从而把原来串行的任务进一步提效。",
   },
   {
-    id: "answer-1",
+    id: "division-answer",
     role: "mentor",
     phase: 0,
     content:
-      "先从“利润最大化”入手。它贯穿微观经济学：从完全竞争到完全垄断，最优产量都绕不开同一条规则——边际收益等于边际成本。",
+      "你的“瓶颈拆解”和“串行转并行”抓住了两条关键机制：熟练度提升、切换成本归零。斯密还补了一条——专注一道工序的人，更容易发明改进工具。",
   },
   {
-    id: "question-2",
+    id: "market-question",
     role: "learner",
     phase: 1,
-    content: "好，那就开始教我吧。",
+    content:
+      "所以人其实只是适应环境，做得更加专精或者更加不专精；影响这个环境的因素有很多，是这个意思吗？",
   },
   {
-    id: "answer-2",
+    id: "market-answer",
     role: "mentor",
     phase: 1,
     content:
-      "好。我们用一个完整例子走一遍“利润最大化”：既看 MR = MC 怎样发挥作用，也把完全竞争和完全垄断的区别看清。",
+      "方向是对的。但斯密的推论不是找一个规划者去设计分工，而是拆除关税、行会与专卖等壁垒，让交换范围扩大，分工自然深化。",
   },
   {
-    id: "question-3",
+    id: "monopoly-question",
     role: "learner",
     phase: 2,
     content:
-      "MR 和 MC 全称是什么？成本和价格都 10 元不就不亏不赚了吗？垄断的部分我还没理解清楚，能用图更直观地解释吗？",
+      "政府退场之后，市场自由发展，难道不会有垄断吗？它会不会反过来阻碍交换？斯密预测过这种情况吗？",
   },
   {
-    id: "answer-3",
+    id: "monopoly-answer",
     role: "mentor",
     phase: 2,
     content:
-      "先拆开第一个问题：MR 是边际收益，MC 是边际成本。“两者相等”不是不赚不亏，而是多生产一单位时，新增收入恰好等于新增成本。接下来我们把它画到图上。",
+      "这个问题问得很准。斯密反对政府制造的特权垄断，也警惕商人合谋；他留给政府的职能是司法、反欺诈与维护竞争规则，而不是替市场定价和分配资源。",
   },
 ];
 
-const phases = [0, 1, 2, 3];
+const phases = [
+  {
+    title: "分工如何提效",
+    detail: "从你的“串行 → 并行”类比出发",
+    objective: "辨认分工的三条提效机制",
+  },
+  {
+    title: "市场范围的限制",
+    detail: "从效率推到交换环境",
+    objective: "理解为什么分工不能凭意愿发生",
+  },
+  {
+    title: "自由与竞争的边界",
+    detail: "用“垄断怎么办”压力测试斯密",
+    objective: "区分特权垄断与维护竞争规则",
+  },
+  {
+    title: "形成自己的论证链",
+    detail: "把本轮理解沉淀为可回看的脉络",
+    objective: "从对话进入下一次判断",
+  },
+];
 
 export default function LearningDialogue() {
   const [activePhase, setActivePhase] = useState(0);
@@ -79,60 +102,124 @@ export default function LearningDialogue() {
   const completedMessages = messages.filter((message) => message.phase <= activePhase);
   const visibleStart = Math.max(0, completedMessages.length - 3);
   const isFinal = activePhase === phases.length - 1;
+  const currentPhase = phases[activePhase];
 
   return (
     <section className="learning-demo-section" aria-labelledby="learning-demo-heading">
       <div className="learning-demo-shell">
         <header className="learning-demo-header">
-          <span className="section-label">截自一次真实的经济学学习</span>
+          <span className="section-label">截自一次真实的《国富论》学习</span>
           <h2 id="learning-demo-heading">
             向下滚动，
             <br className="dialogue-heading-break" />
             看一段对话怎样继续。
           </h2>
-          <p>每一次追问，都会决定下一步该从哪里继续。</p>
+          <p>不是堆叠答案，而是把你的判断接进一条正在形成的学习脉络。</p>
         </header>
 
         <div className="learning-demo-scroll">
           <div className="learning-demo-stage">
-            <div className={`dialogue-mockup ${isFinal ? "is-final" : ""}`}>
+            <div className={`dialogue-mockup dialogue-workspace-shell ${isFinal ? "is-final" : ""}`}>
               <div className="dialogue-topbar">
                 <span className="dialogue-brand"><i />学脉</span>
-                <span className="dialogue-status">学习进行中</span>
-                <span className="dialogue-live"><i />AI 正在陪学</span>
+                <div className="dialogue-nav" aria-label="产品导航">
+                  <span className="is-current">学习</span>
+                  <span>脉络</span>
+                  <span>资料</span>
+                </div>
+                <span className="dialogue-live"><i />已自动保存</span>
               </div>
 
-              <div className="dialogue-context">
-                <span>当前材料</span>
-                <strong>2026 金博老师经济学（1–10）解析整理</strong>
-                <small>对话摘录 · 已隐去时间信息</small>
-              </div>
+              <div className="dialogue-workspace">
+                <aside className="learning-sidebar" aria-label="当前学习脉络">
+                  <div className="learning-sidebar-head">
+                    <span>当前学习</span>
+                    <strong>读懂《国富论》的核心论证</strong>
+                    <small>卷一 · 分工与市场范围</small>
+                  </div>
 
-              <div className="dialogue-thread" aria-live="polite">
-                {messages.map((message) => {
-                  const completedIndex = completedMessages.findIndex(
-                    (completedMessage) => completedMessage.id === message.id,
-                  );
-                  const isVisible = completedIndex >= visibleStart;
-                  const isLatest = completedIndex === completedMessages.length - 1;
+                  <div className="learning-objective">
+                    <span>本轮目标</span>
+                    <p>{currentPhase.objective}</p>
+                  </div>
 
-                  return (
-                    <article
-                      className={`dialogue-message dialogue-message-${message.role} ${
-                        isVisible ? "is-visible" : ""
-                      } ${isLatest ? "is-latest" : ""}`}
-                      key={message.id}
-                      aria-hidden={!isVisible}
-                    >
-                      <span>{message.role === "learner" ? "你" : "学脉"}</span>
-                      <p>{message.content}</p>
-                    </article>
-                  );
-                })}
+                  <ol className="learning-trail">
+                    {phases.map((phase, index) => (
+                      <li
+                        className={index < activePhase ? "is-complete" : index === activePhase ? "is-active" : ""}
+                        key={phase.title}
+                      >
+                        <i>{index < activePhase ? "✓" : String(index + 1).padStart(2, "0")}</i>
+                        <div>
+                          <strong>{phase.title}</strong>
+                          <span>{phase.detail}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+
+                  <div className="learning-memory">
+                    <span>已记录的理解</span>
+                    <p>“串行任务拆解 + 识别可并行步骤”</p>
+                  </div>
+                </aside>
+
+                <section className="conversation-pane" aria-label="学习对话摘录">
+                  <header className="conversation-header">
+                    <div>
+                      <span>正在推进</span>
+                      <strong>{currentPhase.title}</strong>
+                    </div>
+                    <div className="conversation-meta">
+                      <span>对话摘录</span>
+                      <i>{activePhase + 1} / {phases.length}</i>
+                    </div>
+                  </header>
+
+                  <div className="conversation-context">
+                    <span>学习材料</span>
+                    <strong>《国富论》· “劳动分工受市场范围限制”</strong>
+                    <small>根据你的回答调整下一步</small>
+                  </div>
+
+                  <div className="dialogue-thread" aria-live="polite">
+                    {messages.map((message) => {
+                      const completedIndex = completedMessages.findIndex(
+                        (completedMessage) => completedMessage.id === message.id,
+                      );
+                      const isVisible = completedIndex >= visibleStart;
+                      const isLatest = completedIndex === completedMessages.length - 1;
+
+                      return (
+                        <article
+                          className={`dialogue-message dialogue-message-${message.role} ${
+                            isVisible ? "is-visible" : ""
+                          } ${isLatest ? "is-latest" : ""}`}
+                          key={message.id}
+                          aria-hidden={!isVisible}
+                        >
+                          <span>{message.role === "learner" ? "你" : "学脉 · 引导"}</span>
+                          <p>{message.content}</p>
+                        </article>
+                      );
+                    })}
+                  </div>
+
+                  <div className="dialogue-composer" aria-label="继续学习输入框示意">
+                    <span>沿着当前学习脉络继续往下带我学习</span>
+                    <kbd>Enter</kbd>
+                    <i>发送</i>
+                  </div>
+                </section>
               </div>
 
               <div className={`dialogue-claim ${isFinal ? "is-visible" : ""}`}>
-                <span>不是更多回答，而是下一步刚好接住你。</span>
+                <span>学习脉络 · 已更新</span>
+                <ul>
+                  <li>分工不只拆步骤，也积累改进洞察</li>
+                  <li>市场范围决定分工能走多深</li>
+                  <li>自由交换仍需要竞争规则</li>
+                </ul>
                 <strong>
                   交互式学习，
                   <br className="slogan-break" />
@@ -141,20 +228,20 @@ export default function LearningDialogue() {
               </div>
 
               <div className="dialogue-progress" aria-hidden="true">
-                {phases.map((phase) => (
-                  <i className={phase <= activePhase ? "is-active" : ""} key={phase} />
+                {phases.map((phase, index) => (
+                  <i className={index <= activePhase ? "is-active" : ""} key={phase.title} />
                 ))}
               </div>
             </div>
           </div>
 
           <div className="dialogue-scroll-triggers" aria-hidden="true">
-            {phases.map((phase) => (
+            {phases.map((phase, index) => (
               <div
                 className="dialogue-scroll-trigger"
-                key={phase}
+                key={phase.title}
                 ref={(element) => {
-                  triggerRefs.current[phase] = element;
+                  triggerRefs.current[index] = element;
                 }}
               />
             ))}
