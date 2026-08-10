@@ -2,153 +2,163 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const scenes = [
-  {
-    eyebrow: "从一个真实困惑开始",
-    title: "不是“学过了”，而是“我到底懂了吗？”",
-    body: "你不必先把问题说得很完整。学脉会从一句模糊的感受开始，帮你找到值得继续追问的地方。",
-  },
-  {
-    eyebrow: "在回应里暴露理解",
-    title: "让你的判断，决定下一步怎么学",
-    body: "系统不急着给结论。它先邀请你解释、辨别，再根据你的回答切换到更合适的学习动作。",
-  },
-  {
-    eyebrow: "把过程留成脉络",
-    title: "每一次卡住，也成为下一次出发的依据",
-    body: "你的困惑、回答、例子和练习会被整理回来；下次打开时，不必重新从一片空白开始。",
-  },
-  {
-    eyebrow: "这才是交互式学习",
-    title: "不是多聊几句，而是走完一段学习",
-    body: "答案会过去，学习留下来的脉络会继续陪你往下走。",
-  },
-];
-
 type DialogueMessage = {
+  id: string;
+  role: "learner" | "mentor";
   phase: number;
-  role: "learner" | "system" | "summary";
-  label: string;
-  text: string;
+  content: string;
 };
 
 const messages: DialogueMessage[] = [
   {
-    phase: 0,
+    id: "question-1",
     role: "learner",
-    label: "你",
-    text: "我总觉得自己把知识点记住了，但过两天就说不清它到底在讲什么。",
-  },
-  {
     phase: 0,
-    role: "system",
-    label: "学脉",
-    text: "先不用急着记更多。试着用自己的话说说：你觉得“记住”和“理解”最大的差别是什么？",
+    content: "如果要高效学习，先学什么比较好呢？",
   },
   {
-    phase: 1,
+    id: "answer-1",
+    role: "mentor",
+    phase: 0,
+    content:
+      "先从“利润最大化”入手。它贯穿微观经济学：从完全竞争到完全垄断，最优产量都绕不开同一条规则——边际收益等于边际成本。",
+  },
+  {
+    id: "question-2",
     role: "learner",
-    label: "你",
-    text: "记住像是能复述；理解应该是换一个例子，也知道它为什么成立。",
-  },
-  {
     phase: 1,
-    role: "system",
-    label: "学脉",
-    text: "很好。那我们不再重复定义，换一个新情境，看看你能不能用这个判断解释它。",
+    content: "好，那就开始教我吧。",
   },
   {
+    id: "answer-2",
+    role: "mentor",
+    phase: 1,
+    content:
+      "好。我们用一个完整例子走一遍“利润最大化”：既看 MR = MC 怎样发挥作用，也把完全竞争和完全垄断的区别看清。",
+  },
+  {
+    id: "question-3",
+    role: "learner",
     phase: 2,
-    role: "summary",
-    label: "学习脉络 · 已更新",
-    text: "你已经区分了“复述”与“迁移”。下一步：用一个自己的例子验证这个判断。",
+    content:
+      "MR 和 MC 全称是什么？成本和价格都 10 元不就不亏不赚了吗？垄断的部分我还没理解清楚，能用图更直观地解释吗？",
+  },
+  {
+    id: "answer-3",
+    role: "mentor",
+    phase: 2,
+    content:
+      "先拆开第一个问题：MR 是边际收益，MC 是边际成本。“两者相等”不是不赚不亏，而是多生产一单位时，新增收入恰好等于新增成本。接下来我们把它画到图上。",
   },
 ];
 
+const phases = [0, 1, 2, 3];
+
 export default function LearningDialogue() {
-  const [activeScene, setActiveScene] = useState(0);
-  const sceneRefs = useRef<Array<HTMLElement | null>>([]);
+  const [activePhase, setActivePhase] = useState(0);
+  const triggerRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const observers = triggerRefs.current.flatMap((trigger, phase) => {
+      if (!trigger) return [];
 
-        if (visibleEntry) {
-          const index = Number(visibleEntry.target.getAttribute("data-scene"));
-          setActiveScene(index);
-        }
-      },
-      { rootMargin: "-34% 0px -38% 0px", threshold: [0.2, 0.45, 0.7] },
-    );
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActivePhase(phase);
+        },
+        { threshold: 0.55 },
+      );
 
-    const currentScenes = sceneRefs.current;
-    currentScenes.forEach((scene) => scene && observer.observe(scene));
+      observer.observe(trigger);
+      return [observer];
+    });
 
-    return () => observer.disconnect();
+    return () => observers.forEach((observer) => observer.disconnect());
   }, []);
 
+  const completedMessages = messages.filter((message) => message.phase <= activePhase);
+  const visibleStart = Math.max(0, completedMessages.length - 3);
+  const isFinal = activePhase === phases.length - 1;
+
   return (
-    <section className="learning-demo-section" aria-labelledby="learning-demo-title">
+    <section className="learning-demo-section" aria-labelledby="learning-demo-heading">
       <div className="learning-demo-shell">
         <header className="learning-demo-header">
-          <span className="section-label">一段正在发生的学习</span>
-          <h2 id="learning-demo-title">往下走，看一段学习<br className="desktop-break" />怎样被真正推进。</h2>
-          <p>这不是聊天记录的堆叠，而是一段会依据你的回答继续变化的学习过程。</p>
+          <span className="section-label">截自一次真实的经济学学习</span>
+          <h2 id="learning-demo-heading">
+            向下滚动，
+            <br className="dialogue-heading-break" />
+            看一段对话怎样继续。
+          </h2>
+          <p>每一次追问，都会决定下一步该从哪里继续。</p>
         </header>
 
-        <div className="learning-demo-stage" aria-label="交互式学习对话示例">
-          <div className="dialogue-mockup">
-            <div className="dialogue-topbar">
-              <div className="dialogue-product"><i /><span>学脉</span></div>
-              <span>学习进行中</span>
-              <div className="dialogue-live"><i />AI 正在陪学</div>
-            </div>
+        <div className="learning-demo-scroll">
+          <div className="learning-demo-stage">
+            <div className={`dialogue-mockup ${isFinal ? "is-final" : ""}`}>
+              <div className="dialogue-topbar">
+                <span className="dialogue-brand"><i />学脉</span>
+                <span className="dialogue-status">学习进行中</span>
+                <span className="dialogue-live"><i />AI 正在陪学</span>
+              </div>
 
-            <div className="dialogue-context">
-              <span>当前主题</span>
-              <strong>理解，究竟发生在什么时候？</strong>
-              <small>学习阶段 {Math.min(activeScene + 1, 3)} / 3</small>
-            </div>
+              <div className="dialogue-context">
+                <span>当前材料</span>
+                <strong>2026 金博老师经济学（1–10）解析整理</strong>
+                <small>对话摘录 · 已隐去时间信息</small>
+              </div>
 
-            <div className="dialogue-thread" aria-live="polite">
-              {messages.map((message, index) => (
-                <article
-                  className={`dialogue-message ${message.role} ${activeScene >= message.phase ? "is-visible" : ""}`}
-                  key={`${message.role}-${index}`}
-                >
-                  <span>{message.label}</span>
-                  <p>{message.text}</p>
-                </article>
-              ))}
-            </div>
+              <div className="dialogue-thread" aria-live="polite">
+                {messages.map((message) => {
+                  const completedIndex = completedMessages.findIndex(
+                    (completedMessage) => completedMessage.id === message.id,
+                  );
+                  const isVisible = completedIndex >= visibleStart;
+                  const isLatest = completedIndex === completedMessages.length - 1;
 
-            <div className={`dialogue-claim ${activeScene === scenes.length - 1 ? "is-visible" : ""}`}>
-              <span>学习不是一串回答</span>
-              <strong>交互式学习，<br className="slogan-break" />走出专属于你的学习脉络。</strong>
-            </div>
+                  return (
+                    <article
+                      className={`dialogue-message dialogue-message-${message.role} ${
+                        isVisible ? "is-visible" : ""
+                      } ${isLatest ? "is-latest" : ""}`}
+                      key={message.id}
+                      aria-hidden={!isVisible}
+                    >
+                      <span>{message.role === "learner" ? "你" : "学脉"}</span>
+                      <p>{message.content}</p>
+                    </article>
+                  );
+                })}
+              </div>
 
-            <div className="dialogue-progress" aria-hidden="true">
-              {scenes.map((scene, index) => <i className={activeScene >= index ? "is-active" : ""} key={scene.title} />)}
+              <div className={`dialogue-claim ${isFinal ? "is-visible" : ""}`}>
+                <span>不是更多回答，而是下一步刚好接住你。</span>
+                <strong>
+                  交互式学习，
+                  <br className="slogan-break" />
+                  走出专属于你的学习脉络。
+                </strong>
+              </div>
+
+              <div className="dialogue-progress" aria-hidden="true">
+                {phases.map((phase) => (
+                  <i className={phase <= activePhase ? "is-active" : ""} key={phase} />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="learning-demo-story">
-          {scenes.map((scene, index) => (
-            <article
-              className={`learning-scene ${activeScene === index ? "is-active" : ""}`}
-              data-scene={index}
-              key={scene.title}
-              ref={(element) => { sceneRefs.current[index] = element; }}
-            >
-              <span>0{index + 1} · {scene.eyebrow}</span>
-              <h3>{scene.title}</h3>
-              <p>{scene.body}</p>
-            </article>
-          ))}
+          <div className="dialogue-scroll-triggers" aria-hidden="true">
+            {phases.map((phase) => (
+              <div
+                className="dialogue-scroll-trigger"
+                key={phase}
+                ref={(element) => {
+                  triggerRefs.current[phase] = element;
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
