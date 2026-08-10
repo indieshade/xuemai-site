@@ -1,4 +1,5 @@
 import ContactCard from "./ContactCard";
+import LearningDialogue from "./LearningDialogue";
 import { siteAsset } from "./site-path";
 
 const learningSteps = [
@@ -112,6 +113,8 @@ export default function Home() {
           <img src={siteAsset("/screenshots/interest-compass.png")} alt="学脉兴趣罗盘截图" />
         </div>
       </section>
+
+      <LearningDialogue />
 
       <section className="engine-section">
         <div className="engine-heading">
