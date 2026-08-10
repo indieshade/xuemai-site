@@ -52,6 +52,33 @@ const messages: DialogueMessage[] = [
     content:
       "这个问题问得很准。斯密反对政府制造的特权垄断，也警惕商人合谋；他留给政府的职能是司法、反欺诈与维护竞争规则，而不是替市场定价和分配资源。",
   },
+  {
+    id: "mercantilism-question",
+    role: "learner",
+    phase: 3,
+    content: "我选择：了解斯密当时反对的重商主义——对比才能看出他真正的突破。",
+  },
+  {
+    id: "mercantilism-answer",
+    role: "mentor",
+    phase: 3,
+    content:
+      "很好。重商主义把财富等同于金银、把贸易当成零和；斯密换掉了问题：财富来自分工的产出，交换让双方把资源用到更有效率的地方。",
+  },
+  {
+    id: "wine-question",
+    role: "learner",
+    phase: 4,
+    content:
+      "进口同等质量却更便宜的葡萄酒，等于省下生产它的劳动力，并把这些劳动力释放给更合适的生产；市场会用价格继续判断这种交换。",
+  },
+  {
+    id: "wine-answer",
+    role: "mentor",
+    phase: 4,
+    content:
+      "你用“节省生产力”解释得很准。斯密会说，强制自给自足等于放弃不同地区的优势；价格信号不需要贸易总指挥，也会持续引导交换。",
+  },
 ];
 
 const phases = [
@@ -69,6 +96,16 @@ const phases = [
     title: "自由与竞争的边界",
     detail: "用“垄断怎么办”压力测试斯密",
     objective: "区分特权垄断与维护竞争规则",
+  },
+  {
+    title: "重商主义的对比",
+    detail: "看斯密究竟换掉了什么问题",
+    objective: "区分财富、金银与贸易的不同前提",
+  },
+  {
+    title: "交换如何创造国富",
+    detail: "用进口葡萄酒检验论证链",
+    objective: "把价格、优势与资源流动连起来",
   },
   {
     title: "形成自己的论证链",
@@ -214,11 +251,12 @@ export default function LearningDialogue() {
               </div>
 
               <div className={`dialogue-claim ${isFinal ? "is-visible" : ""}`}>
-                <span>学习脉络 · 已更新</span>
+                <span>本轮学习已形成脉络</span>
+                <p>这不是对话结束，而是下一次判断可以从这里继续。</p>
                 <ul>
                   <li>分工不只拆步骤，也积累改进洞察</li>
                   <li>市场范围决定分工能走多深</li>
-                  <li>自由交换仍需要竞争规则</li>
+                  <li>交换节省生产力，也需要竞争规则</li>
                 </ul>
                 <strong>
                   交互式学习，
