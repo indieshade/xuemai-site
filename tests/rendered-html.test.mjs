@@ -12,6 +12,10 @@ async function render(pathname = "/") {
   return new Response(html, { status: 200, headers: { "content-type": "text/html" } });
 }
 
+async function readOutputFile(filename) {
+  return readFile(path.join(projectRoot, "out", filename), "utf8");
+}
+
 test("renders the 学脉 landing page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -53,4 +57,23 @@ test("renders the short-video product card route", async () => {
   assert.match(html, /WINDOWS ALPHA/);
   assert.match(html, /0\.1\.0-ALPHA\.5/);
   assert.match(html, /2590930875/);
+});
+
+test("renders the search-ready interactive learning guide", async () => {
+  const response = await render("/interactive-ai-learning-system");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /什么是交互式 AI 学习系统？/);
+  assert.match(html, /它和普通 AI 对话有什么不同？/);
+  assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
+  assert.match(html, /SoftwareApplication/);
+  assert.match(html, /https:\/\/helplearn\.cn\/og\.png/);
+});
+
+test("publishes crawl instructions and the public sitemap", async () => {
+  const robots = await readOutputFile("robots.txt");
+  const sitemap = await readOutputFile("sitemap.xml");
+  assert.match(robots, /User-Agent: OAI-SearchBot/);
+  assert.match(robots, /Sitemap: https:\/\/helplearn\.cn\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
 });

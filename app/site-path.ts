@@ -4,4 +4,4 @@ export function siteAsset(path: string) {
   return `${basePath}${path}`;
 }
 
-export const siteUrl = "https://indieshade.github.io/xuemai-site";
+export const siteUrl = "https://helplearn.cn";

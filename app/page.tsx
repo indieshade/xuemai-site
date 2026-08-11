@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ContactCard from "./ContactCard";
 import LearningDialogue from "./LearningDialogue";
 import { siteAsset } from "./site-path";
@@ -145,7 +146,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><div><strong>学脉</strong><span>Indie Shade Product · Created by 影下独作</span></div></div>
-        <p>把一个模糊的念头，变成一段真正走过的学习。</p><span>© 2026 影下独作</span>
+        <p>把一个模糊的念头，变成一段真正走过的学习。<Link href="/interactive-ai-learning-system/">了解交互式 AI 学习系统 →</Link></p><span>© 2026 影下独作</span>
       </footer>
     </main>
   );
