@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContactCard from "./ContactCard";
 import LearningDialogue from "./LearningDialogue";
+import { product } from "./product-config";
 import { siteAsset } from "./site-path";
 
 const learningSteps = [
@@ -21,7 +22,11 @@ const learningSteps = [
   },
 ];
 
-const engines = ["Codex CLI", "Claude Code", "OpenCode", "Cursor Agent", "兼容模型 API"];
+const productLayers = [
+  { name: "HelpLearn Skill", detail: "学习大脑与交互指导", access: "免费开放" },
+  { name: "Core · CLI · MCP", detail: "旅程、证据与概念的数据交互基础", access: "免费开放" },
+  { name: "学脉桌面端", detail: "领域、资料、复习与跨 Agent 记录的集中管理", access: "激活授权" },
+];
 
 export default function Home() {
   return (
@@ -33,23 +38,23 @@ export default function Home() {
         </a>
         <div className="nav-links">
           <a href="#how">怎样学习</a>
-          <a href="#product">产品界面</a>
-          <a href="#alpha">Alpha 测试</a>
+          <a href="#architecture">产品架构</a>
+          <a href="#download">Alpha 测试</a>
         </div>
-        <a className="nav-cta" href="#contact">联系作者 <span aria-hidden="true">↓</span></a>
+          <a className="nav-cta" href="#download">下载测试版 <span aria-hidden="true">↓</span></a>
       </nav>
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-pulse" />本地优先的交互式 AI 学习系统</div>
-          <h1><span className="hero-title-system">交互式 AI</span><span className="hero-title-system hero-title-system-tail">学习系统，</span><span className="hero-title-promise">陪你真正学下去。</span></h1>
-          <p className="hero-lead">学脉会根据你正在学的内容，持续安排解释、追问、阅读、练习和复习。你不必独自在聊天记录、笔记与待办之间拼凑计划；系统规划下一步，也持续总结这段学习已经形成的脉络。</p>
+          <div className="eyebrow"><span className="eyebrow-pulse" />学脉 · HelpLearn｜交互式 AI 学习系统</div>
+          <h1><span className="hero-title-system">交互式 AI</span><span className="hero-title-system hero-title-system-tail">学习系统，</span><span className="hero-title-promise">让每一步都留在你的学习里。</span></h1>
+          <p className="hero-lead">学脉会根据你正在学的内容，持续安排解释、追问、阅读、练习和复习。领域保存长期关心的问题，领域里的多条学习旅程则把每一次推进、证据和概念联系起来。</p>
           <div className="hero-actions">
-            <a className="button-primary" href="#how">看看它怎样辅助学习 <span aria-hidden="true">↓</span></a>
-            <a className="button-secondary" href="#contact">Windows Alpha · 0.1.0-alpha.5</a>
+            <a className="button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows 测试版 <span aria-hidden="true">↓</span></a>
+            <a className="button-secondary" href="#contact">获取激活码</a>
           </div>
           <div className="hero-notes" aria-label="产品特点">
-            <span>系统规划下一步</span><span>交互式推进学习</span><span>持续总结学习脉络</span>
+            <span>{product.windows.label}</span><span>领域与学习旅程</span><span>免费开放组件</span>
           </div>
         </div>
 
@@ -104,48 +109,48 @@ export default function Home() {
 
       <section className="product-section product-section-reverse">
         <div className="product-copy">
-          <span className="section-label violet">系统规划学习的起点</span>
-          <h2>还没想好学什么，<br className="desktop-break" />系统先帮你定起点。</h2>
-          <p>兴趣罗盘会从你当下在意的内容逐步缩小范围，生成几个可立即进入的学习方向。它不是一次测试，而是系统为接下来一段学习做的起点规划。</p>
-          <ul><li><i />从粗到细探索领域、行业和概念</li><li><i />由你选择的 AI 引擎动态生成方向</li><li><i />保留探索记录，作为下一次规划的依据</li></ul>
+          <span className="section-label violet">长期认知容器</span>
+          <h2>一个领域，<br className="desktop-break" />容纳多条学习旅程。</h2>
+          <p>领域不是一门上完就结束的课，而是你愿意长期积累的主题。它可以包含读书、补概念、工作中的问题和新的资料；每条旅程都有自己的目标、证据、阶段总结和待复习内容。</p>
+          <ul><li><i />在同一个领域里并行管理多条学习旅程</li><li><i />资料、证据和概念可以持续回到对应领域</li><li><i />从已经形成的脉络出发，继续下一次学习</li></ul>
         </div>
         <div className="product-shot compass-shot">
-          <div className="shot-caption"><span>02</span> 从兴趣出发，规划一段具体的学习</div>
-          <img src={siteAsset("/screenshots/interest-compass.png")} alt="学脉兴趣罗盘截图" />
+          <div className="shot-caption"><span>02</span> 把一段段学习放回同一条长期脉络</div>
+          <img src={siteAsset("/screenshots/concept-graph.png")} alt="学脉整理学习概念与脉络的界面" />
         </div>
       </section>
 
       <LearningDialogue />
 
-      <section className="engine-section">
+      <section className="engine-section" id="architecture">
         <div className="engine-heading">
-          <span className="section-label">学习脉络，始终由你保存</span><h2>AI 可以换。<br className="desktop-break" />学习脉络一直在。</h2>
-          <p>你可以按自己已有的习惯连接本地 CLI 或模型 API。引擎负责生成与推理；学习的计划、节点、材料、练习和总结，始终由学脉保留在本地。</p>
+          <span className="section-label">HelpLearn 0.3 产品架构</span><h2>开放学习架构，<br className="desktop-break" />和更完整的桌面体验。</h2>
+          <p>HelpLearn 的 Skill、Core、CLI 和 MCP 免费开放。你可以在其他 Agent 中使用这套学习架构，并把旅程、证据和概念写入自己选择的个人认知库；学脉桌面端则把领域、学习旅程、资料、复习和跨 Agent 记录集中起来。</p>
         </div>
         <div className="engine-console">
-          <div className="console-top"><span>AI 引擎</span><small>由你选择</small></div>
-          {engines.map((engine, index) => (
-            <div className="engine-row" key={engine}><span className={`engine-light light-${index}`} /><strong>{engine}</strong><small>{index === engines.length - 1 ? "直接连接" : "本地 CLI"}</small><i>{index === 1 ? "当前使用" : "可连接"}</i></div>
+          <div className="console-top"><span>学习架构</span><small>0.3</small></div>
+          {productLayers.map((layer, index) => (
+            <div className="engine-row" key={layer.name}><span className={`engine-light light-${index}`} /><strong>{layer.name}</strong><small>{layer.detail}</small><i>{layer.access}</i></div>
           ))}
-          <div className="console-foot"><span>学习数据</span><strong>默认保存在本机</strong></div>
+          <div className="console-foot"><span>下一版本重点</span><strong>更新提醒与自动更新（计划中）</strong></div>
         </div>
       </section>
 
-      <section className="alpha-section" id="alpha">
+      <section className="alpha-section" id="download">
         <div className="alpha-path" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="alpha-copy">
-          <span>Windows x64 · Alpha</span><h2>来走一段，看看学习会留下什么。</h2>
-          <p>当前版本面向早期体验者。安装包尚未进行商业签名，也暂时没有自动更新。</p>
-          <div className="alpha-actions"><a className="button-primary" href="#contact">获取测试方式 ↓</a><code>暂不开放在线下载</code></div>
+          <span>{product.windows.label}</span><h2>下载测试版，<br className="desktop-break" />在桌面端管理你的学习。</h2>
+          <p>当前版本支持输入激活码、重新校验，以及设备解绑或移除凭据。被授权状态阻断的操作会在激活成功后恢复。安装包尚未进行代码签名，Windows 可能会提示风险；请确认下载来源和 SHA256 后再安装。</p>
+          <div className="alpha-actions"><a className="button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows 测试版 ↓</a><a className="button-secondary" href="#contact">获取激活码</a></div>
         </div>
         <aside className="alpha-aside">
-          <div className="alpha-meta"><div><span>版本</span><strong>0.1.0-alpha.5</strong></div><div><span>平台</span><strong>Windows x64</strong></div><div><span>数据</span><strong>本地优先</strong></div></div>
+          <div className="alpha-meta"><div><span>版本</span><strong>{product.windows.version}</strong></div><div><span>平台</span><strong>{product.windows.platform}</strong></div><div><span>大小</span><strong>{product.windows.size}</strong></div></div>
           <ContactCard />
         </aside>
       </section>
 
       <footer>
-        <div className="footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><div><strong>学脉</strong><span>Indie Shade Product · Created by 影下独作</span></div></div>
+        <div className="footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><div><strong>学脉 · HelpLearn</strong><span>Indie Shade Product · Created by 影下独作</span></div></div>
         <p>把一个模糊的念头，变成一段真正走过的学习。<Link href="/interactive-ai-learning-system/">了解交互式 AI 学习系统 →</Link></p><span>© 2026 影下独作</span>
       </footer>
     </main>

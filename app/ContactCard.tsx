@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-const CONTACT_QQ = "2590930875";
+import { product } from "./product-config";
 
 async function copyText(value: string) {
   if (navigator.clipboard?.writeText) {
@@ -22,33 +21,52 @@ async function copyText(value: string) {
 }
 
 export default function ContactCard() {
-  const [status, setStatus] = useState<"idle" | "copied" | "failed">("idle");
+  const [copied, setCopied] = useState<"qq" | "hash" | null>(null);
+  const [failed, setFailed] = useState(false);
 
-  const handleCopy = async () => {
+  const handleCopy = async (kind: "qq" | "hash", value: string) => {
     try {
-      await copyText(CONTACT_QQ);
-      setStatus("copied");
-      window.setTimeout(() => setStatus("idle"), 2600);
+      await copyText(value);
+      setCopied(kind);
+      setFailed(false);
+      window.setTimeout(() => setCopied(null), 2600);
     } catch {
-      setStatus("failed");
+      setFailed(true);
     }
   };
 
   return (
     <div className="contact-card" id="contact">
-      <span className="contact-kicker">申请体验 · 交流反馈</span>
-      <h3>添加作者 QQ</h3>
-      <p>当前不开放在线下载。添加时备注“学脉测试”，我会把测试方式和注意事项发给你。</p>
-      <button className="contact-copy" type="button" onClick={handleCopy}>
-        <span><small>QQ</small>{CONTACT_QQ}</span>
-        <strong>{status === "copied" ? "已复制 ✓" : status === "failed" ? "请手动复制" : "复制号码"}</strong>
+      <span className="contact-kicker">激活与反馈</span>
+      <h3>获取激活码</h3>
+      <p>
+        链动小铺将提供 30 日使用权与永久激活。永久激活仅覆盖桌面端授权；未来 Pro、高级能力和云端模型点数会作为持续服务单独提供。
+      </p>
+      <div className="purchase-options" aria-label="激活码购买状态">
+        {product.purchaseOptions.map((option) => (
+          <div className="purchase-state" key={option.purchaseUrl}>
+            <span>{option.name}</span>
+            <strong>{option.availability} · 即将开放</strong>
+          </div>
+        ))}
+      </div>
+      <button className="contact-copy" type="button" onClick={() => handleCopy("qq", product.feedbackQQ)}>
+        <span><small>QQ</small>{product.feedbackQQ}</span>
+        <strong>{copied === "qq" ? "已复制 ✓" : failed ? "请手动复制" : "复制号码"}</strong>
       </button>
       <div className="contact-feedback" role="status" aria-live="polite">
-        {status === "copied"
+        {copied === "qq"
           ? "已复制到剪贴板，现在可以打开 QQ 添加好友。"
-          : status === "failed"
+          : failed
             ? "浏览器未允许自动复制，请选中号码手动复制。"
-            : "版本通知和测试交流目前都通过 QQ。"}
+            : "激活、使用反馈和版本通知目前都通过 QQ。"}
+      </div>
+      <div className="download-hash">
+        <span>SHA256</span>
+        <code>{product.windows.sha256}</code>
+        <button type="button" onClick={() => handleCopy("hash", product.windows.sha256)}>
+          {copied === "hash" ? "已复制 ✓" : "复制校验值"}
+        </button>
       </div>
     </div>
   );

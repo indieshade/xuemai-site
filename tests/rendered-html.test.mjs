@@ -16,11 +16,16 @@ async function readOutputFile(filename) {
   return readFile(path.join(projectRoot, "out", filename), "utf8");
 }
 
+async function readSourceFile(filename) {
+  return readFile(path.join(projectRoot, filename), "utf8");
+}
+
 test("renders the 学脉 landing page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<title>学脉/);
+  assert.match(html, /HelpLearn/);
   assert.match(html, /把一个模糊的念头/);
   assert.match(html, /交互式 AI 学习系统/);
   assert.match(html, /系统规划下一步/);
@@ -34,7 +39,13 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /走出专属于你的学习脉络/);
   assert.match(html, /Windows x64/);
   assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.5/);
-  assert.match(html, /当前不开放在线下载/);
+  assert.match(html, /下载 Windows 测试版/);
+  assert.match(html, /121\.15 MB/);
+  assert.match(html, /C3EA956A2F83DA22E73014B0AB34DDFF0CB89DC610F30F8E9A4AA1BF69AB14AB/);
+  assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.5/);
+  assert.match(html, /30 日使用权与永久激活/);
+  assert.match(html, /永久激活仅覆盖桌面端授权/);
+  assert.match(html, /更新提醒与自动更新（计划中）/);
   assert.match(html, /2590930875/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
   assert.doesNotMatch(html, /HelpMeLearn|codex-preview|SkeletonPreview/);
@@ -45,7 +56,7 @@ test("renders the promotional poster route", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /promo-card/);
-  assert.match(html, /动态学习路径/);
+  assert.match(html, /领域与学习旅程/);
   assert.match(html, /2590930875/);
 });
 
@@ -64,6 +75,9 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /什么是交互式 AI 学习系统？/);
+  assert.match(html, /开放组件负责学习架构/);
+  assert.match(html, /Windows Alpha/);
+  assert.match(html, /0\.1\.0-alpha\.5/);
   assert.match(html, /它和普通 AI 对话有什么不同？/);
   assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
   assert.match(html, /SoftwareApplication/);
@@ -76,4 +90,12 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(robots, /User-Agent: OAI-SearchBot/);
   assert.match(robots, /Sitemap: https:\/\/helplearn\.cn\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
+});
+
+test("centralizes verified download and pending purchase URLs", async () => {
+  const config = await readSourceFile("app/product-config.ts");
+  assert.match(config, /Xuemai-License-Candidate-0\.1\.0-alpha\.5-x64\.exe/);
+  assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
+  assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
+  assert.match(config, /availability: "库存准备中"/);
 });

@@ -3,16 +3,16 @@ import "./globals.css";
 import { siteAsset, siteUrl } from "./site-path";
 
 const siteDescription =
-  "学脉是一款本地优先的交互式 AI 学习系统。它根据你的材料与回答，规划解释、追问、练习和复习，并持续整理学习脉络。";
+  "学脉（HelpLearn）是一款交互式 AI 学习系统：用领域和学习旅程管理长期学习，通过开放的 Skill、Core、CLI、MCP 与桌面端持续整理学习脉络。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "学脉｜交互式 AI 学习系统",
-    template: "%s｜学脉",
+    default: "学脉 HelpLearn｜交互式 AI 学习系统",
+    template: "%s｜学脉 HelpLearn",
   },
   description: siteDescription,
-  applicationName: "学脉",
+  applicationName: "学脉 HelpLearn",
   category: "教育软件",
   alternates: { canonical: "/" },
   icons: { icon: siteAsset("/xuemai-icon.png"), shortcut: siteAsset("/xuemai-icon.png") },
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "zh_CN",
     url: "/",
-    siteName: "学脉",
-    title: "学脉｜交互式 AI 学习系统",
+    siteName: "学脉 HelpLearn",
+    title: "学脉 HelpLearn｜交互式 AI 学习系统",
     description: siteDescription,
     images: [{ url: siteAsset("/og.png"), width: 1731, height: 909, alt: "学脉交互式学习脉络示意" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "学脉｜交互式 AI 学习系统",
+    title: "学脉 HelpLearn｜交互式 AI 学习系统",
     description: siteDescription,
     images: [siteAsset("/og.png")],
   },
@@ -41,7 +41,8 @@ export const metadata: Metadata = {
 const softwareApplication = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "学脉",
+  name: "HelpLearn",
+  alternateName: "学脉",
   applicationCategory: "EducationalApplication",
   operatingSystem: "Windows",
   inLanguage: "zh-CN",

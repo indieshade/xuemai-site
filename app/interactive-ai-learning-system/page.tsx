@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { product } from "../product-config";
 import { siteAsset, siteUrl } from "../site-path";
 
 const title = "什么是交互式 AI 学习系统？";
 const description =
-  "交互式 AI 学习系统会根据学习材料和学习者的回答，决定下一步该解释、追问、练习还是复习。了解学脉如何规划学习并整理学习脉络。";
+  "交互式 AI 学习系统会根据学习材料和学习者的回答，决定下一步该解释、追问、练习还是复习。了解学脉（HelpLearn）如何用领域与学习旅程整理学习脉络。";
 
 export const metadata: Metadata = {
   title,
@@ -32,7 +33,7 @@ const articleSchema = {
   description,
   inLanguage: "zh-CN",
   datePublished: "2026-08-11",
-  dateModified: "2026-08-11",
+  dateModified: "2026-08-23",
   mainEntityOfPage: `${siteUrl}/interactive-ai-learning-system/`,
   author: { "@type": "Organization", name: "Indie Shade" },
   publisher: { "@type": "Organization", name: "Indie Shade", url: siteUrl },
@@ -58,13 +59,13 @@ export default function InteractiveAiLearningSystemPage() {
           <a href="#process">怎样推进</a>
           <a href="#faq">常见问题</a>
         </div>
-        <Link className="nav-cta" href="/#contact">联系作者 <span aria-hidden="true">↓</span></Link>
+        <a className="nav-cta" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载测试版 <span aria-hidden="true">↓</span></a>
       </nav>
 
       <article className="guide-article">
         <header className="guide-hero">
           <div>
-            <span className="guide-kicker">产品说明 · 交互式学习</span>
+            <span className="guide-kicker">学脉 · HelpLearn｜产品说明</span>
             <h1>什么是交互式 AI 学习系统？</h1>
             <p>
               它不只给出一次回答。它会依据你正在读的材料、刚刚作出的判断和已经卡住的地方，决定下一步该解释、追问、举例、练习还是复习。
@@ -82,7 +83,7 @@ export default function InteractiveAiLearningSystemPage() {
             普通聊天工具很适合查一个概念、改一段文字或快速讨论一个想法。但学习常常不是这样结束的：你会理解一部分、误解一部分，再在一个新例子里发现自己并没有真的会用。
           </p>
           <p>
-            学脉把这些回应当成学习过程的一部分。系统不预先把所有内容排成固定课程，而是根据当前状态安排一个合适的动作，并把已经形成的理解保留下来。
+            学脉把这些回应当成学习过程的一部分。它根据当前状态安排一个合适的动作，再把已经形成的理解保留下来，让下一次学习能接着往前走。
           </p>
         </section>
 
@@ -130,9 +131,20 @@ export default function InteractiveAiLearningSystemPage() {
           </ol>
         </section>
 
+        <section className="guide-section" aria-labelledby="architecture-heading">
+          <span className="guide-index">03 · 产品架构</span>
+          <h2 id="architecture-heading">开放组件负责学习架构，桌面端负责把过程管理起来</h2>
+          <p>
+            HelpLearn Skill、Core、CLI 和 MCP 免费开放。它们让你在其他 Agent 中使用同一套学习架构，并把旅程、证据和概念写入自己选择的个人认知库。
+          </p>
+          <p>
+            学脉桌面端是更完整的可视化管理界面：领域作为长期认知容器，领域内可放入多条学习旅程，并集中查看资料、复习和跨 Agent 记录。
+          </p>
+        </section>
+
         <section className="guide-section guide-case" aria-labelledby="case-heading">
           <div className="guide-case-copy">
-            <span className="guide-index">03 · 一个学习片段</span>
+            <span className="guide-index">04 · 一个学习片段</span>
             <h2 id="case-heading">从《国富论》的分工，走到“垄断怎么办”</h2>
             <p>
               在一次《国富论》学习中，学习者先用“把串行任务拆解成更高效的小任务”解释分工。系统没有重复定义，而是把这个判断接到熟练度、切换成本与工具改进上。
@@ -149,14 +161,14 @@ export default function InteractiveAiLearningSystemPage() {
         </section>
 
         <section className="guide-section guide-boundary" aria-labelledby="boundary-heading">
-          <h2 id="boundary-heading">它不替你把学习变成一条固定流水线</h2>
+          <h2 id="boundary-heading">它不替你学，也不要求按固定顺序完成</h2>
           <p>
             学脉不会假装知道每个人都应按同一个顺序学习。它做的是在你已经提供的材料和回答中找到下一步：有时是解释，有时是让你自己举例，有时是把一段已经走通的理解整理回来。
           </p>
         </section>
 
         <section className="guide-section guide-faq" id="faq" aria-labelledby="faq-heading">
-          <span className="guide-index">04 · 常见问题</span>
+          <span className="guide-index">05 · 常见问题</span>
           <h2 id="faq-heading">使用学脉前，可能会关心的几件事</h2>
           <details>
             <summary>学脉会替我生成一整套固定课程吗？</summary>
@@ -164,16 +176,20 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>学习数据在哪里？</summary>
-            <p>当前版本默认将学习计划、节点、材料、练习与总结保存在本机。你可以按自己的习惯连接本地 CLI 或模型 API。</p>
+            <p>你可以在其他 Agent 中选择个人认知库来保存旅程、证据和概念；桌面端则集中管理领域、学习旅程、资料、复习和跨 Agent 记录。</p>
           </details>
           <details>
             <summary>现在可以下载吗？</summary>
-            <p>目前是 Windows Alpha 测试阶段，暂不开放在线下载。可通过首页联系作者获取测试方式。</p>
+            <p>可以。当前提供 Windows Alpha {product.windows.version}，文件大小 {product.windows.size}。它尚未进行代码签名，Windows 可能会提示风险；请从官网或 GitHub Release 下载并核对 SHA256。</p>
+          </details>
+          <details>
+            <summary>桌面端授权包含哪些内容？</summary>
+            <p>链动小铺将提供 30 日使用权和永久激活。永久激活只对应桌面端授权；未来 Pro、高级能力和云端模型点数属于持续服务，不包含在一次性永久授权中。</p>
           </details>
         </section>
 
         <footer className="guide-footer">
-          <p>最后更新：2026 年 8 月 11 日 · 学脉 · Indie Shade</p>
+          <p>最后更新：2026 年 8 月 23 日 · 学脉 HelpLearn · Indie Shade</p>
           <Link href="/">返回学脉首页 <span aria-hidden="true">↑</span></Link>
         </footer>
       </article>

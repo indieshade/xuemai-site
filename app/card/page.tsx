@@ -17,8 +17,8 @@ export default function ProductCard() {
         </header>
 
         <div className="name-card-main">
-          <div className="name-card-eyebrow"><i />本地优先的桌面学习系统</div>
-          <h1>学脉</h1>
+          <div className="name-card-eyebrow"><i />交互式 AI 学习系统</div>
+          <h1>学脉 <small>/ HelpLearn</small></h1>
           <p>
             <span>把一个模糊的念头，</span>
             <strong>变成一段真正走过的学习。</strong>

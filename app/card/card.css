@@ -120,6 +120,16 @@
   letter-spacing: 0.07em;
 }
 
+.name-card-main h1 small {
+  display: block;
+  margin-top: 25px;
+  color: var(--orange2);
+  font-family: Consolas, "SFMono-Regular", monospace;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+
 .name-card-main p {
   margin: 0;
   color: var(--soft);
