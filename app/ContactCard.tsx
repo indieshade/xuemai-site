@@ -41,7 +41,7 @@ export default function ContactCard() {
       <h3>获取激活码</h3>
       <div className="trial-notice">
         <strong>{product.trial.label}</strong>
-        <span>先下载测试版，试用后激活即可。</span>
+        <span>{product.trial.detail}</span>
       </div>
       <p>
         可按需要选择 30 日激活码或永久激活。购买并输入激活码后即可继续使用；永久激活仅覆盖桌面端授权。

@@ -41,11 +41,12 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.5/);
   assert.match(html, /下载 Windows 测试版/);
   assert.match(html, /121\.15 MB/);
-  assert.match(html, /C3EA956A2F83DA22E73014B0AB34DDFF0CB89DC610F30F8E9A4AA1BF69AB14AB/);
+  assert.match(html, /460518F724CB9BFA6647B3788C1AC5D0A8F3AA8F989B4065A870908BC6E173AC/);
   assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.5/);
-  assert.match(html, /7(?:<!-- -->)? 天免费试用/);
+  assert.match(html, /首次启动自动获得 7(?:<!-- -->)? 天完整体验/);
   assert.match(html, /30 日激活码.*永久激活/);
   assert.doesNotMatch(html, /使用权/);
+  assert.doesNotMatch(html, /14 天|试用码|alpha\.4/);
   assert.match(html, /¥19\.9/);
   assert.match(html, /¥99/);
   assert.match(html, /前往购买/);
@@ -105,6 +106,7 @@ test("centralizes verified download and purchasable activation URLs", async () =
   assert.match(config, /price: "¥19\.9"/);
   assert.match(config, /price: "¥99"/);
   assert.match(config, /days: 7/);
+  assert.match(config, /首次启动自动获得 7 天完整体验/);
   assert.match(config, /availability: "可购买"/);
   assert.match(config, /isAvailable: true/);
 });

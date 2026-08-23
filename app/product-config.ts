@@ -7,14 +7,15 @@ export const product = {
     label: "Windows Alpha · 0.1.0-alpha.5",
     platform: "Windows x64",
     size: "121.15 MB",
-    sha256: "C3EA956A2F83DA22E73014B0AB34DDFF0CB89DC610F30F8E9A4AA1BF69AB14AB",
+    sha256: "460518F724CB9BFA6647B3788C1AC5D0A8F3AA8F989B4065A870908BC6E173AC",
     downloadUrl:
       "https://github.com/indieshade/xuemai-site/releases/download/v0.1.0-alpha.5/Xuemai-License-Candidate-0.1.0-alpha.5-x64.exe",
     releaseUrl: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.5",
   },
   trial: {
     days: 7,
-    label: "7 天免费试用",
+    label: "首次启动自动获得 7 天完整体验",
+    detail: "无需额外操作，体验结束后输入激活码即可继续使用。",
   },
   purchaseOptions: [
     {

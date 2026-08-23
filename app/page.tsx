@@ -140,7 +140,7 @@ export default function Home() {
         <div className="alpha-path" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="alpha-copy">
           <span>{product.windows.label}</span><h2>下载测试版，<br className="desktop-break" />在桌面端管理你的学习。</h2>
-          <div className="alpha-trial-notice"><strong>{product.trial.label}</strong><span>先下载测试版，试用后激活即可。</span></div>
+          <div className="alpha-trial-notice"><strong>{product.trial.label}</strong><span>{product.trial.detail}</span></div>
           <p>当前版本支持输入激活码、重新校验，以及设备解绑或移除凭据；被授权状态阻断的操作会在激活成功后恢复。安装包尚未进行代码签名，Windows 可能会提示风险；请确认下载来源和 SHA256 后再安装。</p>
           <div className="alpha-actions"><a className="button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows 测试版 ↓</a><a className="button-secondary" href="#contact">获取激活码</a></div>
         </div>

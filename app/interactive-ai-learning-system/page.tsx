@@ -184,7 +184,7 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>桌面端授权包含哪些内容？</summary>
-            <p><strong>{product.trial.label}</strong>：先下载测试版，试用后激活即可。可选择 30 日激活码（¥19.9）或永久激活码（¥99）；永久激活只对应桌面端授权。未来 Pro、高级能力和云端模型点数属于持续服务，不包含在一次性永久授权中。</p>
+            <p><strong>{product.trial.label}</strong>：{product.trial.detail} 可选择 30 日激活码（¥19.9）或永久激活码（¥99）；永久激活只对应桌面端授权。未来 Pro、高级能力和云端模型点数属于持续服务，不包含在一次性永久授权中。</p>
           </details>
         </section>
 
