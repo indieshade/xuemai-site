@@ -40,12 +40,12 @@ export default function ContactCard() {
       <span className="contact-kicker">激活与反馈</span>
       <h3>获取激活码</h3>
       <p>
-        链动小铺将提供 30 日使用权与永久激活。永久激活仅覆盖桌面端授权；未来 Pro、高级能力和云端模型点数会作为持续服务单独提供。
+        桌面端可先免费试用 {product.trial.days} 天。试用结束后，购买并输入激活码即可继续使用；可按需要选择 30 日使用权或永久激活。永久激活仅覆盖桌面端授权。
       </p>
       <div className="purchase-options" aria-label="激活码购买状态">
         {product.purchaseOptions.map((option) => (
           <div className="purchase-state" key={option.purchaseUrl}>
-            <span>{option.name}</span>
+            <span><small>{option.price}</small>{option.name}</span>
             {option.isAvailable ? (
               <a href={option.purchaseUrl} target="_blank" rel="noreferrer">前往购买</a>
             ) : (

@@ -43,7 +43,11 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /121\.15 MB/);
   assert.match(html, /C3EA956A2F83DA22E73014B0AB34DDFF0CB89DC610F30F8E9A4AA1BF69AB14AB/);
   assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.5/);
-  assert.match(html, /30 日使用权与永久激活/);
+  assert.match(html, /免费试用.*14(?:<!-- -->)? 天/);
+  assert.match(html, /30 日使用权.*永久激活/);
+  assert.match(html, /¥19\.9/);
+  assert.match(html, /¥99/);
+  assert.match(html, /前往购买/);
   assert.match(html, /永久激活仅覆盖桌面端授权/);
   assert.match(html, /更新提醒与自动更新（计划中）/);
   assert.match(html, /2590930875/);
@@ -92,11 +96,14 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
 });
 
-test("centralizes verified download and pending purchase URLs", async () => {
+test("centralizes verified download and purchasable activation URLs", async () => {
   const config = await readSourceFile("app/product-config.ts");
   assert.match(config, /Xuemai-License-Candidate-0\.1\.0-alpha\.5-x64\.exe/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
-  assert.match(config, /availability: "库存准备中"/);
-  assert.match(config, /isAvailable: false/);
+  assert.match(config, /price: "¥19\.9"/);
+  assert.match(config, /price: "¥99"/);
+  assert.match(config, /days: 14/);
+  assert.match(config, /availability: "可购买"/);
+  assert.match(config, /isAvailable: true/);
 });

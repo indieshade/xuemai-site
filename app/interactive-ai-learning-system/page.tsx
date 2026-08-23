@@ -184,7 +184,7 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>桌面端授权包含哪些内容？</summary>
-            <p>链动小铺将提供 30 日使用权和永久激活。永久激活只对应桌面端授权；未来 Pro、高级能力和云端模型点数属于持续服务，不包含在一次性永久授权中。</p>
+            <p>桌面端可先免费试用 {product.trial.days} 天。试用结束后，购买并输入激活码即可继续使用；可选择 30 日使用权激活码（¥19.9）或永久激活码（¥99）。永久激活只对应桌面端授权；未来 Pro、高级能力和云端模型点数属于持续服务，不包含在一次性永久授权中。</p>
           </details>
         </section>
 

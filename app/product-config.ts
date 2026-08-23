@@ -12,18 +12,24 @@ export const product = {
       "https://github.com/indieshade/xuemai-site/releases/download/v0.1.0-alpha.5/Xuemai-License-Candidate-0.1.0-alpha.5-x64.exe",
     releaseUrl: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.5",
   },
+  trial: {
+    days: 14,
+    label: "14 天试用",
+  },
   purchaseOptions: [
     {
       name: "30 日使用权激活码",
+      price: "¥19.9",
       purchaseUrl: "https://pay.ldxp.cn/item/b2bxj2",
-      availability: "库存准备中" as const,
-      isAvailable: false,
+      availability: "可购买" as const,
+      isAvailable: true,
     },
     {
       name: "永久激活码",
+      price: "¥99",
       purchaseUrl: "https://pay.ldxp.cn/item/vgxadp",
-      availability: "库存准备中" as const,
-      isAvailable: false,
+      availability: "可购买" as const,
+      isAvailable: true,
     },
   ],
 } as const;
