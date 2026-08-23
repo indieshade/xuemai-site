@@ -46,7 +46,11 @@ export default function ContactCard() {
         {product.purchaseOptions.map((option) => (
           <div className="purchase-state" key={option.purchaseUrl}>
             <span>{option.name}</span>
-            <strong>{option.availability} · 即将开放</strong>
+            {option.isAvailable ? (
+              <a href={option.purchaseUrl} target="_blank" rel="noreferrer">前往购买</a>
+            ) : (
+              <strong>{option.availability} · 即将开放</strong>
+            )}
           </div>
         ))}
       </div>

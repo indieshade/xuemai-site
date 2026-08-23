@@ -98,4 +98,5 @@ test("centralizes verified download and pending purchase URLs", async () => {
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
   assert.match(config, /availability: "库存准备中"/);
+  assert.match(config, /isAvailable: false/);
 });

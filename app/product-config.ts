@@ -17,11 +17,13 @@ export const product = {
       name: "30 日使用权激活码",
       purchaseUrl: "https://pay.ldxp.cn/item/b2bxj2",
       availability: "库存准备中" as const,
+      isAvailable: false,
     },
     {
       name: "永久激活码",
       purchaseUrl: "https://pay.ldxp.cn/item/vgxadp",
       availability: "库存准备中" as const,
+      isAvailable: false,
     },
   ],
 } as const;
