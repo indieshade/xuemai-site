@@ -39,8 +39,12 @@ export default function ContactCard() {
     <div className="contact-card" id="contact">
       <span className="contact-kicker">激活与反馈</span>
       <h3>获取激活码</h3>
+      <div className="trial-notice">
+        <strong>{product.trial.label}</strong>
+        <span>先下载测试版，试用后激活即可。</span>
+      </div>
       <p>
-        桌面端可先免费试用 {product.trial.days} 天。试用结束后，购买并输入激活码即可继续使用；可按需要选择 30 日使用权或永久激活。永久激活仅覆盖桌面端授权。
+        可按需要选择 30 日激活码或永久激活。购买并输入激活码后即可继续使用；永久激活仅覆盖桌面端授权。
       </p>
       <div className="purchase-options" aria-label="激活码购买状态">
         {product.purchaseOptions.map((option) => (

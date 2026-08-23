@@ -13,12 +13,12 @@ export const product = {
     releaseUrl: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.5",
   },
   trial: {
-    days: 14,
-    label: "14 天试用",
+    days: 7,
+    label: "7 天免费试用",
   },
   purchaseOptions: [
     {
-      name: "30 日使用权激活码",
+      name: "30 日激活码",
       price: "¥19.9",
       purchaseUrl: "https://pay.ldxp.cn/item/b2bxj2",
       availability: "可购买" as const,

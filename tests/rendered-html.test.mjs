@@ -43,8 +43,9 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /121\.15 MB/);
   assert.match(html, /C3EA956A2F83DA22E73014B0AB34DDFF0CB89DC610F30F8E9A4AA1BF69AB14AB/);
   assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.5/);
-  assert.match(html, /免费试用.*14(?:<!-- -->)? 天/);
-  assert.match(html, /30 日使用权.*永久激活/);
+  assert.match(html, /7(?:<!-- -->)? 天免费试用/);
+  assert.match(html, /30 日激活码.*永久激活/);
+  assert.doesNotMatch(html, /使用权/);
   assert.match(html, /¥19\.9/);
   assert.match(html, /¥99/);
   assert.match(html, /前往购买/);
@@ -103,7 +104,7 @@ test("centralizes verified download and purchasable activation URLs", async () =
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
   assert.match(config, /price: "¥19\.9"/);
   assert.match(config, /price: "¥99"/);
-  assert.match(config, /days: 14/);
+  assert.match(config, /days: 7/);
   assert.match(config, /availability: "可购买"/);
   assert.match(config, /isAvailable: true/);
 });
