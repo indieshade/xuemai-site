@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./home.css";
 import { siteAsset, siteUrl } from "./site-path";
 
 const siteDescription =
-  "学脉（HelpLearn）是一款交互式 AI 学习系统：用领域和学习旅程管理长期学习，通过开放的 Skill、Core、CLI、MCP 与桌面端持续整理学习脉络。";
+  "学脉（HelpLearn）把你和 AI 围绕资料、书和问题展开的讨论，整理成可以继续的学习旅程，并放回你自己的领域里。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "学脉 HelpLearn｜交互式 AI 学习系统",
+    default: "学脉 HelpLearn｜让 AI 对话成为可继续的学习脉络",
     template: "%s｜学脉 HelpLearn",
   },
   description: siteDescription,
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     url: "/",
     siteName: "学脉 HelpLearn",
-    title: "学脉 HelpLearn｜交互式 AI 学习系统",
+    title: "学脉 HelpLearn｜让 AI 对话成为可继续的学习脉络",
     description: siteDescription,
     images: [{ url: siteAsset("/og.png"), width: 1731, height: 909, alt: "学脉交互式学习脉络示意" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "学脉 HelpLearn｜交互式 AI 学习系统",
+    title: "学脉 HelpLearn｜让 AI 对话成为可继续的学习脉络",
     description: siteDescription,
     images: [siteAsset("/og.png")],
   },

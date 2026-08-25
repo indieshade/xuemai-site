@@ -4,7 +4,7 @@ import { siteUrl } from "./site-path";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-08-23T00:00:00.000Z");
+  const lastModified = new Date("2026-08-25T00:00:00.000Z");
 
   return [
     {
@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: `${siteUrl}/domains/`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: `${siteUrl}/interactive-ai-learning-system/`,

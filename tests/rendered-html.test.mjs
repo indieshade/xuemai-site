@@ -26,20 +26,19 @@ test("renders the 学脉 landing page", async () => {
   const html = await response.text();
   assert.match(html, /<title>学脉/);
   assert.match(html, /HelpLearn/);
-  assert.match(html, /把一个模糊的念头/);
-  assert.match(html, /交互式 AI 学习系统/);
-  assert.match(html, /系统规划下一步/);
+  assert.match(html, /和 AI 聊过的东西，别让它散掉/);
+  assert.match(html, /下载学脉桌面端/);
+  assert.match(html, /免费安装 HelpLearn Skill/);
+  assert.match(html, /对话结束了，学习还可以继续/);
+  assert.match(html, /先聊起来，整理交给学脉/);
+  assert.match(html, /一本书讲不完一个领域/);
+  assert.match(html, /产品研究与决策/);
+  assert.match(html, /用户满意度为什么可能失真/);
+  assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
-  assert.match(html, /向下滚动，/);
-  assert.match(html, /截自一次真实的《国富论》学习/);
-  assert.match(html, /读懂《国富论》的核心论证/);
-  assert.match(html, /已记录的理解/);
-  assert.match(html, /特权垄断/);
-  assert.match(html, /交互式学习，/);
-  assert.match(html, /走出专属于你的学习脉络/);
   assert.match(html, /Windows x64/);
   assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.5/);
-  assert.match(html, /下载 Windows 测试版/);
+  assert.match(html, /下载 Windows Alpha/);
   assert.match(html, /121\.15 MB/);
   assert.match(html, /460518F724CB9BFA6647B3788C1AC5D0A8F3AA8F989B4065A870908BC6E173AC/);
   assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.5/);
@@ -51,10 +50,23 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /¥99/);
   assert.match(html, /前往购买/);
   assert.match(html, /永久激活仅覆盖桌面端授权/);
-  assert.match(html, /更新提醒与自动更新（计划中）/);
   assert.match(html, /2590930875/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
+  assert.doesNotMatch(html, /Core · CLI · MCP/);
+  assert.doesNotMatch(html, /持续生长的认知空间|更完整的理解|核心产品能力|不会预先锁死路径/);
   assert.doesNotMatch(html, /HelpMeLearn|codex-preview|SkeletonPreview/);
+});
+
+test("renders the domain workspace page", async () => {
+  const response = await render("/domains");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /把相关的学习，放回同一个问题里/);
+  assert.match(html, /产品研究与决策/);
+  assert.match(html, /随机对照试验能证明什么/);
+  assert.match(html, /枢纽对话/);
+  assert.match(html, /新问题不必另起炉灶|新的学习分支/);
+  assert.match(html, /一条旅程可以从一本书或一个问题开始/);
 });
 
 test("renders the promotional poster route", async () => {
@@ -95,6 +107,7 @@ test("publishes crawl instructions and the public sitemap", async () => {
   const sitemap = await readOutputFile("sitemap.xml");
   assert.match(robots, /User-Agent: OAI-SearchBot/);
   assert.match(robots, /Sitemap: https:\/\/helplearn\.cn\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/domains\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
 });
 
