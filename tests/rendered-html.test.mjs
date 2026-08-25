@@ -26,7 +26,10 @@ test("renders the 学脉 landing page", async () => {
   const html = await response.text();
   assert.match(html, /<title>学脉/);
   assert.match(html, /HelpLearn/);
+  assert.match(html, /AI交互式学习系统/);
   assert.match(html, /和 AI 聊过的东西，别让它散掉/);
+  assert.match(html, /在学脉，围绕一本书、一份资料或一个问题展开的讨论/);
+  assert.match(html, /screenshots\/learning-home\.png/);
   assert.match(html, /下载学脉桌面端/);
   assert.match(html, /免费安装 HelpLearn Skill/);
   assert.match(html, /对话结束了，学习还可以继续/);

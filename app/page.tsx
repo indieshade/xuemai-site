@@ -28,9 +28,9 @@ export default function Home() {
 
       <section className="home-hero" id="top">
         <div>
-          <span className="home-kicker">学脉 · HelpLearn</span>
+          <span className="home-kicker">AI交互式学习系统</span>
           <h1>和 AI 聊过的东西，别让它散掉</h1>
-          <p>学脉会把你围绕一本书、一份资料或一个问题展开的讨论，整理成可以继续往下走的学习脉络。相关的脉络还能放进同一个领域，慢慢拼出你自己的理解。</p>
+          <p>在学脉，围绕一本书、一份资料或一个问题展开的讨论，会被整理成可以继续往下走的学习脉络。相关的脉络还能放进同一个领域，慢慢拼出你自己的理解。</p>
           <div className="home-actions">
             <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载学脉桌面端 <span aria-hidden="true">↓</span></a>
             <a className="home-button-secondary" href={skillUrl} target="_blank" rel="noreferrer">免费安装 HelpLearn Skill <span aria-hidden="true">↗</span></a>
@@ -38,9 +38,7 @@ export default function Home() {
           <div className="home-hero-notes"><span>{product.windows.label}</span><span>首次启动自动获得 7 天完整体验</span><span>Skill 可单独使用</span></div>
         </div>
         <div className="home-screenshot-frame">
-          <div className="home-screenshot-bar"><strong>学脉</strong><span>学习旅程 · 对话继续中</span><span>已保存</span></div>
-          <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉里围绕学习材料继续展开的对话和学习旅程" />
-          <p className="home-screenshot-caption">一次讨论留下的问题、材料和下一步，都还在这里。</p>
+          <img src={siteAsset("/screenshots/learning-home.png")} alt="学脉桌面端首页，展示领域、学习旅程和复习内容" />
         </div>
       </section>
 
