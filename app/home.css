@@ -374,6 +374,23 @@
 .home-download-meta strong { display: block; margin-top: 5px; color: rgba(241, 233, 217, 0.85); font-size: 12px; font-weight: 600; }
 .home-download-panel > .home-button-primary { margin-bottom: 21px; }
 .home-download-panel .contact-card { margin-top: 0; }
+.home-download-panel .trial-notice { display: grid; gap: 6px; margin: 17px 0; padding: 15px 16px; border: 1px solid rgba(120, 184, 154, 0.28); border-left: 3px solid var(--green); border-radius: 12px; background: rgba(70, 152, 116, 0.07); }
+.home-download-panel .trial-notice strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(22px, 2vw, 28px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.22; white-space: normal; }
+.home-download-panel .trial-notice span { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.contact-wechat { width: 100%; min-height: 54px; margin-top: 8px; padding: 0 14px 0 16px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(120, 184, 154, 0.32); border-radius: 13px; color: var(--bone); background: rgba(120, 184, 154, 0.07); cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.contact-wechat:hover { border-color: var(--green); background: rgba(120, 184, 154, 0.13); transform: translateY(-1px); }
+.contact-wechat > span { display: flex; align-items: baseline; gap: 9px; font-size: 14px; }
+.contact-wechat small { color: var(--green); font-family: var(--font-mono), monospace; font-size: 9px; }
+.contact-wechat strong { color: var(--green); font-size: 11px; font-weight: 600; }
+.contact-modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; }
+.contact-modal-backdrop { position: absolute; inset: 0; border: 0; background: rgba(5, 7, 6, 0.78); cursor: default; backdrop-filter: blur(8px); }
+.contact-modal-dialog { position: relative; z-index: 1; width: min(100%, 420px); padding: 30px; border: 1px solid rgba(235, 224, 204, 0.16); border-radius: 20px; color: var(--bone); background: #181a17; box-shadow: 0 28px 90px rgba(0, 0, 0, 0.54); text-align: center; }
+.contact-modal-dialog > span { color: var(--green); font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: .12em; }
+.contact-modal-dialog h3 { margin: 12px 0 20px; font-family: var(--font-serif), Georgia, serif; font-size: 28px; font-weight: 600; letter-spacing: -0.04em; }
+.contact-modal-dialog img { display: block; width: min(100%, 300px); height: auto; margin: 0 auto; border-radius: 12px; background: #fff; }
+.contact-modal-dialog p { margin: 18px 0 0; color: var(--muted); font-size: 13px; }
+.contact-modal-close { position: absolute; top: 11px; right: 13px; display: grid; width: 34px; height: 34px; place-items: center; border: 0; border-radius: 9px; color: var(--muted); background: transparent; cursor: pointer; font-size: 24px; line-height: 1; }
+.contact-modal-close:hover { color: var(--bone); background: rgba(255, 255, 255, 0.07); }
 
 .home-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 42px 0 52px; border-top: 1px solid rgba(235, 224, 204, 0.08); color: rgba(225, 218, 205, 0.53); font-size: 12px; }
 .home-footer-brand { display: flex; align-items: center; gap: 10px; color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: 17px; }
@@ -471,6 +488,11 @@
   .home-way-grid { grid-template-columns: 1fr; }
   .home-way-card { min-height: 272px; padding: 25px; }
   .home-download-panel { padding: 23px 17px; }
+  .home-download-panel .trial-notice { padding: 14px; }
+  .home-download-panel .trial-notice strong { font-size: 22px; }
+  .contact-modal { padding: 16px; }
+  .contact-modal-dialog { padding: 27px 21px 23px; }
+  .contact-modal-dialog h3 { font-size: 25px; }
   .home-download-meta { grid-template-columns: 1fr 1fr; }
   .home-download-meta div:last-child { grid-column: span 2; }
   .home-footer { align-items: start; flex-direction: column; padding: 31px 0 39px; }

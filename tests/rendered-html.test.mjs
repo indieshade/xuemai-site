@@ -34,7 +34,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /免费安装 HelpLearn Skill/);
   assert.match(html, /对话结束了，学习还可以继续/);
   assert.match(html, /先聊起来，整理交给学脉/);
-  assert.match(html, /一本书讲不完一个领域/);
+  assert.match(html, /围绕领域持续构建理解/);
   assert.match(html, /产品研究与决策/);
   assert.match(html, /用户满意度为什么可能失真/);
   assert.match(html, /资料放在哪里，由你决定/);
@@ -54,6 +54,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /前往购买/);
   assert.match(html, /永久激活仅覆盖桌面端授权/);
   assert.match(html, /2590930875/);
+  assert.match(html, /添加微信咨询/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
   assert.doesNotMatch(html, /Core · CLI · MCP/);
   assert.doesNotMatch(html, /持续生长的认知空间|更完整的理解|核心产品能力|不会预先锁死路径/);
@@ -116,6 +117,7 @@ test("publishes crawl instructions and the public sitemap", async () => {
 
 test("centralizes verified download and purchasable activation URLs", async () => {
   const config = await readSourceFile("app/product-config.ts");
+  const contactCard = await readSourceFile("app/ContactCard.tsx");
   assert.match(config, /Xuemai-License-Candidate-0\.1\.0-alpha\.5-x64\.exe/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
@@ -125,4 +127,6 @@ test("centralizes verified download and purchasable activation URLs", async () =
   assert.match(config, /首次启动自动获得 7 天完整体验/);
   assert.match(config, /availability: "可购买"/);
   assert.match(config, /isAvailable: true/);
+  assert.match(contactCard, /contact\/wechat-qr\.jpg/);
+  assert.match(contactCard, /role="dialog"/);
 });

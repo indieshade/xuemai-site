@@ -71,7 +71,7 @@ export default function Home() {
 
       <section className="home-section home-domain-section">
         <div className="home-domain-intro">
-          <div><span className="home-section-label">领域工作台</span><h2>一本书讲不完一个领域</h2></div>
+          <div><span className="home-section-label">领域工作台</span><h2>围绕领域持续构建理解</h2></div>
           <p>理解一个领域往往要经过多次讨论。领域工作台把相关学习旅程放在一起，让你回看联系、比较冲突观点，并从新问题继续学习。</p>
         </div>
         <DomainWorkspace />
