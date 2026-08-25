@@ -108,6 +108,26 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /https:\/\/helplearn\.cn\/og\.png/);
 });
 
+test("renders download, pricing, privacy, and changelog as standalone product pages", async () => {
+  const download = await (await render("/download")).text();
+  const pricing = await (await render("/pricing")).text();
+  const privacy = await (await render("/privacy")).text();
+  const changelog = await (await render("/changelog")).text();
+
+  assert.match(download, /下载学脉 Windows Alpha/);
+  assert.match(download, /460518F724CB9BFA6647B3788C1AC5D0A8F3AA8F989B4065A870908BC6E173AC/);
+  assert.match(download, /尚未进行代码签名/);
+  assert.match(pricing, /自动获得 7(?:<!-- -->)? 天完整体验/);
+  assert.match(pricing, /¥19\.9/);
+  assert.match(pricing, /¥99/);
+  assert.match(pricing, /永久激活不是所有服务的一次买断/);
+  assert.match(privacy, /默认写入你选择的本地文件夹/);
+  assert.match(privacy, /请求会发给你选择的 AI 引擎/);
+  assert.match(changelog, /0\.1\.0-alpha\.5/);
+  assert.match(changelog, /更新提醒与自动更新/);
+  assert.match(changelog, /这是一项计划，不是当前已上线能力/);
+});
+
 test("publishes crawl instructions and the public sitemap", async () => {
   const robots = await readOutputFile("robots.txt");
   const sitemap = await readOutputFile("sitemap.xml");
@@ -115,6 +135,23 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(robots, /Sitemap: https:\/\/helplearn\.cn\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/domains\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/download\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/pricing\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/privacy\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/changelog\//);
+});
+
+test("publishes brand schema and notifies IndexNow after Pages deploy", async () => {
+  const layout = await readSourceFile("app/layout.tsx");
+  const workflow = await readSourceFile(".github/workflows/pages.yml");
+  const key = await readOutputFile("2797c545ab105d2403b1bd326352838f.txt");
+
+  assert.match(layout, /\"@type\": \"WebSite\"/);
+  assert.match(layout, /\"@type\": \"Organization\"/);
+  assert.match(layout, /AI 交互学习系统/);
+  assert.match(workflow, /api\.indexnow\.org\/indexnow/);
+  assert.match(workflow, /needs: deploy/);
+  assert.equal(key.trim(), "2797c545ab105d2403b1bd326352838f");
 });
 
 test("centralizes verified download and purchasable activation URLs", async () => {

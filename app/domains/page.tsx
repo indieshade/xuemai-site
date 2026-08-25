@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import DomainWorkspace from "../DomainWorkspace";
 import { product } from "../product-config";
-import { siteAsset } from "../site-path";
+import SiteHeader from "../SiteHeader";
 
 const skillUrl = "https://github.com/indieshade/helplearn-skill#readme";
 
@@ -15,22 +15,7 @@ export const metadata: Metadata = {
 export default function DomainsPage() {
   return (
     <main className="domains-page">
-      <nav className="home-nav" aria-label="主导航">
-        <Link className="home-brand" href="/"><img src={siteAsset("/xuemai-icon.png")} alt="" /><span>学脉</span></Link>
-        <div className="home-nav-links">
-          <Link href="/#product">产品</Link>
-          <Link href="/domains/" aria-current="page">领域工作台</Link>
-          <a href={skillUrl} target="_blank" rel="noreferrer">免费 Skill</a>
-          <Link href="/#download">下载</Link>
-          <Link href="/interactive-ai-learning-system/">文档</Link>
-          <Link href="/#pricing">定价</Link>
-        </div>
-        <a className="home-nav-download" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载</a>
-        <details className="home-mobile-menu">
-          <summary>菜单</summary>
-          <div><Link href="/#product">产品</Link><Link href="/domains/">领域工作台</Link><a href={skillUrl} target="_blank" rel="noreferrer">免费 Skill</a><Link href="/#download">下载</Link><Link href="/interactive-ai-learning-system/">文档</Link><Link href="/#pricing">定价</Link></div>
-        </details>
-      </nav>
+      <SiteHeader current="domains" />
 
       <section className="domains-hero">
         <div>

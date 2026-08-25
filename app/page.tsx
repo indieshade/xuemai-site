@@ -3,28 +3,14 @@ import ContactCard from "./ContactCard";
 import DomainWorkspace from "./DomainWorkspace";
 import { product } from "./product-config";
 import { siteAsset } from "./site-path";
+import SiteHeader from "./SiteHeader";
 
 const skillUrl = "https://github.com/indieshade/helplearn-skill#readme";
 
 export default function Home() {
   return (
     <main className="home-page">
-      <nav className="home-nav" aria-label="主导航">
-        <a className="home-brand" href="#top" aria-label="学脉首页"><img src={siteAsset("/xuemai-icon.png")} alt="" /><span>学脉</span></a>
-        <div className="home-nav-links">
-          <a href="#product">产品</a>
-          <Link href="/domains/">领域工作台</Link>
-          <a href={skillUrl} target="_blank" rel="noreferrer">免费 Skill</a>
-          <a href="#download">下载</a>
-          <Link href="/interactive-ai-learning-system/">文档</Link>
-          <a href="#pricing">定价</a>
-        </div>
-        <a className="home-nav-download" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载</a>
-        <details className="home-mobile-menu">
-          <summary>菜单</summary>
-          <div><a href="#product">产品</a><Link href="/domains/">领域工作台</Link><a href={skillUrl} target="_blank" rel="noreferrer">免费 Skill</a><a href="#download">下载</a><Link href="/interactive-ai-learning-system/">文档</Link><a href="#pricing">定价</a></div>
-        </details>
-      </nav>
+      <SiteHeader />
 
       <section className="home-hero" id="top">
         <div>
@@ -118,6 +104,7 @@ export default function Home() {
 
       <footer className="home-footer">
         <div className="home-footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><span>学脉 · HelpLearn</span></div>
+        <div className="home-footer-links"><Link href="/privacy/">隐私说明</Link><Link href="/changelog/">更新记录</Link></div>
         <a href="https://qm.qq.com/cgi-bin/qm/qr?k=2590930875" target="_blank" rel="noreferrer">激活、反馈与版本通知：QQ {product.feedbackQQ}</a>
         <span>© 2026 影下独作</span>
       </footer>
