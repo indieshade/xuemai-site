@@ -29,7 +29,7 @@ export default function Home() {
       <section className="home-hero" id="top">
         <div>
           <span className="home-kicker">持续构建属于自己的理解</span>
-          <h1>学脉：AI交互式<span className="home-hero-title-line">学习系统。</span></h1>
+          <h1>学脉：AI交互<span className="home-hero-title-line">学习系统。</span></h1>
           <p>在学脉，围绕一本书、一份资料或一个问题展开的讨论，会被整理成可以继续往下走的学习脉络。相关的脉络还能放进同一个领域，慢慢拼出你自己的理解。</p>
           <div className="home-actions">
             <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载学脉桌面端 <span aria-hidden="true">↓</span></a>
