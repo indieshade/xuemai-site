@@ -5,6 +5,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const release = JSON.parse(await readFile(path.join(projectRoot, "app", "windows-release.generated.json"), "utf8"));
+
+function asLiteralPattern(value) {
+  return new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+}
 
 async function render(pathname = "/") {
   const relativePath = pathname === "/" ? "index.html" : path.join(pathname.slice(1), "index.html");
@@ -42,11 +47,11 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
-  assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.10/);
+  assert.match(html, asLiteralPattern(release.label));
   assert.match(html, /下载 Windows Alpha/);
-  assert.match(html, /121\.38 MB/);
-  assert.match(html, /A26522C9821D6F1CCEF37A66430A4BFF48F814D75E12A97B1024C025461C4409/);
-  assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.10/);
+  assert.match(html, asLiteralPattern(release.size));
+  assert.match(html, asLiteralPattern(release.sha256));
+  assert.match(html, asLiteralPattern(release.downloadUrl));
   assert.match(html, /首次启动自动获得 7(?:<!-- -->)? 天完整体验/);
   assert.match(html, /30 日激活码.*永久激活/);
   assert.doesNotMatch(html, /使用权/);
@@ -90,7 +95,7 @@ test("renders the short-video product card route", async () => {
   const html = await response.text();
   assert.match(html, /short-video-card/);
   assert.match(html, /WINDOWS ALPHA/);
-  assert.match(html, /0\.1\.0-ALPHA\.10/);
+  assert.match(html, asLiteralPattern(release.label.toUpperCase()));
   assert.match(html, /2590930875/);
 });
 
@@ -101,7 +106,7 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /什么是交互式 AI 学习系统？/);
   assert.match(html, /开放组件负责学习架构/);
   assert.match(html, /Windows Alpha/);
-  assert.match(html, /0\.1\.0-alpha\.10/);
+  assert.match(html, asLiteralPattern(release.version));
   assert.match(html, /它和普通 AI 对话有什么不同？/);
   assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
   assert.match(html, /SoftwareApplication/);
@@ -115,7 +120,7 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   const changelog = await (await render("/changelog")).text();
 
   assert.match(download, /下载学脉 Windows Alpha/);
-  assert.match(download, /A26522C9821D6F1CCEF37A66430A4BFF48F814D75E12A97B1024C025461C4409/);
+  assert.match(download, asLiteralPattern(release.sha256));
   assert.match(download, /尚未进行代码签名/);
   assert.match(pricing, /自动获得 7(?:<!-- -->)? 天完整体验/);
   assert.match(pricing, /¥19\.9/);
@@ -123,7 +128,7 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(pricing, /永久激活不是所有服务的一次买断/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
-  assert.match(changelog, /0\.1\.0-alpha\.10/);
+  assert.match(changelog, asLiteralPattern(release.version));
   assert.match(changelog, /启动后会静默检查更新/);
   assert.match(changelog, /安装前会征求你的确认/);
   assert.doesNotMatch(changelog, /下一版本重点：更新提醒与自动更新/);
@@ -142,6 +147,14 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(sitemap, /https:\/\/helplearn\.cn\/changelog\//);
 });
 
+test("publishes the same verified Windows release data used by the pages", async () => {
+  const publicRelease = JSON.parse(await readOutputFile("windows-release.json"));
+
+  assert.deepEqual(publicRelease, release);
+  assert.match(publicRelease.version, /^\d+\.\d+\.\d+-alpha\.\d+$/);
+  assert.match(publicRelease.downloadUrl, new RegExp(`/v${publicRelease.version.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/`));
+});
+
 test("publishes brand schema and notifies IndexNow after Pages deploy", async () => {
   const layout = await readSourceFile("app/layout.tsx");
   const workflow = await readSourceFile(".github/workflows/pages.yml");
@@ -152,13 +165,33 @@ test("publishes brand schema and notifies IndexNow after Pages deploy", async ()
   assert.match(layout, /AI 交互学习系统/);
   assert.match(workflow, /api\.indexnow\.org\/indexnow/);
   assert.match(workflow, /needs: deploy/);
+  assert.match(workflow, /release:\s+types: \[published\]/);
+  assert.match(workflow, /cron: "17 \*\/6 \* \* \*"/);
   assert.equal(key.trim(), "2797c545ab105d2403b1bd326352838f");
 });
 
-test("centralizes verified download and purchasable activation URLs", async () => {
+test("centralizes release data and keeps download entry points free of hardcoded release URLs", async () => {
   const config = await readSourceFile("app/product-config.ts");
   const contactCard = await readSourceFile("app/ContactCard.tsx");
-  assert.match(config, /Xuemai-Setup-0\.1\.0-alpha\.10-x64\.exe/);
+  const releaseModule = await readSourceFile("app/windows-release.ts");
+  const entryPointFiles = [
+    "app/page.tsx",
+    "app/domains/page.tsx",
+    "app/download/page.tsx",
+    "app/changelog/page.tsx",
+    "app/interactive-ai-learning-system/page.tsx",
+    "app/card/page.tsx",
+    "app/layout.tsx",
+  ];
+
+  assert.match(config, /import \{ windowsRelease \} from "\.\/windows-release"/);
+  assert.doesNotMatch(config, /releases\/download|0\.1\.0-alpha\./);
+  assert.match(releaseModule, /windows-release\.generated\.json/);
+  assert.doesNotMatch(releaseModule, /github\.com\/indieshade\/xuemai-site\/releases\/download/);
+  for (const file of entryPointFiles) {
+    const source = await readSourceFile(file);
+    assert.doesNotMatch(source, /github\.com\/indieshade\/xuemai-site\/releases\/download|Xuemai-Setup-0\.1\.0-alpha|0\.1\.0-alpha\.\d+/);
+  }
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
   assert.match(config, /price: "¥19\.9"/);

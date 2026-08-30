@@ -25,9 +25,9 @@ export default function ChangelogPage() {
 
       <section className="info-section" aria-labelledby="released">
         <span className="info-index">已发布</span>
-        <h2 id="released">0.1.0-alpha.10</h2>
+        <h2 id="released">{product.windows.version}</h2>
         <ul className="info-check-list">
-          <li>Windows Alpha 安装包更新至 0.1.0-alpha.10。</li>
+          <li>Windows Alpha 安装包已更新至 {product.windows.version}。</li>
           <li>首次启动自动领取 7 天完整桌面体验；同一设备重复请求不会刷新期限。</li>
           <li>支持输入激活码、重新校验、设备解绑与移除本机凭据。</li>
           <li>被授权拦住的操作，会在激活成功后恢复。</li>
@@ -41,7 +41,7 @@ export default function ChangelogPage() {
       </section>
 
       <section className="info-section info-callout" aria-labelledby="next-version">
-        <span className="info-index">本次更新</span>
+        <span className="info-index">当前更新方式</span>
         <h2 id="next-version">发现新版本后，由你决定是否安装</h2>
         <p>启动后会静默检查更新，并在左下角给出提示。下载在后台进行并显示进度；安装前会征求你的确认，不会自行重启。</p>
         <Link className="info-text-link" href="/download/">查看当前可下载版本 →</Link>

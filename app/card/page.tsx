@@ -1,4 +1,5 @@
 import "./card.css";
+import { product } from "../product-config";
 import { siteAsset } from "../site-path";
 
 export default function ProductCard() {
@@ -13,7 +14,7 @@ export default function ProductCard() {
             <img src={siteAsset("/xuemai-icon.png")} alt="学脉" />
             <span>INDIE SHADE PRODUCT</span>
           </div>
-          <span className="name-card-version">WINDOWS ALPHA · 0.1.0-ALPHA.10</span>
+          <span className="name-card-version">{product.windows.label.toUpperCase()}</span>
         </header>
 
         <div className="name-card-main">

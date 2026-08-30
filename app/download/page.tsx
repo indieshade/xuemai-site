@@ -24,6 +24,7 @@ export default function DownloadPage() {
           <span>{product.windows.label}</span>
           <h2>先装起来，从一段对话开始。</h2>
           <p>这是公开测试版本。安装前请确认系统平台、下载来源与校验值。</p>
+          {product.windows.refreshNote ? <p>{product.windows.refreshNote}</p> : null}
         </div>
         <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>
       </section>

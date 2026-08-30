@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "refreshNote": null,
+  "version": "0.1.0-alpha.11",
+  "label": "Windows Alpha · 0.1.0-alpha.11",
+  "platform": "Windows x64",
+  "sizeBytes": 127276990,
+  "size": "121.38 MB",
+  "sha256": "5B30AD8F9975F638BB94E819535C1BE5E9DEA76FB2666A8E9AB5EA04DCD5FB02",
+  "sha512": "YpDIYYEemBlkfirtHrP+nq6zjFkRja2VmZv0cmUsJLUQoCAIjsDe6W4SnHS1Ehcuqmbbn6IjUXdr6nRTbOZK1Q==",
+  "downloadUrl": "https://github.com/indieshade/xuemai-site/releases/download/v0.1.0-alpha.11/Xuemai-Setup-0.1.0-alpha.11-x64.exe",
+  "releaseUrl": "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.11",
+  "releaseDate": "2026-08-30T07:18:43.865Z",
+  "releasedOn": "2026 年 8 月 30 日"
+}
