@@ -42,11 +42,11 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
-  assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.9/);
+  assert.match(html, /Windows Alpha · 0\.1\.0-alpha\.10/);
   assert.match(html, /下载 Windows Alpha/);
   assert.match(html, /121\.38 MB/);
-  assert.match(html, /79F373AE5EC7C898BE48787CCBB57CEB0D2DB81E6C64A6D4C2E6FE5BB9699BFC/);
-  assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.9/);
+  assert.match(html, /A26522C9821D6F1CCEF37A66430A4BFF48F814D75E12A97B1024C025461C4409/);
+  assert.match(html, /github\.com\/indieshade\/xuemai-site\/releases\/download\/v0\.1\.0-alpha\.10/);
   assert.match(html, /首次启动自动获得 7(?:<!-- -->)? 天完整体验/);
   assert.match(html, /30 日激活码.*永久激活/);
   assert.doesNotMatch(html, /使用权/);
@@ -90,7 +90,7 @@ test("renders the short-video product card route", async () => {
   const html = await response.text();
   assert.match(html, /short-video-card/);
   assert.match(html, /WINDOWS ALPHA/);
-  assert.match(html, /0\.1\.0-ALPHA\.9/);
+  assert.match(html, /0\.1\.0-ALPHA\.10/);
   assert.match(html, /2590930875/);
 });
 
@@ -101,7 +101,7 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /什么是交互式 AI 学习系统？/);
   assert.match(html, /开放组件负责学习架构/);
   assert.match(html, /Windows Alpha/);
-  assert.match(html, /0\.1\.0-alpha\.9/);
+  assert.match(html, /0\.1\.0-alpha\.10/);
   assert.match(html, /它和普通 AI 对话有什么不同？/);
   assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
   assert.match(html, /SoftwareApplication/);
@@ -115,7 +115,7 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   const changelog = await (await render("/changelog")).text();
 
   assert.match(download, /下载学脉 Windows Alpha/);
-  assert.match(download, /79F373AE5EC7C898BE48787CCBB57CEB0D2DB81E6C64A6D4C2E6FE5BB9699BFC/);
+  assert.match(download, /A26522C9821D6F1CCEF37A66430A4BFF48F814D75E12A97B1024C025461C4409/);
   assert.match(download, /尚未进行代码签名/);
   assert.match(pricing, /自动获得 7(?:<!-- -->)? 天完整体验/);
   assert.match(pricing, /¥19\.9/);
@@ -123,9 +123,10 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(pricing, /永久激活不是所有服务的一次买断/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
-  assert.match(changelog, /0\.1\.0-alpha\.9/);
-  assert.match(changelog, /更新提醒与自动更新/);
-  assert.match(changelog, /这是一项计划，不是当前已上线能力/);
+  assert.match(changelog, /0\.1\.0-alpha\.10/);
+  assert.match(changelog, /启动后会静默检查更新/);
+  assert.match(changelog, /安装前会征求你的确认/);
+  assert.doesNotMatch(changelog, /下一版本重点：更新提醒与自动更新/);
 });
 
 test("publishes crawl instructions and the public sitemap", async () => {
@@ -157,7 +158,7 @@ test("publishes brand schema and notifies IndexNow after Pages deploy", async ()
 test("centralizes verified download and purchasable activation URLs", async () => {
   const config = await readSourceFile("app/product-config.ts");
   const contactCard = await readSourceFile("app/ContactCard.tsx");
-  assert.match(config, /Xuemai-Setup-0\.1\.0-alpha\.9-x64\.exe/);
+  assert.match(config, /Xuemai-Setup-0\.1\.0-alpha\.10-x64\.exe/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
   assert.match(config, /price: "¥19\.9"/);

@@ -13,7 +13,7 @@ export default function ProductCard() {
             <img src={siteAsset("/xuemai-icon.png")} alt="学脉" />
             <span>INDIE SHADE PRODUCT</span>
           </div>
-          <span className="name-card-version">WINDOWS ALPHA · 0.1.0-ALPHA.9</span>
+          <span className="name-card-version">WINDOWS ALPHA · 0.1.0-ALPHA.10</span>
         </header>
 
         <div className="name-card-main">
