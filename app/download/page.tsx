@@ -17,7 +17,7 @@ export default function DownloadPage() {
       eyebrow="学脉 HelpLearn · 下载"
       title="下载学脉 Windows Alpha"
       description="当前提供 Windows x64 测试版。首次启动会自动获得 7 天完整体验；体验结束后，输入激活码即可继续使用。"
-      updated="2026 年 8 月 25 日"
+      updated="2026 年 8 月 30 日"
     >
       <section className="info-highlight">
         <div>

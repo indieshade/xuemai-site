@@ -16,7 +16,7 @@ export default function ChangelogPage() {
       eyebrow="学脉 HelpLearn · 更新记录"
       title="版本、已知问题和接下来的安排"
       description="这里记录已经发布的变化，也把尚未上线的计划单独写清楚。"
-      updated="2026 年 8 月 25 日"
+      updated="2026 年 8 月 30 日"
     >
       <section className="info-release" aria-labelledby="current-release">
         <div><span>当前版本</span><h2 id="current-release">Windows Alpha · {product.windows.version}</h2></div>
@@ -25,8 +25,9 @@ export default function ChangelogPage() {
 
       <section className="info-section" aria-labelledby="released">
         <span className="info-index">已发布</span>
-        <h2 id="released">0.1.0-alpha.5</h2>
+        <h2 id="released">0.1.0-alpha.9</h2>
         <ul className="info-check-list">
+          <li>Windows Alpha 安装包更新至 0.1.0-alpha.9。</li>
           <li>首次启动自动领取 7 天完整桌面体验；同一设备重复请求不会刷新期限。</li>
           <li>支持输入激活码、重新校验、设备解绑与移除本机凭据。</li>
           <li>被授权拦住的操作，会在激活成功后恢复。</li>

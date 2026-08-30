@@ -3,14 +3,14 @@ export const product = {
   internationalName: "HelpLearn",
   feedbackQQ: "2590930875",
   windows: {
-    version: "0.1.0-alpha.5",
-    label: "Windows Alpha · 0.1.0-alpha.5",
+    version: "0.1.0-alpha.9",
+    label: "Windows Alpha · 0.1.0-alpha.9",
     platform: "Windows x64",
-    size: "121.15 MB",
-    sha256: "460518F724CB9BFA6647B3788C1AC5D0A8F3AA8F989B4065A870908BC6E173AC",
+    size: "121.38 MB",
+    sha256: "79F373AE5EC7C898BE48787CCBB57CEB0D2DB81E6C64A6D4C2E6FE5BB9699BFC",
     downloadUrl:
-      "https://github.com/indieshade/xuemai-site/releases/download/v0.1.0-alpha.5/Xuemai-License-Candidate-0.1.0-alpha.5-x64.exe",
-    releaseUrl: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.5",
+      "https://github.com/indieshade/xuemai-site/releases/download/v0.1.0-alpha.9/Xuemai-Setup-0.1.0-alpha.9-x64.exe",
+    releaseUrl: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.9",
   },
   trial: {
     days: 7,
