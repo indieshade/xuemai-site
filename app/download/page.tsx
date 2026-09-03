@@ -16,7 +16,7 @@ export default function DownloadPage() {
       current="download"
       eyebrow="学脉 HelpLearn · 下载"
       title="下载学脉 Windows Alpha"
-      description="当前提供 Windows x64 测试版。桌面端可选择年度版或永久版：年度版从首次激活起计算 365 天。"
+      description="当前提供 Windows x64 测试版。桌面端可选择年度版或永久版：年度版从首次激活起计算 365 天，同一购买者可激活 2 台设备。"
       updated="2026 年 8 月 30 日"
     >
       <section className="info-highlight">
@@ -54,7 +54,7 @@ export default function DownloadPage() {
       <section className="info-section info-callout" aria-labelledby="desktop-license">
         <span className="info-index">桌面端授权</span>
         <h2 id="desktop-license">选择适合自己的授权方式</h2>
-        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}。{product.licensing.futureServices}</p>
+        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.futureServices}</p>
         <Link className="info-text-link" href="/pricing/">查看授权方案与购买入口 →</Link>
       </section>
     </InfoPage>

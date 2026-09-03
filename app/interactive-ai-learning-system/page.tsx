@@ -184,7 +184,7 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>桌面端授权包含哪些内容？</summary>
-            <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}。{product.licensing.desktopOnly} {product.licensing.futureServices} {product.licensing.independentAccess}</p>
+            <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.desktopOnly} {product.licensing.futureServices} {product.licensing.independentAccess}</p>
           </details>
         </section>
 

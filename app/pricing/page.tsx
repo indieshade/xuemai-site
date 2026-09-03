@@ -14,13 +14,13 @@ export default function PricingPage() {
       current="pricing"
       eyebrow="学脉 HelpLearn · 桌面端授权"
       title="按使用周期选择桌面端授权"
-      description="年度版从首次激活起计算 365 天；永久版提供桌面端永久使用。"
+      description="年度版从首次激活起计算 365 天；永久版永久解锁本地桌面能力；同一购买者可激活 2 台设备。"
       updated="2026 年 9 月 4 日"
     >
       <section className="info-license-banner" aria-label="桌面端授权">
         <span>桌面端授权</span>
         <strong>年度版或永久版</strong>
-        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}。</p>
+        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
       </section>
 
       <section className="info-section" aria-labelledby="activation-options">
@@ -30,10 +30,10 @@ export default function PricingPage() {
           {product.desktopLicenses.map((option) => (
             <article className="info-price-card" key={option.id}>
               <span>{option.name}</span>
-              <strong className={option.price ? undefined : "info-price-term"}>{option.price ?? option.term}</strong>
-              <p>{option.price ? option.description : `${option.term}。${option.description}`}</p>
+              <strong>{option.price}</strong>
+              <p>{option.term}。{option.description}</p>
               {option.isAvailable && option.purchaseUrl ? (
-                <a className="home-button-primary" href={option.purchaseUrl} target="_blank" rel="noreferrer">前往购买 <span aria-hidden="true">↗</span></a>
+                <a className="home-button-primary" href={option.purchaseUrl} target="_blank" rel="noreferrer">购买{option.name} <span aria-hidden="true">↗</span></a>
               ) : (
                 <span className="info-price-unavailable">{option.availability}</span>
               )}
@@ -46,7 +46,7 @@ export default function PricingPage() {
         <span className="info-index">怎么激活</span>
         <h2 id="activation-flow">购买后，在桌面端输入激活码</h2>
         <ol className="info-numbered-list">
-          <li><strong>选择桌面端授权</strong><span>{product.licensing.annualTerm}，{product.licensing.permanentTerm}。</span></li>
+          <li><strong>选择桌面端授权</strong><span>{product.licensing.annualTerm}，{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</span></li>
           <li><strong>获取对应激活码</strong><span>在已开放的购买入口下单，或通过 QQ、微信咨询。</span></li>
           <li><strong>输入并校验</strong><span>桌面端支持重新校验、设备解绑与移除本机凭据。</span></li>
         </ol>
