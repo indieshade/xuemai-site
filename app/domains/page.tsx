@@ -46,7 +46,7 @@ export default function DomainsPage() {
       </section>
 
       <section className="domains-cta">
-        <div><span>{product.windows.label}</span><h2>从一段对话开始，把以后还想回看的问题放进领域。</h2><p>{product.trial.label}。{product.trial.detail}</p></div>
+        <div><span>{product.windows.label}</span><h2>从一段对话开始，把以后还想回看的问题放进领域。</h2><p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}。</p></div>
         <div><a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a><a className="home-button-secondary" href={skillUrl} target="_blank" rel="noreferrer">安装免费 Skill <span aria-hidden="true">↗</span></a></div>
       </section>
     </main>

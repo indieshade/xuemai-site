@@ -5,7 +5,7 @@ import { product } from "../product-config";
 
 export const metadata: Metadata = {
   title: "更新记录与已知问题",
-  description: "查看学脉 HelpLearn Windows Alpha 的当前版本、体验与激活能力、已知问题和下一步计划。",
+  description: "查看学脉 HelpLearn Windows Alpha 的当前版本、激活能力、已知问题和下一步计划。",
   alternates: { canonical: "/changelog/" },
 };
 
@@ -28,7 +28,6 @@ export default function ChangelogPage() {
         <h2 id="released">{product.windows.version}</h2>
         <ul className="info-check-list">
           <li>Windows Alpha 安装包已更新至 {product.windows.version}。</li>
-          <li>首次启动自动领取 7 天完整桌面体验；同一设备重复请求不会刷新期限。</li>
           <li>支持输入激活码、重新校验、设备解绑与移除本机凭据。</li>
           <li>被授权拦住的操作，会在激活成功后恢复。</li>
         </ul>

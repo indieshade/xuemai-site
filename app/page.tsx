@@ -21,7 +21,7 @@ export default function Home() {
             <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载学脉桌面端 <span aria-hidden="true">↓</span></a>
             <a className="home-button-secondary" href={skillUrl} target="_blank" rel="noreferrer">免费安装 HelpLearn Skill <span aria-hidden="true">↗</span></a>
           </div>
-          <div className="home-hero-notes"><span>{product.windows.label}</span><span>首次启动自动获得 7 天完整体验</span><span>Skill 可单独使用</span></div>
+          <div className="home-hero-notes"><span>{product.windows.label}</span><span>桌面端提供年度版与永久版</span><span>Skill 可单独使用</span></div>
         </div>
         <div className="home-screenshot-frame">
           <img src={siteAsset("/screenshots/learning-home.png")} alt="学脉桌面端首页，展示领域、学习旅程和复习内容" />
@@ -94,7 +94,7 @@ export default function Home() {
         <aside className="home-download-panel" id="download">
           <span>{product.windows.label}</span>
           <h3>先装起来，从一段对话开始。</h3>
-          <p><strong>{product.trial.label}</strong>。{product.trial.detail}</p>
+          <p><strong>桌面端提供年度版与永久版。</strong>{product.licensing.annualTerm}，{product.licensing.permanentTerm}。</p>
           <div className="home-download-warning">安装包当前未进行代码签名，Windows 可能会提示风险。请确认下载来源和 SHA256 后再安装。</div>
           <div className="home-download-meta"><div><span>平台</span><strong>{product.windows.platform}</strong></div><div><span>大小</span><strong>{product.windows.size}</strong></div><div><span>版本</span><strong>{product.windows.version}</strong></div></div>
           <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>

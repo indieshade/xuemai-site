@@ -52,14 +52,15 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, asLiteralPattern(release.size));
   assert.match(html, asLiteralPattern(release.sha256));
   assert.match(html, asLiteralPattern(release.downloadUrl));
-  assert.match(html, /首次启动自动获得 7(?:<!-- -->)? 天完整体验/);
-  assert.match(html, /30 日激活码.*永久激活/);
+  assert.match(html, /桌面端提供年度版与永久版/);
+  assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
+  assert.match(html, /永久版提供桌面端永久使用/);
   assert.doesNotMatch(html, /使用权/);
-  assert.doesNotMatch(html, /14 天|试用码|alpha\.4/);
-  assert.match(html, /¥19\.9/);
+  assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
   assert.match(html, /¥99/);
   assert.match(html, /前往购买/);
-  assert.match(html, /永久激活仅覆盖桌面端授权/);
+  assert.match(html, /年度版与永久版都只覆盖学脉桌面端授权/);
+  assert.match(html, /个人认知库，不会因桌面端授权到期或失效而被锁定/);
   assert.match(html, /2590930875/);
   assert.match(html, /添加微信咨询/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
@@ -111,6 +112,9 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /https:\/\/helplearn\.cn\/og\.png/);
+  assert.match(html, /桌面端授权包含哪些内容/);
+  assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
+  assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
 });
 
 test("renders download, pricing, privacy, and changelog as standalone product pages", async () => {
@@ -122,16 +126,24 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(download, /下载学脉 Windows Alpha/);
   assert.match(download, asLiteralPattern(release.sha256));
   assert.match(download, /尚未进行代码签名/);
-  assert.match(pricing, /自动获得 7(?:<!-- -->)? 天完整体验/);
-  assert.match(pricing, /¥19\.9/);
+  assert.match(download, /年度版与永久版/);
+  assert.match(download, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
+  assert.match(pricing, /年度版或永久版/);
+  assert.match(pricing, /首次激活起 365(?:<!-- -->)? 天/);
+  assert.match(pricing, /即将开放/);
   assert.match(pricing, /¥99/);
-  assert.match(pricing, /永久激活不是所有服务的一次买断/);
+  assert.match(pricing, /桌面端授权和在线服务分开/);
+  assert.match(pricing, /个人认知库，不会因桌面端授权到期或失效而被锁定/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
   assert.match(changelog, asLiteralPattern(release.version));
   assert.match(changelog, /启动后会静默检查更新/);
   assert.match(changelog, /安装前会征求你的确认/);
   assert.doesNotMatch(changelog, /下一版本重点：更新提醒与自动更新/);
+
+  for (const html of [download, pricing, changelog]) {
+    assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
+  }
 });
 
 test("publishes crawl instructions and the public sitemap", async () => {
@@ -192,14 +204,20 @@ test("centralizes release data and keeps download entry points free of hardcoded
     const source = await readSourceFile(file);
     assert.doesNotMatch(source, /github\.com\/indieshade\/xuemai-site\/releases\/download|Xuemai-Setup-0\.1\.0-alpha|0\.1\.0-alpha\.\d+/);
   }
+  assert.match(config, /desktopLicenses/);
+  assert.match(config, /id: "annual"/);
+  assert.match(config, /name: "年度版"/);
+  assert.match(config, /annualTerm: "年度版从首次激活起计算 365 天"/);
+  assert.match(config, /id: "permanent"/);
+  assert.match(config, /name: "永久版"/);
   assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/vgxadp/);
-  assert.match(config, /https:\/\/pay\.ldxp\.cn\/item\/b2bxj2/);
-  assert.match(config, /price: "¥19\.9"/);
   assert.match(config, /price: "¥99"/);
-  assert.match(config, /days: 7/);
-  assert.match(config, /首次启动自动获得 7 天完整体验/);
+  assert.doesNotMatch(config, /b2bxj2|30 日|30日|trial|7 天|Pro/);
   assert.match(config, /availability: "可购买"/);
   assert.match(config, /isAvailable: true/);
+  assert.match(config, /isAvailable: false/);
   assert.match(contactCard, /contact\/wechat-qr\.jpg/);
   assert.match(contactCard, /role="dialog"/);
+  assert.match(contactCard, /desktopLicenses/);
+  assert.doesNotMatch(contactCard, /purchaseOptions|product\.trial|30 日|30日|7 天/);
 });

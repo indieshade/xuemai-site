@@ -53,14 +53,18 @@ const softwareApplication = {
   softwareVersion: product.windows.version,
   downloadUrl: product.windows.downloadUrl,
   publisher: { "@id": `${siteUrl}/#organization` },
-  offers: product.purchaseOptions.map((option) => ({
-    "@type": "Offer",
-    name: option.name,
-    price: option.price.replace("¥", ""),
-    priceCurrency: "CNY",
-    availability: "https://schema.org/InStock",
-    url: option.purchaseUrl,
-  })),
+  offers: product.desktopLicenses.flatMap((option) => (
+    option.isAvailable && option.purchaseUrl && option.price
+      ? [{
+          "@type": "Offer",
+          name: option.name,
+          price: option.price.replace("¥", ""),
+          priceCurrency: "CNY",
+          availability: "https://schema.org/InStock",
+          url: option.purchaseUrl,
+        }]
+      : []
+  )),
 };
 
 const siteSchemas = {

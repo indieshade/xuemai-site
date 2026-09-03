@@ -39,7 +39,7 @@ npm test
 - `app/card/page.tsx`：1080 × 1920 短视频产品名片
 - `app/globals.css`：视觉系统与响应式布局
 - `app/ContactCard.tsx`：一键复制 QQ 的联系入口
-- `app/product-config.ts`：Windows 下载、SHA256、反馈 QQ 与链动小铺两种激活码商品的链接与库存状态配置
+- `app/product-config.ts`：Windows 下载、SHA256、反馈 QQ 与桌面端授权方案的集中配置
 - `public/screenshots/`：产品实机截图
 
 Indie Shade Product · Created by 影下独作

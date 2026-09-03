@@ -52,26 +52,23 @@ export default function ContactCard() {
   return (
     <div className="contact-card" id="contact">
       <span className="contact-kicker">激活与反馈</span>
-      <h3>获取激活码</h3>
-      <div className="trial-notice">
-        <strong>{product.trial.label}</strong>
-        <span>{product.trial.detail}</span>
-      </div>
+      <h3>选择桌面端授权</h3>
       <p>
-        可按需要选择 30 日激活码或永久激活。购买并输入激活码后即可继续使用；永久激活仅覆盖桌面端授权。
+        {product.licensing.annualTerm}，{product.licensing.permanentTerm}。{product.licensing.desktopOnly}
       </p>
-      <div className="purchase-options" aria-label="激活码购买状态">
-        {product.purchaseOptions.map((option) => (
-          <div className="purchase-state" key={option.purchaseUrl}>
-            <span><small>{option.price}</small>{option.name}</span>
-            {option.isAvailable ? (
+      <div className="purchase-options" aria-label="桌面端授权方案">
+        {product.desktopLicenses.map((option) => (
+          <div className="purchase-state" key={option.id}>
+            <span>{option.price ? <small>{option.price}</small> : null}{option.name}</span>
+            {option.isAvailable && option.purchaseUrl ? (
               <a href={option.purchaseUrl} target="_blank" rel="noreferrer">前往购买</a>
             ) : (
-              <strong>{option.availability} · 即将开放</strong>
+              <strong>{option.availability}</strong>
             )}
           </div>
         ))}
       </div>
+      <p className="contact-license-boundary">{product.licensing.futureServices} {product.licensing.independentAccess}</p>
       <button className="contact-copy" type="button" onClick={() => handleCopy("qq", product.feedbackQQ)}>
         <span><small>QQ</small>{product.feedbackQQ}</span>
         <strong>{copied === "qq" ? "已复制 ✓" : failed ? "请手动复制" : "复制号码"}</strong>

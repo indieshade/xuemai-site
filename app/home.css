@@ -375,9 +375,6 @@
 .home-download-meta strong { display: block; margin-top: 5px; color: rgba(241, 233, 217, 0.85); font-size: 12px; font-weight: 600; }
 .home-download-panel > .home-button-primary { margin-bottom: 21px; }
 .home-download-panel .contact-card { margin-top: 0; }
-.home-download-panel .trial-notice { display: grid; gap: 6px; margin: 17px 0; padding: 15px 16px; border: 1px solid rgba(120, 184, 154, 0.28); border-left: 3px solid var(--green); border-radius: 12px; background: rgba(70, 152, 116, 0.07); }
-.home-download-panel .trial-notice strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(22px, 2vw, 28px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.22; white-space: normal; }
-.home-download-panel .trial-notice span { color: var(--muted); font-size: 12px; line-height: 1.6; }
 .contact-wechat { width: 100%; min-height: 54px; margin-top: 8px; padding: 0 14px 0 16px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(120, 184, 154, 0.32); border-radius: 13px; color: var(--bone); background: rgba(120, 184, 154, 0.07); cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
 .contact-wechat:hover { border-color: var(--green); background: rgba(120, 184, 154, 0.13); transform: translateY(-1px); }
 .contact-wechat > span { display: flex; align-items: baseline; gap: 9px; font-size: 14px; }
@@ -489,8 +486,6 @@
   .home-way-grid { grid-template-columns: 1fr; }
   .home-way-card { min-height: 272px; padding: 25px; }
   .home-download-panel { padding: 23px 17px; }
-  .home-download-panel .trial-notice { padding: 14px; }
-  .home-download-panel .trial-notice strong { font-size: 22px; }
   .contact-modal { padding: 16px; }
   .contact-modal-dialog { padding: 27px 21px 23px; }
   .contact-modal-dialog h3 { font-size: 25px; }
@@ -558,17 +553,19 @@
 .info-callout { margin-top: 72px; padding: 51px 52px; border: 1px solid rgba(120, 184, 154, 0.2); border-radius: 22px; background: linear-gradient(135deg, rgba(40, 89, 68, 0.16), rgba(239, 109, 66, 0.08)); }
 .info-callout > p { margin-bottom: 0; }
 .info-text-link { display: inline-flex; margin-top: 25px; padding-bottom: 4px; border-bottom: 1px solid rgba(239, 109, 66, 0.65); color: var(--orange2); font-size: 13px; }
-.info-trial-banner { display: grid; gap: 10px; padding: 38px 42px; border: 1px solid rgba(120, 184, 154, 0.27); border-radius: 21px; background: rgba(73, 146, 110, 0.09); }
-.info-trial-banner > span { color: var(--green); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.1em; }
-.info-trial-banner strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(31px, 3.7vw, 50px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.25; }
-.info-trial-banner p { margin: 0; color: var(--soft); font-size: 14px; line-height: 1.75; }
+.info-license-banner { display: grid; gap: 10px; padding: 38px 42px; border: 1px solid rgba(120, 184, 154, 0.27); border-radius: 21px; background: rgba(73, 146, 110, 0.09); }
+.info-license-banner > span { color: var(--green); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.1em; }
+.info-license-banner strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(31px, 3.7vw, 50px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.25; }
+.info-license-banner p { margin: 0; color: var(--soft); font-size: 14px; line-height: 1.75; }
 .info-price-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 31px; }
 .info-price-card { display: flex; min-height: 286px; flex-direction: column; align-items: start; padding: 28px; border: 1px solid rgba(235, 224, 204, 0.12); border-radius: 18px; background: rgba(255, 255, 255, 0.02); }
 .info-price-card:nth-child(2) { border-color: rgba(239, 109, 66, 0.3); background: linear-gradient(145deg, rgba(144, 55, 24, 0.13), rgba(255, 255, 255, 0.015)); }
 .info-price-card > span { color: var(--muted); font-size: 13px; }
 .info-price-card > strong { margin-top: 20px; color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: 48px; font-weight: 600; letter-spacing: -0.05em; }
+.info-price-card > strong.info-price-term { font-size: clamp(25px, 2.7vw, 35px); line-height: 1.28; letter-spacing: -0.035em; }
 .info-price-card p { margin: 15px 0 0; color: var(--soft); font-size: 14px; line-height: 1.75; }
 .info-price-card .home-button-primary { margin-top: auto; }
+.info-price-unavailable { display: inline-flex; align-items: center; min-height: 50px; margin-top: auto; color: var(--gold); font-size: 13px; }
 .info-numbered-list { display: grid; gap: 1px; margin: 31px 0 0; padding: 1px; list-style: none; border: 1px solid rgba(235, 224, 204, 0.1); border-radius: 18px; overflow: hidden; background: rgba(235, 224, 204, 0.1); }
 .info-numbered-list li { position: relative; display: grid; gap: 8px; min-height: 102px; padding: 22px 24px 22px 78px; background: #151613; }
 .info-numbered-list li::before { content: counter(list-item, decimal-leading-zero); position: absolute; top: 24px; left: 24px; color: var(--orange2); font-family: var(--font-mono), monospace; font-size: 11px; }
@@ -606,8 +603,8 @@
   .info-hash-block code { font-size: 11px; }
   .info-copy-button { width: max-content; }
   .info-callout { margin-top: 58px; padding: 33px 25px; border-radius: 18px; }
-  .info-trial-banner { padding: 29px 25px; border-radius: 18px; }
-  .info-trial-banner strong { font-size: clamp(30px, 8.6vw, 39px); line-height: 1.32; }
+  .info-license-banner { padding: 29px 25px; border-radius: 18px; }
+  .info-license-banner strong { font-size: clamp(30px, 8.6vw, 39px); line-height: 1.32; }
   .info-price-card { min-height: 255px; padding: 24px; }
   .info-numbered-list li { min-height: 0; padding: 21px 18px 21px 61px; }
   .info-numbered-list li::before { top: 23px; left: 18px; }
