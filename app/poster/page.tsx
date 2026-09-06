@@ -23,7 +23,7 @@ export default function Poster() {
           <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉学习界面" />
         </div>
         <div className="poster-features"><span>领域与学习旅程</span><span>资料伴读与摘录</span><span>个人认知库</span><span>跨 Agent 记录</span></div>
-        <footer className="poster-footer"><span>Indie Shade Product · Created by 影下独作</span><strong>{product.windows.channel === "candidate" ? "候选预发布" : "Alpha 测试"} · QQ 2590930875</strong></footer>
+        <footer className="poster-footer"><span>Indie Shade Product · Created by 影下独作</span><strong>Windows 版 · QQ 2590930875</strong></footer>
       </section>
     </main>
   );

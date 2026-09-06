@@ -92,13 +92,13 @@ test("uses the latest verified candidate release and its bundled alpha.yml", asy
 
   assert.equal(release.status, "verified");
   assert.equal(release.channel, "candidate");
-  assert.equal(release.edition, "Windows 候选版");
+  assert.equal(release.edition, "Windows 版");
   assert.equal(release.version, candidateVersion);
   assert.equal(release.downloadUrl, candidateDownloadUrl);
   assert.equal(release.sizeBytes, 202798679);
   assert.equal(release.sha512, candidateSha512);
   assert.equal(release.sha256, "8772AEB87D5DEE4295087C5E8F15DF5CB18253E07A5521EA151C00696CC55617");
-  assert.equal(release.prereleaseNote, "这是候选预发布包，不是稳定版。");
+  assert.equal(release.prereleaseNote, null);
 });
 
 test("uses the alpha manifest URL and matching GitHub Release digest when no candidate is available", async () => {

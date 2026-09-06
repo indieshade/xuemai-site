@@ -4,7 +4,7 @@ export type WindowsRelease = {
   status: "verified" | "fallback";
   refreshNote: string | null;
   channel: "alpha" | "candidate";
-  edition: "Windows Alpha" | "Windows 候选版";
+  edition: "Windows 版";
   prereleaseNote: string | null;
   version: string;
   label: string;

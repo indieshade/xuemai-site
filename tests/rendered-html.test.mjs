@@ -128,7 +128,8 @@ test("renders the short-video product card route", async () => {
   const html = await response.text();
   assert.match(html, /short-video-card/);
   assert.match(html, asLiteralPattern(release.label.toUpperCase()));
-  assert.match(html, release.channel === "candidate" ? /候选预发布/ : /ALPHA 测试/);
+  assert.match(html, /Windows 版/);
+  assert.doesNotMatch(html, /候选预发布|Windows 候选版|ALPHA 测试/);
   assert.match(html, /2590930875/);
 });
 

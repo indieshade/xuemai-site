@@ -99,13 +99,14 @@ function normalizeFallback(candidate) {
 
 function toPublicRelease(release, status, refreshNote) {
   const channel = releaseChannel(release.version);
-  const edition = channel === "candidate" ? "Windows 候选版" : "Windows Alpha";
+  // 发布通道用于校验与回退策略；面向访客只统一称为 Windows 版。
+  const edition = "Windows 版";
   return {
     status,
     refreshNote,
     channel,
     edition,
-    prereleaseNote: channel === "candidate" ? "这是候选预发布包，不是稳定版。" : null,
+    prereleaseNote: null,
     version: release.version,
     label: `${edition} · ${release.version}`,
     platform: "Windows x64",
