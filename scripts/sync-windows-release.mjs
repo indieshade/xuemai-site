@@ -7,7 +7,7 @@ export const candidateReleasesUrl = "https://api.github.com/repos/indieshade/xue
 export const liveFallbackUrl = "https://helplearn.cn/windows-release.json";
 
 const releaseRepository = "indieshade/xuemai-site";
-// Keep a bad candidate out of the public download path while the corrected build is prepared.
+// Keep the candidate with an installation filename-encoding issue out of public download until its corrected build is ready.
 const blockedPublicVersions = new Set(["0.2.0-rc.3"]);
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const fallbackPath = path.join(projectRoot, "app", "windows-release-fallback.json");
