@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ContactCard from "./ContactCard";
+import { DomainCognitiveMapDemo, DomainRecordsDemo } from "./DomainWorkspaceDemos";
 import { product } from "./product-config";
 import { siteAsset } from "./site-path";
 import SiteHeader from "./SiteHeader";
@@ -61,8 +62,18 @@ export default function Home() {
         </div>
         <figure className="home-domain-product-shot">
           <img src={siteAsset("/screenshots/domain-workspace-rc3-safe.png")} alt="学脉领域工作台演示：同一领域内有多条学习脉络，可切换对话、认知地图和领域记录" />
-          <figcaption>演示数据：同一领域下可以放多条学习脉络；切到认知地图，能回看它们之间的关系。</figcaption>
+          <figcaption><strong>对话</strong>演示数据：同一领域下可以放多条学习脉络；从一个问题接着往下聊。</figcaption>
         </figure>
+        <div className="home-domain-gallery" aria-label="领域工作台的更多界面演示">
+          <figure className="home-domain-demo-shot">
+            <DomainCognitiveMapDemo />
+            <figcaption><strong>认知地图</strong>把概念、它们之间的关系和仍待验证的问题放在一起。</figcaption>
+          </figure>
+          <figure className="home-domain-demo-shot">
+            <DomainRecordsDemo />
+            <figcaption><strong>领域记录</strong>回看跨旅程的判断、依据和下一步要继续追问的地方。</figcaption>
+          </figure>
+        </div>
         <div className="home-domain-action"><Link className="home-button-secondary" href="/domains/">了解领域工作台 <span aria-hidden="true">→</span></Link></div>
       </section>
 

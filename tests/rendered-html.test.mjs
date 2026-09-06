@@ -45,6 +45,10 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /domain-workspace-rc3-safe\.png/);
   assert.match(html, /同一领域下可以放多条学习脉络/);
   assert.match(html, /认知地图/);
+  assert.match(html, /把概念、它们之间的关系和仍待验证的问题放在一起/);
+  assert.match(html, /回看跨旅程的判断、依据和下一步要继续追问的地方/);
+  assert.match(html, /幸存者偏差会如何误导产品决策？/);
+  assert.match(html, /用户满意度为什么可能失真/);
   assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
@@ -84,6 +88,8 @@ test("renders the domain workspace page", async () => {
   const html = await response.text();
   assert.match(html, /把相关的学习，放回同一个问题里/);
   assert.match(html, /domain-workspace-rc3-safe\.png/);
+  assert.match(html, /关系都能连回来源/);
+  assert.match(html, /不同旅程带回来的新发现放进当前综合/);
   assert.match(html, /产品研究与决策/);
   assert.match(html, /从资料创建脉络/);
   assert.match(html, /点开关系继续想/);
