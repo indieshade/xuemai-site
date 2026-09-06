@@ -25,6 +25,30 @@ function releaseChannel(version) {
   throw new Error("版本号格式不正确");
 }
 
+function compareReleaseVersions(left, right) {
+  const parse = (version) => {
+    const match = version.match(/^(\d+)\.(\d+)\.(\d+)-(alpha|rc)\.(\d+)$/);
+    if (!match) throw new Error("版本号格式不正确");
+    return {
+      major: Number(match[1]),
+      minor: Number(match[2]),
+      patch: Number(match[3]),
+      channel: match[4],
+      channelNumber: Number(match[5]),
+    };
+  };
+  const leftVersion = parse(left);
+  const rightVersion = parse(right);
+  for (const field of ["major", "minor", "patch"]) {
+    if (leftVersion[field] !== rightVersion[field]) return leftVersion[field] - rightVersion[field];
+  }
+  const channelRank = { alpha: 0, rc: 1 };
+  if (channelRank[leftVersion.channel] !== channelRank[rightVersion.channel]) {
+    return channelRank[leftVersion.channel] - channelRank[rightVersion.channel];
+  }
+  return leftVersion.channelNumber - rightVersion.channelNumber;
+}
+
 function fileNameFromManifestReference(fileReference) {
   if (/^https:\/\//.test(fileReference)) return parseGithubDownloadUrl(fileReference).fileName;
   if (!/^[^/\\]+\.exe$/.test(fileReference)) throw new Error("候选清单安装包路径不正确");
@@ -230,17 +254,24 @@ export async function resolveWindowsRelease({
   try {
     return await loadVerifiedCandidateRelease({ fetchImpl, sourceUrl: candidateSourceUrl });
   } catch {
+    let lastVerified = normalizeFallback(fallback);
     try {
-      return await loadVerifiedManifestRelease({ fetchImpl, sourceUrl });
+      const deployed = normalizeFallback(await getJson(deployedFallbackUrl, fetchImpl));
+      if (compareReleaseVersions(deployed.version, lastVerified.version) > 0) lastVerified = deployed;
     } catch {
-      try {
-        const deployed = normalizeFallback(await getJson(deployedFallbackUrl, fetchImpl));
-        return toPublicRelease(deployed, "fallback", fallbackNotice);
-      } catch {
-        const checkedIn = normalizeFallback(fallback);
-        return toPublicRelease(checkedIn, "fallback", fallbackNotice);
-      }
+      // The checked-in release remains the safe fallback when the deployed copy is unreachable.
     }
+
+    try {
+      const manifestRelease = await loadVerifiedManifestRelease({ fetchImpl, sourceUrl });
+      if (compareReleaseVersions(manifestRelease.version, lastVerified.version) >= 0) {
+        return manifestRelease;
+      }
+    } catch {
+      // Keep the last verified release below.
+    }
+
+    return toPublicRelease(lastVerified, "fallback", fallbackNotice);
   }
 }
 

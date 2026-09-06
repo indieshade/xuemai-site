@@ -306,25 +306,44 @@
 .home-domain-intro { display: grid; grid-template-columns: minmax(0, 0.83fr) minmax(250px, 0.42fr); gap: 58px; align-items: end; margin-bottom: 54px; }
 .home-domain-intro p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
 
-/* One real workspace is shown at a time, so the three views read as a product flow. */
-.domain-carousel { overflow: hidden; margin: 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #0d0f0e; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); outline: none; }
-.domain-carousel:focus-visible { box-shadow: 0 0 0 3px rgba(120, 184, 154, 0.62), 0 30px 90px rgba(0, 0, 0, 0.28); }
-.domain-carousel-stage { position: relative; z-index: 0; display: grid; min-height: 0; aspect-ratio: 2193 / 1386; place-items: center; background: #090b0a; }
-.domain-carousel-stage::after { position: absolute; inset: 0; border: 1px solid rgba(235, 224, 204, 0.04); content: ""; pointer-events: none; }
-.domain-carousel-stage img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* The gallery behaves like a workspace view switcher: every screenshot is ready before it is selected. */
+.domain-carousel { overflow: hidden; margin: 0; border: 1px solid rgba(127, 194, 160, 0.24); border-radius: 23px; background: #0b0d0c; box-shadow: 0 36px 100px rgba(0, 0, 0, 0.36), 0 0 80px rgba(48, 142, 105, 0.08); outline: none; }
+.domain-carousel:focus-visible { box-shadow: 0 0 0 3px rgba(120, 184, 154, 0.62), 0 36px 100px rgba(0, 0, 0, 0.36); }
+.domain-carousel-header { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 21px 14px 23px; border-bottom: 1px solid rgba(235, 224, 204, 0.1); background: linear-gradient(90deg, rgba(30, 75, 57, 0.24), rgba(11, 13, 12, 0.18) 48%, rgba(136, 57, 31, 0.14)); }
+.domain-carousel-header > div > span { display: block; color: var(--green); font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.13em; }
+.domain-carousel-header strong { display: block; margin-top: 6px; color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(17px, 1.7vw, 22px); font-weight: 600; letter-spacing: -0.035em; }
+.domain-carousel-header p { display: flex; align-items: baseline; gap: 5px; margin: 0; color: rgba(225, 218, 205, 0.44); font-family: var(--font-mono), monospace; font-size: 12px; }
+.domain-carousel-header b { color: var(--orange-light); font-size: 18px; font-weight: 500; }
+.domain-carousel-stage { position: relative; z-index: 0; min-height: 0; aspect-ratio: 2193 / 1386; background: #090b0a; }
+.domain-carousel-stage::after { position: absolute; z-index: 2; inset: 0; border: 1px solid rgba(235, 224, 204, 0.04); content: ""; pointer-events: none; }
+.domain-carousel-slide { position: absolute; inset: 0; visibility: hidden; opacity: 0; pointer-events: none; }
+.domain-carousel-slide.is-active { z-index: 1; visibility: visible; opacity: 1; }
+.domain-carousel-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.domain-carousel-stage-nav { position: absolute; z-index: 3; right: 18px; bottom: 18px; left: 18px; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; min-height: 58px; border: 1px solid rgba(235, 224, 204, 0.16); border-radius: 12px; background: rgba(9, 12, 10, 0.86); box-shadow: 0 12px 38px rgba(0, 0, 0, 0.24); backdrop-filter: blur(16px); }
+.domain-carousel-stage-nav > div { min-width: 0; padding: 0 13px; text-align: center; }
+.domain-carousel-stage-nav span { display: block; color: rgba(225, 218, 205, 0.5); font-family: var(--font-mono), monospace; font-size: 9px; letter-spacing: 0.09em; }
+.domain-carousel-stage-nav strong { display: block; overflow: hidden; margin-top: 3px; color: var(--cream); font-size: 13px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.domain-carousel-arrow { display: grid; width: 100%; height: 100%; place-items: center; border: 0; color: var(--cream); background: transparent; cursor: pointer; font: inherit; font-size: 22px; line-height: 1; transition: color 150ms ease, background 150ms ease; }
+.domain-carousel-arrow:first-child { border-right: 1px solid rgba(235, 224, 204, 0.11); border-radius: 11px 0 0 11px; }
+.domain-carousel-arrow:last-child { border-left: 1px solid rgba(235, 224, 204, 0.11); border-radius: 0 11px 11px 0; }
+.domain-carousel-arrow:hover { color: var(--green); background: rgba(55, 126, 91, 0.15); }
+.domain-carousel-arrow:focus-visible,
+.domain-carousel-tabs button:focus-visible { position: relative; z-index: 4; outline: 2px solid var(--green); outline-offset: -2px; }
 .domain-carousel-caption { position: relative; z-index: 1; border-top: 1px solid rgba(235, 224, 204, 0.09); }
-.domain-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 18px 12px; }
-.domain-carousel-tabs { display: flex; flex-wrap: wrap; gap: 5px; }
-.domain-carousel-tabs button { min-height: 31px; padding: 0 11px; border: 1px solid transparent; border-radius: 7px; color: rgba(225, 218, 205, 0.52); background: transparent; cursor: pointer; font: inherit; font-size: 12px; transition: color 180ms ease, border-color 180ms ease, background 180ms ease; }
-.domain-carousel-tabs button:hover { color: var(--cream); background: rgba(235, 224, 204, 0.06); }
-.domain-carousel-tabs button[aria-pressed="true"] { border-color: rgba(120, 184, 154, 0.38); color: var(--green); background: rgba(55, 126, 91, 0.12); }
-.domain-carousel-tabs button:focus-visible,
-.domain-carousel-arrow:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
-.domain-carousel-navigation { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; color: rgba(225, 218, 205, 0.45); font-family: var(--font-mono), monospace; font-size: 10px; white-space: nowrap; }
-.domain-carousel-arrow { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid rgba(235, 224, 204, 0.14); border-radius: 50%; color: var(--cream); background: transparent; cursor: pointer; font: inherit; font-size: 16px; line-height: 1; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
-.domain-carousel-arrow:hover { border-color: rgba(120, 184, 154, 0.56); color: var(--green); background: rgba(55, 126, 91, 0.12); }
-.domain-carousel-caption p { margin: 0; padding: 0 20px 17px; color: var(--muted); font-size: 12px; line-height: 1.7; }
-.domain-carousel-caption p strong { margin-right: 9px; color: var(--orange-light); font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.08em; }
+.domain-carousel-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; padding: 1px; background: rgba(235, 224, 204, 0.1); }
+.domain-carousel-tabs button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; min-height: 78px; align-items: center; gap: 11px; padding: 13px 15px; border: 0; color: rgba(225, 218, 205, 0.58); background: #111310; cursor: pointer; font: inherit; text-align: left; transition: color 150ms ease, background 150ms ease; }
+.domain-carousel-tabs button:hover { color: var(--cream); background: #171a17; }
+.domain-carousel-tabs button[aria-selected="true"] { color: var(--cream); background: linear-gradient(135deg, rgba(38, 89, 67, 0.53), rgba(20, 24, 21, 0.98)); box-shadow: inset 0 3px 0 var(--green); }
+.domain-carousel-tabs button > span { color: var(--orange-light); font-family: var(--font-mono), monospace; font-size: 10px; }
+.domain-carousel-tabs button[aria-selected="true"] > span { color: var(--green); }
+.domain-carousel-tabs button > div { min-width: 0; }
+.domain-carousel-tabs button strong { display: block; overflow: hidden; color: inherit; font-family: var(--font-serif), Georgia, serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; text-overflow: ellipsis; white-space: nowrap; }
+.domain-carousel-tabs button small { display: block; overflow: hidden; margin-top: 5px; color: rgba(225, 218, 205, 0.42); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.domain-carousel-tabs button i { color: rgba(225, 218, 205, 0.26); font-size: 14px; font-style: normal; }
+.domain-carousel-tabs button[aria-selected="true"] i { color: var(--green); }
+.domain-carousel-caption > p { display: flex; align-items: baseline; gap: 10px; margin: 0; padding: 15px 20px 17px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.domain-carousel-caption > p > span { flex: 0 0 auto; color: var(--orange-light); font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.08em; }
+.domain-carousel-caption > p strong { flex: 0 0 auto; color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: 15px; font-weight: 600; }
 
 .home-domain-product-shot,
 .domains-product-shot { overflow: hidden; margin: 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #111310; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); }
@@ -559,11 +578,21 @@
   .home-domain-intro { margin-bottom: 33px; }
   .home-domain-intro h2 { font-size: clamp(32px, 8.7vw, 40px); letter-spacing: -0.06em; }
   .domain-carousel { border-radius: 16px; }
-  .domain-carousel-controls { display: grid; gap: 9px; padding: 11px 13px 10px; }
-  .domain-carousel-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
-  .domain-carousel-tabs button { min-width: 0; padding: 0 4px; font-size: 11px; }
-  .domain-carousel-navigation { justify-self: end; }
-  .domain-carousel-caption p { padding: 0 14px 14px; font-size: 11px; }
+  .domain-carousel-header { min-height: 68px; padding: 12px 14px 12px 16px; }
+  .domain-carousel-header > div > span { font-size: 8px; }
+  .domain-carousel-header strong { font-size: 16px; }
+  .domain-carousel-header p { font-size: 10px; }
+  .domain-carousel-header b { font-size: 15px; }
+  .domain-carousel-stage-nav { right: 10px; bottom: 10px; left: 10px; grid-template-columns: 40px 1fr 40px; min-height: 46px; border-radius: 10px; }
+  .domain-carousel-arrow { font-size: 18px; }
+  .domain-carousel-tabs button { min-height: 65px; gap: 7px; padding: 9px 8px; }
+  .domain-carousel-tabs button > span { font-size: 8px; }
+  .domain-carousel-tabs button strong { font-size: 12px; }
+  .domain-carousel-tabs button small,
+  .domain-carousel-tabs button i { display: none; }
+  .domain-carousel-caption > p { display: block; padding: 12px 14px 14px; font-size: 11px; }
+  .domain-carousel-caption > p > span,
+  .domain-carousel-caption > p strong { margin-right: 8px; font-size: 10px; }
   .home-domain-product-shot,
   .domains-product-shot { border-radius: 16px; }
   .home-domain-product-shot figcaption,

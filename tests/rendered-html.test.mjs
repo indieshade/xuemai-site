@@ -105,6 +105,10 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.match(carousel, /domain-workspace-rc3-safe\.png/);
   assert.match(carousel, /domain-cognitive-map\.png/);
   assert.match(carousel, /domain-records\.png/);
+  assert.match(carousel, /loading="eager"/);
+  assert.match(carousel, /fetchPriority="high"/);
+  assert.match(carousel, /role="tablist"/);
+  assert.match(carousel, /aria-selected/);
   assert.match(carousel, /查看上一张界面/);
   assert.match(carousel, /查看下一张界面/);
   assert.match(carousel, /ArrowLeft/);

@@ -134,6 +134,49 @@ test("uses the alpha manifest URL and matching GitHub Release digest when no can
   assert.equal(release.refreshNote, null);
 });
 
+test("does not downgrade the site when an older alpha manifest is the only source available", async () => {
+  const deployed = {
+    ...fallback,
+    version: candidateVersion,
+    downloadUrl: candidateDownloadUrl,
+    releaseUrl: `https://github.com/indieshade/xuemai-site/releases/tag/v${candidateVersion}`,
+    sizeBytes: 202798679,
+    sha256: "8772AEB87D5DEE4295087C5E8F15DF5CB18253E07A5521EA151C00696CC55617",
+    sha512: candidateSha512,
+    releaseDate: "2026-09-06T10:23:41.535Z",
+  };
+  const fetchImpl = async (url) => {
+    if (url === candidateReleasesUrl) return new Response(JSON.stringify([]));
+    if (url === "https://site.example.test/windows-release.json") return new Response(JSON.stringify(deployed));
+    if (url === "https://updates.example.test/alpha.yml") return new Response(alphaManifest);
+    if (url === "https://api.github.com/repos/indieshade/xuemai-site/releases/tags/v0.1.0-alpha.12") {
+      return new Response(JSON.stringify({
+        tag_name: "v0.1.0-alpha.12",
+        html_url: "https://github.com/indieshade/xuemai-site/releases/tag/v0.1.0-alpha.12",
+        assets: [{
+          name: "Xuemai-Setup-0.1.0-alpha.12-x64.exe",
+          browser_download_url: alphaDownloadUrl,
+          size: 127276991,
+          digest: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        }],
+      }));
+    }
+    throw new Error(`Unexpected URL: ${url}`);
+  };
+
+  const release = await resolveWindowsRelease({
+    fetchImpl,
+    fallback,
+    sourceUrl: "https://updates.example.test/alpha.yml",
+    deployedFallbackUrl: "https://site.example.test/windows-release.json",
+  });
+
+  assert.equal(release.status, "fallback");
+  assert.equal(release.version, candidateVersion);
+  assert.equal(release.downloadUrl, candidateDownloadUrl);
+  assert.match(release.refreshNote, /版本信息暂未刷新/);
+});
+
 test("falls back to the last deployed verified release when primary sources cannot be read", async () => {
   const deployed = {
     ...fallback,
