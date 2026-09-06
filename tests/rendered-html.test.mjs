@@ -112,6 +112,7 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.match(carousel, /htmlFor/);
   assert.match(carousel, /查看上一张界面/);
   assert.match(carousel, /查看下一张界面/);
+  assert.doesNotMatch(carousel, /当前查看/);
   assert.ok(mapImage.size > 100_000);
   assert.ok(recordsImage.size > 100_000);
 });

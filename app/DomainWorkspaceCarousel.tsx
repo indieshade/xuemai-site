@@ -73,10 +73,6 @@ export default function DomainWorkspaceCarousel({ className = "" }: DomainWorksp
           <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="dialogue" htmlFor="domain-workspace-records">←</label>
           <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="map" htmlFor="domain-workspace-dialogue">←</label>
           <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="records" htmlFor="domain-workspace-map">←</label>
-          <div>
-            <span>当前查看</span>
-            {slides.map((slide) => <strong data-view={slide.id} key={slide.id}>{slide.label}</strong>)}
-          </div>
           <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="dialogue" htmlFor="domain-workspace-map">→</label>
           <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="map" htmlFor="domain-workspace-records">→</label>
           <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="records" htmlFor="domain-workspace-dialogue">→</label>
