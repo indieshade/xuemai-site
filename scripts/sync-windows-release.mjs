@@ -20,6 +20,7 @@ function requiredMatch(source, expression, field) {
 }
 
 function releaseChannel(version) {
+  if (/^\d+\.\d+\.\d+$/.test(version)) return "stable";
   if (/^\d+\.\d+\.\d+-rc\.\d+$/.test(version)) return "candidate";
   if (/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version)) return "alpha";
   throw new Error("版本号格式不正确");
@@ -27,14 +28,14 @@ function releaseChannel(version) {
 
 function compareReleaseVersions(left, right) {
   const parse = (version) => {
-    const match = version.match(/^(\d+)\.(\d+)\.(\d+)-(alpha|rc)\.(\d+)$/);
+    const match = version.match(/^(\d+)\.(\d+)\.(\d+)(?:-(alpha|rc)\.(\d+))?$/);
     if (!match) throw new Error("版本号格式不正确");
     return {
       major: Number(match[1]),
       minor: Number(match[2]),
       patch: Number(match[3]),
-      channel: match[4],
-      channelNumber: Number(match[5]),
+      channel: match[4] ?? "stable",
+      channelNumber: Number(match[5] ?? 0),
     };
   };
   const leftVersion = parse(left);
@@ -42,7 +43,7 @@ function compareReleaseVersions(left, right) {
   for (const field of ["major", "minor", "patch"]) {
     if (leftVersion[field] !== rightVersion[field]) return leftVersion[field] - rightVersion[field];
   }
-  const channelRank = { alpha: 0, rc: 1 };
+  const channelRank = { alpha: 0, rc: 1, stable: 2 };
   if (channelRank[leftVersion.channel] !== channelRank[rightVersion.channel]) {
     return channelRank[leftVersion.channel] - channelRank[rightVersion.channel];
   }
@@ -62,7 +63,7 @@ export function parseWindowsAlphaManifest(source) {
   const size = Number(requiredMatch(source, /^\s*size:\s*(\d+)\s*$/m, "files[0].size"));
   const releaseDate = requiredMatch(source, /^releaseDate:\s*([^\r\n]+)$/m, "releaseDate");
 
-  if (releaseChannel(version) !== "alpha") throw new Error("清单版本格式不正确");
+  releaseChannel(version);
   if (!Number.isSafeInteger(size) || size <= 0) throw new Error("清单文件大小不正确");
   if (!/^[A-Za-z0-9+/]+={0,2}$/.test(sha512)) throw new Error("清单 SHA512 格式不正确");
 
@@ -251,9 +252,7 @@ export async function resolveWindowsRelease({
 } = {}) {
   if (!fallback) throw new Error("缺少本地回退版本信息");
 
-  try {
-    return await loadVerifiedCandidateRelease({ fetchImpl, sourceUrl: candidateSourceUrl });
-  } catch {
+  {
     let lastVerified = normalizeFallback(fallback);
     try {
       const deployed = normalizeFallback(await getJson(deployedFallbackUrl, fetchImpl));
@@ -262,14 +261,15 @@ export async function resolveWindowsRelease({
       // The checked-in release remains the safe fallback when the deployed copy is unreachable.
     }
 
-    try {
-      const manifestRelease = await loadVerifiedManifestRelease({ fetchImpl, sourceUrl });
-      if (compareReleaseVersions(manifestRelease.version, lastVerified.version) >= 0) {
-        return manifestRelease;
-      }
-    } catch {
-      // Keep the last verified release below.
-    }
+    const candidates = await Promise.allSettled([
+      loadVerifiedManifestRelease({ fetchImpl, sourceUrl }),
+      loadVerifiedCandidateRelease({ fetchImpl, sourceUrl: candidateSourceUrl }),
+    ]);
+    const newest = candidates.filter((result) => result.status === "fulfilled")
+      .map((result) => result.value)
+      .filter((release) => compareReleaseVersions(release.version, lastVerified.version) >= 0)
+      .sort((left, right) => compareReleaseVersions(right.version, left.version))[0];
+    if (newest) return newest;
 
     return toPublicRelease(lastVerified, "fallback", fallbackNotice);
   }

@@ -43,6 +43,31 @@ sha512: ${candidateSha512}
 releaseDate: '2026-09-06T10:23:41.535Z'
 `;
 
+test("stable 0.2.0 supersedes RC3 and is never downgraded by an older candidate", async () => {
+  const stableVersion = "0.2.0";
+  const stableUrl = `https://github.com/indieshade/xuemai-site/releases/download/v${stableVersion}/Xuemai-Setup-${stableVersion}-x64.exe`;
+  const stableManifest = alphaManifest.replaceAll("0.1.0-alpha.12", stableVersion);
+  const stable = { ...fallback, version: stableVersion, downloadUrl: stableUrl,
+    releaseUrl: `https://github.com/indieshade/xuemai-site/releases/tag/v${stableVersion}` };
+  const fetchImpl = async (url) => {
+    if (url === candidateReleasesUrl) return new Response(JSON.stringify([candidateRelease()]));
+    if (url === candidateManifestUrl) return new Response(candidateManifest);
+    if (url === "https://stable.test/alpha.yml") return new Response(stableManifest);
+    if (url === `https://api.github.com/repos/indieshade/xuemai-site/releases/tags/v${stableVersion}`) return new Response(JSON.stringify({
+      tag_name: `v${stableVersion}`, html_url: stable.releaseUrl,
+      assets: [{ name: `Xuemai-Setup-${stableVersion}-x64.exe`, browser_download_url: stableUrl, size: 127276991, digest: `sha256:${"a".repeat(64)}` }],
+    }));
+    throw new Error("offline");
+  };
+  const resolved = await resolveWindowsRelease({ fetchImpl, fallback, sourceUrl: "https://stable.test/alpha.yml" });
+  assert.equal(resolved.version, stableVersion);
+  assert.equal(resolved.channel, "stable");
+  assert.equal(resolved.status, "verified");
+  const retained = await resolveWindowsRelease({ fetchImpl, fallback: stable, sourceUrl: "https://offline.test/alpha.yml" });
+  assert.equal(retained.version, stableVersion);
+  assert.equal(retained.status, "fallback");
+});
+
 function candidateRelease(version = candidateVersion) {
   const fileName = `Xuemai-Setup-${version}-x64.exe`;
   const downloadUrl = `https://github.com/indieshade/xuemai-site/releases/download/v${version}/${fileName}`;
