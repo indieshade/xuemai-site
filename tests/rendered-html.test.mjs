@@ -107,12 +107,11 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.match(carousel, /domain-records\.png/);
   assert.match(carousel, /loading="eager"/);
   assert.match(carousel, /fetchPriority="high"/);
-  assert.match(carousel, /role="tablist"/);
-  assert.match(carousel, /aria-selected/);
+  assert.match(carousel, /type="radio"/);
+  assert.match(carousel, /domain-workspace-map/);
+  assert.match(carousel, /htmlFor/);
   assert.match(carousel, /查看上一张界面/);
   assert.match(carousel, /查看下一张界面/);
-  assert.match(carousel, /ArrowLeft/);
-  assert.match(carousel, /ArrowRight/);
   assert.ok(mapImage.size > 100_000);
   assert.ok(recordsImage.size > 100_000);
 });

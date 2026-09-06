@@ -1,6 +1,3 @@
-"use client";
-
-import { useId, useState, type KeyboardEvent } from "react";
 import { siteAsset } from "./site-path";
 
 const slides = [
@@ -35,48 +32,36 @@ type DomainWorkspaceCarouselProps = {
 };
 
 export default function DomainWorkspaceCarousel({ className = "" }: DomainWorkspaceCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const carouselId = useId();
-  const activeSlide = slides[activeIndex];
-
-  function showSlide(index: number) {
-    setActiveIndex((index + slides.length) % slides.length);
-  }
-
-  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      showSlide(activeIndex - 1);
-    }
-
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      showSlide(activeIndex + 1);
-    }
-  }
-
   return (
-    <figure className={`domain-carousel ${className}`.trim()} onKeyDown={handleKeyDown} tabIndex={0}>
+    <figure className={`domain-carousel ${className}`.trim()}>
+      {slides.map((slide, index) => (
+        <input
+          className="domain-carousel-input"
+          defaultChecked={index === 0}
+          id={viewId(slide.id)}
+          key={slide.id}
+          name="domain-workspace-view"
+          type="radio"
+          value={slide.id}
+        />
+      ))}
+
       <header className="domain-carousel-header">
         <div>
           <span>领域工作台 / 视图导航</span>
           <strong>同一个领域，换一种方式看。</strong>
         </div>
-        <p aria-live="polite"><b>{String(activeIndex + 1).padStart(2, "0")}</b><span>/ {String(slides.length).padStart(2, "0")}</span></p>
+        <p>
+          {slides.map((slide, index) => <b data-view={slide.id} key={slide.id}>{String(index + 1).padStart(2, "0")}</b>)}
+          <span>/ {String(slides.length).padStart(2, "0")}</span>
+        </p>
       </header>
 
       <div className="domain-carousel-stage">
-        {slides.map((slide, index) => (
-          <div
-            aria-hidden={index !== activeIndex}
-            aria-labelledby={`${carouselId}-${slide.id}-tab`}
-            className={`domain-carousel-slide${index === activeIndex ? " is-active" : ""}`}
-            id={`${carouselId}-${slide.id}-panel`}
-            key={slide.id}
-            role="tabpanel"
-          >
+        {slides.map((slide) => (
+          <div className="domain-carousel-slide" data-view={slide.id} key={slide.id}>
             <img
-              alt={index === activeIndex ? slide.alt : ""}
+              alt={slide.alt}
               decoding="sync"
               fetchPriority="high"
               loading="eager"
@@ -85,32 +70,35 @@ export default function DomainWorkspaceCarousel({ className = "" }: DomainWorksp
           </div>
         ))}
         <div className="domain-carousel-stage-nav" aria-label="图片切换">
-          <button aria-label="查看上一张界面" className="domain-carousel-arrow" onClick={() => showSlide(activeIndex - 1)} type="button">←</button>
-          <div><span>当前查看</span><strong>{activeSlide.label}</strong></div>
-          <button aria-label="查看下一张界面" className="domain-carousel-arrow" onClick={() => showSlide(activeIndex + 1)} type="button">→</button>
+          <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="dialogue" htmlFor="domain-workspace-records">←</label>
+          <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="map" htmlFor="domain-workspace-dialogue">←</label>
+          <label aria-label="查看上一张界面" className="domain-carousel-arrow" data-direction="previous" data-view="records" htmlFor="domain-workspace-map">←</label>
+          <div>
+            <span>当前查看</span>
+            {slides.map((slide) => <strong data-view={slide.id} key={slide.id}>{slide.label}</strong>)}
+          </div>
+          <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="dialogue" htmlFor="domain-workspace-map">→</label>
+          <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="map" htmlFor="domain-workspace-records">→</label>
+          <label aria-label="查看下一张界面" className="domain-carousel-arrow" data-direction="next" data-view="records" htmlFor="domain-workspace-dialogue">→</label>
         </div>
       </div>
 
       <figcaption className="domain-carousel-caption">
-        <div aria-label="选择领域工作台展示界面" className="domain-carousel-tabs" role="tablist">
+        <div aria-label="选择领域工作台展示界面" className="domain-carousel-tabs">
           {slides.map((slide, index) => (
-            <button
-              aria-controls={`${carouselId}-${slide.id}-panel`}
-              aria-selected={index === activeIndex}
-              id={`${carouselId}-${slide.id}-tab`}
-              key={slide.id}
-              onClick={() => showSlide(index)}
-              role="tab"
-              type="button"
-            >
+            <label htmlFor={viewId(slide.id)} key={slide.id}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <div><strong>{slide.label}</strong><small>{slide.eyebrow}</small></div>
               <i aria-hidden="true">↗</i>
-            </button>
+            </label>
           ))}
         </div>
-        <p><span>正在查看</span><strong>{activeSlide.label}</strong>{activeSlide.description}</p>
+        {slides.map((slide) => (
+          <p data-view={slide.id} key={slide.id}><span>正在查看</span><strong>{slide.label}</strong>{slide.description}</p>
+        ))}
       </figcaption>
     </figure>
   );
 }
+
+const viewId = (slideId: (typeof slides)[number]["id"]) => `domain-workspace-${slideId}`;
