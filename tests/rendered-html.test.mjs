@@ -205,8 +205,9 @@ test("publishes the same verified Windows release data used by the pages", async
   const publicRelease = JSON.parse(await readOutputFile("windows-release.json"));
 
   assert.deepEqual(publicRelease, release);
-  assert.match(publicRelease.version, /^\d+\.\d+\.\d+-(?:alpha|rc)\.\d+$/);
-  assert.match(publicRelease.channel, /^(?:alpha|candidate)$/);
+  assert.match(publicRelease.version, /^\d+\.\d+\.\d+(?:-(?:alpha|rc)\.\d+)?$/);
+  assert.match(publicRelease.channel, /^(?:alpha|candidate|stable)$/);
+  assert.equal(publicRelease.channel === "stable", !publicRelease.version.includes("-"));
   assert.match(publicRelease.downloadUrl, new RegExp(`/v${publicRelease.version.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/`));
 });
 
