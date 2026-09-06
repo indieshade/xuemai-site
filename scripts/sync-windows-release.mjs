@@ -7,8 +7,6 @@ export const candidateReleasesUrl = "https://api.github.com/repos/indieshade/xue
 export const liveFallbackUrl = "https://helplearn.cn/windows-release.json";
 
 const releaseRepository = "indieshade/xuemai-site";
-// Keep the candidate with an installation filename-encoding issue out of public download until its corrected build is ready.
-const blockedPublicVersions = new Set(["0.2.0-rc.3"]);
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const fallbackPath = path.join(projectRoot, "app", "windows-release-fallback.json");
 const generatedPath = path.join(projectRoot, "app", "windows-release.generated.json");
@@ -25,10 +23,6 @@ function releaseChannel(version) {
   if (/^\d+\.\d+\.\d+-rc\.\d+$/.test(version)) return "candidate";
   if (/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version)) return "alpha";
   throw new Error("版本号格式不正确");
-}
-
-function isBlockedPublicVersion(version) {
-  return blockedPublicVersions.has(version);
 }
 
 function fileNameFromManifestReference(fileReference) {
@@ -90,7 +84,6 @@ function normalizeFallback(candidate) {
 
   const { version, downloadUrl, releaseUrl, sizeBytes, sha256, sha512, releaseDate } = candidate;
   releaseChannel(version);
-  if (isBlockedPublicVersion(version)) throw new Error("该版本已停止公开下载");
   if (typeof downloadUrl !== "string" || typeof releaseUrl !== "string") throw new Error("回退下载地址无效");
   if (!Number.isSafeInteger(sizeBytes) || sizeBytes <= 0) throw new Error("回退文件大小无效");
   if (typeof sha256 !== "string" || !/^[A-Fa-f0-9]{64}$/.test(sha256)) throw new Error("回退 SHA256 无效");
@@ -157,7 +150,7 @@ export async function loadVerifiedCandidateRelease({ fetchImpl = fetch, sourceUr
   if (!Array.isArray(releases)) throw new Error("候选版本列表无效");
 
   const release = releases
-    .filter((candidate) => candidate?.prerelease === true && candidate?.draft === false && /^v\d+\.\d+\.\d+-rc\.\d+$/.test(candidate?.tag_name ?? "") && !isBlockedPublicVersion(candidate.tag_name.slice(1)))
+    .filter((candidate) => candidate?.prerelease === true && candidate?.draft === false && /^v\d+\.\d+\.\d+-rc\.\d+$/.test(candidate?.tag_name ?? ""))
     .sort((left, right) => compareCandidateTags(left.tag_name, right.tag_name))[0];
   if (!release) throw new Error("没有可用的候选版本");
 
