@@ -305,6 +305,12 @@
 .home-domain-section { padding-top: 155px; padding-bottom: 145px; background: linear-gradient(180deg, transparent, rgba(28, 50, 42, 0.12) 20%, rgba(28, 50, 42, 0.12) 80%, transparent); }
 .home-domain-intro { display: grid; grid-template-columns: minmax(0, 0.83fr) minmax(250px, 0.42fr); gap: 58px; align-items: end; margin-bottom: 54px; }
 .home-domain-intro p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+.home-domain-product-shot,
+.domains-product-shot { overflow: hidden; margin: 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #111310; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); }
+.home-domain-product-shot img,
+.domains-product-shot img { display: block; width: 100%; height: auto; }
+.home-domain-product-shot figcaption,
+.domains-product-shot figcaption { padding: 15px 20px 17px; border-top: 1px solid rgba(235, 224, 204, 0.08); color: var(--muted); font-size: 12px; line-height: 1.7; }
 
 .domain-workspace {
   overflow: hidden;
@@ -368,6 +374,7 @@
 .home-download-panel > span { color: var(--orange-light); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.08em; }
 .home-download-panel > h3 { max-width: 360px; margin: 12px 0 0; color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: 32px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.2; }
 .home-download-panel > p { margin: 14px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.home-download-panel > .home-prerelease-note { margin-top: 16px; padding: 8px 11px; border-left: 2px solid var(--orange); color: var(--orange-light); background: rgba(203, 72, 28, 0.07); font-size: 12px; }
 .home-download-warning { margin-top: 18px; padding: 12px 14px; border-left: 2px solid var(--orange); color: rgba(226, 214, 197, 0.72); background: rgba(203, 72, 28, 0.07); font-size: 12px; line-height: 1.65; }
 .home-download-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px 0; }
 .home-download-meta div { padding: 11px 10px; border: 1px solid rgba(235, 224, 204, 0.07); border-radius: 9px; background: rgba(255, 255, 255, 0.018); }
@@ -467,6 +474,10 @@
   .home-domain-section { padding-top: 100px; padding-bottom: 92px; }
   .home-domain-intro { margin-bottom: 33px; }
   .home-domain-intro h2 { font-size: clamp(32px, 8.7vw, 40px); letter-spacing: -0.06em; }
+  .home-domain-product-shot,
+  .domains-product-shot { border-radius: 16px; }
+  .home-domain-product-shot figcaption,
+  .domains-product-shot figcaption { padding: 12px 14px 14px; font-size: 11px; }
   .domain-workspace-topbar { grid-template-columns: 1fr auto; min-height: 55px; padding: 0 16px; }
   .domain-workspace-tabs { display: none; }
   .domain-save-state { font-size: 10px; }

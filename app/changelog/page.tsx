@@ -5,7 +5,7 @@ import { product } from "../product-config";
 
 export const metadata: Metadata = {
   title: "更新记录与已知问题",
-  description: "查看学脉 HelpLearn Windows Alpha 的当前版本、激活能力、已知问题和下一步计划。",
+  description: "查看学脉 HelpLearn 当前 Windows 预发布版本、激活能力、已知问题和下一步计划。",
   alternates: { canonical: "/changelog/" },
 };
 
@@ -16,10 +16,10 @@ export default function ChangelogPage() {
       eyebrow="学脉 HelpLearn · 更新记录"
       title="版本、已知问题和接下来的安排"
       description="这里记录已经发布的变化，也把尚未上线的计划单独写清楚。"
-      updated="2026 年 8 月 30 日"
+      updated={product.windows.releasedOn}
     >
       <section className="info-release" aria-labelledby="current-release">
-        <div><span>当前版本</span><h2 id="current-release">Windows Alpha · {product.windows.version}</h2></div>
+        <div><span>当前版本</span><h2 id="current-release">{product.windows.label}</h2></div>
         <a className="home-button-primary" href={product.windows.releaseUrl} target="_blank" rel="noreferrer">查看 GitHub Release <span aria-hidden="true">↗</span></a>
       </section>
 
@@ -27,7 +27,9 @@ export default function ChangelogPage() {
         <span className="info-index">已发布</span>
         <h2 id="released">{product.windows.version}</h2>
         <ul className="info-check-list">
-          <li>Windows Alpha 安装包已更新至 {product.windows.version}。</li>
+          <li>{product.windows.edition}安装包已更新至 {product.windows.version}。</li>
+          <li>领域工作台新增对话、认知地图和领域记录入口；可以从资料新建学习脉络。</li>
+          <li>认知地图里的概念关系可以点开查看说明。</li>
           <li>支持输入激活码、重新校验、设备解绑与移除本机凭据。</li>
           <li>被授权拦住的操作，会在激活成功后恢复。</li>
         </ul>
@@ -42,7 +44,7 @@ export default function ChangelogPage() {
       <section className="info-section info-callout" aria-labelledby="next-version">
         <span className="info-index">当前更新方式</span>
         <h2 id="next-version">发现新版本后，由你决定是否安装</h2>
-        <p>启动后会静默检查更新，并在左下角给出提示。下载在后台进行并显示进度；安装前会征求你的确认，不会自行重启。</p>
+        <p>候选包中包含更新提示、后台下载进度和确认后安装的逻辑。RC3 的安装、快捷方式和完整升级链路还在验收，暂不视为已验证完成。</p>
         <Link className="info-text-link" href="/download/">查看当前可下载版本 →</Link>
       </section>
     </InfoPage>

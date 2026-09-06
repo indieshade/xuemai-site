@@ -39,7 +39,7 @@ export default function ProductCard() {
             <strong>影下独作</strong>
           </div>
           <div className="name-card-contact">
-            <span>ALPHA 测试</span>
+            <span>{product.windows.channel === "candidate" ? "候选预发布" : "ALPHA 测试"}</span>
             <strong>QQ 2590930875</strong>
           </div>
         </footer>

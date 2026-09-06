@@ -38,7 +38,7 @@ export default function PrivacyPage() {
       <section className="info-section info-callout" aria-labelledby="alpha-boundary">
         <span className="info-index">测试版本</span>
         <h2 id="alpha-boundary">重要资料请保留自己的备份</h2>
-        <p>当前为 Windows Alpha 测试版。我们会继续修复问题，但不把测试软件当成唯一存档位置。对你重要的学习资料，请定期复制或备份到你信任的位置。</p>
+        <p>当前提供的是 Windows 预发布版本。我们会继续修复问题，但不把测试软件当成唯一存档位置。对你重要的学习资料，请定期复制或备份到你信任的位置。</p>
       </section>
     </InfoPage>
   );

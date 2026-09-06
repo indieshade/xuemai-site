@@ -1,4 +1,5 @@
 import { siteAsset } from "../site-path";
+import { product } from "../product-config";
 
 export default function Poster() {
   return (
@@ -6,7 +7,7 @@ export default function Poster() {
       <section className="poster-card" id="promo-card">
         <header className="poster-header">
           <div className="poster-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><div><strong>学脉 · HelpLearn</strong><span>交互式 AI 学习系统</span></div></div>
-          <span>WINDOWS ALPHA</span>
+          <span>{product.windows.label.toUpperCase()}</span>
         </header>
         <div className="poster-copy">
           <span className="poster-kicker"><i />不只回答问题，也延续你的学习</span>
@@ -22,7 +23,7 @@ export default function Poster() {
           <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉学习界面" />
         </div>
         <div className="poster-features"><span>领域与学习旅程</span><span>资料伴读与摘录</span><span>个人认知库</span><span>跨 Agent 记录</span></div>
-        <footer className="poster-footer"><span>Indie Shade Product · Created by 影下独作</span><strong>Alpha 测试 · QQ 2590930875</strong></footer>
+        <footer className="poster-footer"><span>Indie Shade Product · Created by 影下独作</span><strong>{product.windows.channel === "candidate" ? "候选预发布" : "Alpha 测试"} · QQ 2590930875</strong></footer>
       </section>
     </main>
   );

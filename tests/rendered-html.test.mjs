@@ -42,13 +42,14 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /对话结束了，学习还可以继续/);
   assert.match(html, /先聊起来，整理交给学脉/);
   assert.match(html, /围绕领域持续构建理解/);
-  assert.match(html, /产品研究与决策/);
-  assert.match(html, /用户满意度为什么可能失真/);
+  assert.match(html, /domain-workspace-rc3-safe\.png/);
+  assert.match(html, /同一领域下可以放多条学习脉络/);
+  assert.match(html, /认知地图/);
   assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
   assert.match(html, asLiteralPattern(release.label));
-  assert.match(html, /下载 Windows Alpha/);
+  assert.match(html, asLiteralPattern(release.edition));
   assert.match(html, asLiteralPattern(release.size));
   assert.match(html, asLiteralPattern(release.sha256));
   assert.match(html, asLiteralPattern(release.downloadUrl));
@@ -82,10 +83,12 @@ test("renders the domain workspace page", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /把相关的学习，放回同一个问题里/);
+  assert.match(html, /domain-workspace-rc3-safe\.png/);
   assert.match(html, /产品研究与决策/);
-  assert.match(html, /随机对照试验能证明什么/);
-  assert.match(html, /枢纽对话/);
-  assert.match(html, /新问题不必另起炉灶|新的学习分支/);
+  assert.match(html, /从资料创建脉络/);
+  assert.match(html, /点开关系继续想/);
+  assert.match(html, /认知地图会把概念之间的关联列出来/);
+  assert.match(html, /点开一条关系/);
   assert.match(html, /一条旅程可以从一本书或一个问题开始/);
 });
 
@@ -103,8 +106,8 @@ test("renders the short-video product card route", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /short-video-card/);
-  assert.match(html, /WINDOWS ALPHA/);
   assert.match(html, asLiteralPattern(release.label.toUpperCase()));
+  assert.match(html, /候选预发布/);
   assert.match(html, /2590930875/);
 });
 
@@ -114,7 +117,7 @@ test("renders the search-ready interactive learning guide", async () => {
   const html = await response.text();
   assert.match(html, /什么是交互式 AI 学习系统？/);
   assert.match(html, /开放组件负责学习架构/);
-  assert.match(html, /Windows Alpha/);
+  assert.match(html, asLiteralPattern(release.edition));
   assert.match(html, asLiteralPattern(release.version));
   assert.match(html, /它和普通 AI 对话有什么不同？/);
   assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
@@ -132,7 +135,7 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   const privacy = await (await render("/privacy")).text();
   const changelog = await (await render("/changelog")).text();
 
-  assert.match(download, /下载学脉 Windows Alpha/);
+  assert.match(download, asLiteralPattern(release.edition));
   assert.match(download, asLiteralPattern(release.sha256));
   assert.match(download, /尚未进行代码签名/);
   assert.match(download, /年度版与永久版/);
@@ -150,8 +153,8 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
   assert.match(changelog, asLiteralPattern(release.version));
-  assert.match(changelog, /启动后会静默检查更新/);
-  assert.match(changelog, /安装前会征求你的确认/);
+  assert.match(changelog, /候选包中包含更新提示/);
+  assert.match(changelog, /完整升级链路还在验收/);
   assert.doesNotMatch(changelog, /下一版本重点：更新提醒与自动更新/);
 
   for (const html of [download, pricing, changelog]) {
@@ -176,7 +179,8 @@ test("publishes the same verified Windows release data used by the pages", async
   const publicRelease = JSON.parse(await readOutputFile("windows-release.json"));
 
   assert.deepEqual(publicRelease, release);
-  assert.match(publicRelease.version, /^\d+\.\d+\.\d+-alpha\.\d+$/);
+  assert.match(publicRelease.version, /^\d+\.\d+\.\d+-(?:alpha|rc)\.\d+$/);
+  assert.match(publicRelease.channel, /^(?:alpha|candidate)$/);
   assert.match(publicRelease.downloadUrl, new RegExp(`/v${publicRelease.version.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/`));
 });
 

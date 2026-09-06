@@ -3,8 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const manifestUrl = "https://updates.helplearn.cn/windows/alpha.yml";
+export const candidateReleasesUrl = "https://api.github.com/repos/indieshade/xuemai-site/releases?per_page=100";
 export const liveFallbackUrl = "https://helplearn.cn/windows-release.json";
 
+const releaseRepository = "indieshade/xuemai-site";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const fallbackPath = path.join(projectRoot, "app", "windows-release-fallback.json");
 const generatedPath = path.join(projectRoot, "app", "windows-release.generated.json");
@@ -17,6 +19,18 @@ function requiredMatch(source, expression, field) {
   return match[1].trim().replace(/^['"]|['"]$/g, "");
 }
 
+function releaseChannel(version) {
+  if (/^\d+\.\d+\.\d+-rc\.\d+$/.test(version)) return "candidate";
+  if (/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version)) return "alpha";
+  throw new Error("版本号格式不正确");
+}
+
+function fileNameFromManifestReference(fileReference) {
+  if (/^https:\/\//.test(fileReference)) return parseGithubDownloadUrl(fileReference).fileName;
+  if (!/^[^/\\]+\.exe$/.test(fileReference)) throw new Error("候选清单安装包路径不正确");
+  return fileReference;
+}
+
 export function parseWindowsAlphaManifest(source) {
   const version = requiredMatch(source, /^version:\s*([^\r\n]+)$/m, "version");
   const downloadUrl = requiredMatch(source, /^\s*-\s*url:\s*(https:\/\/[^\s]+)$/m, "files[0].url");
@@ -24,18 +38,32 @@ export function parseWindowsAlphaManifest(source) {
   const size = Number(requiredMatch(source, /^\s*size:\s*(\d+)\s*$/m, "files[0].size"));
   const releaseDate = requiredMatch(source, /^releaseDate:\s*([^\r\n]+)$/m, "releaseDate");
 
-  if (!/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version)) throw new Error("清单版本格式不正确");
+  if (releaseChannel(version) !== "alpha") throw new Error("清单版本格式不正确");
   if (!Number.isSafeInteger(size) || size <= 0) throw new Error("清单文件大小不正确");
   if (!/^[A-Za-z0-9+/]+={0,2}$/.test(sha512)) throw new Error("清单 SHA512 格式不正确");
 
   return { version, downloadUrl, sha512, sizeBytes: size, releaseDate };
 }
 
+export function parseCandidateReleaseManifest(source) {
+  const version = requiredMatch(source, /^version:\s*([^\r\n]+)$/m, "version");
+  const fileReference = requiredMatch(source, /^\s*-\s*url:\s*([^\r\n]+)$/m, "files[0].url");
+  const sha512 = requiredMatch(source, /^\s*sha512:\s*([^\r\n]+)$/m, "files[0].sha512");
+  const releaseDate = requiredMatch(source, /^releaseDate:\s*([^\r\n]+)$/m, "releaseDate");
+  const pathReference = requiredMatch(source, /^path:\s*([^\r\n]+)$/m, "path");
+  const fileName = fileNameFromManifestReference(fileReference);
+
+  if (releaseChannel(version) !== "candidate") throw new Error("候选清单版本格式不正确");
+  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(sha512)) throw new Error("候选清单 SHA512 格式不正确");
+  if (pathReference !== fileName) throw new Error("候选清单 path 与安装包不一致");
+
+  return { version, fileName, sha512, releaseDate };
+}
+
 function parseGithubDownloadUrl(downloadUrl) {
-  const match = new URL(downloadUrl).pathname.match(
-    /^\/([^/]+)\/([^/]+)\/releases\/download\/(v[^/]+)\/([^/]+\.exe)$/,
-  );
-  if (new URL(downloadUrl).hostname !== "github.com" || !match) throw new Error("清单下载地址不是 GitHub Release 安装包");
+  const parsed = new URL(downloadUrl);
+  const match = parsed.pathname.match(/^\/([^/]+)\/([^/]+)\/releases\/download\/(v[^/]+)\/([^/]+\.exe)$/);
+  if (parsed.hostname !== "github.com" || !match) throw new Error("清单下载地址不是 GitHub Release 安装包");
 
   const [, owner, repository, tag, fileName] = match;
   return { owner, repository, tag, fileName: decodeURIComponent(fileName) };
@@ -55,7 +83,7 @@ function normalizeFallback(candidate) {
   if (!candidate || typeof candidate !== "object") throw new Error("回退版本信息无效");
 
   const { version, downloadUrl, releaseUrl, sizeBytes, sha256, sha512, releaseDate } = candidate;
-  if (typeof version !== "string" || !/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version)) throw new Error("回退版本号无效");
+  releaseChannel(version);
   if (typeof downloadUrl !== "string" || typeof releaseUrl !== "string") throw new Error("回退下载地址无效");
   if (!Number.isSafeInteger(sizeBytes) || sizeBytes <= 0) throw new Error("回退文件大小无效");
   if (typeof sha256 !== "string" || !/^[A-Fa-f0-9]{64}$/.test(sha256)) throw new Error("回退 SHA256 无效");
@@ -64,17 +92,22 @@ function normalizeFallback(candidate) {
 
   const { tag, fileName } = parseGithubDownloadUrl(downloadUrl);
   if (tag !== `v${version}` || !fileName.includes(version)) throw new Error("回退版本与下载地址不一致");
-  if (releaseUrl !== `https://github.com/indieshade/xuemai-site/releases/tag/v${version}`) throw new Error("回退 Release 地址无效");
+  if (releaseUrl !== `https://github.com/${releaseRepository}/releases/tag/v${version}`) throw new Error("回退 Release 地址无效");
 
   return { version, downloadUrl, releaseUrl, sizeBytes, sha256: sha256.toUpperCase(), sha512, releaseDate };
 }
 
 function toPublicRelease(release, status, refreshNote) {
+  const channel = releaseChannel(release.version);
+  const edition = channel === "candidate" ? "Windows 候选版" : "Windows Alpha";
   return {
     status,
     refreshNote,
+    channel,
+    edition,
+    prereleaseNote: channel === "candidate" ? "这是候选预发布包，不是稳定版。" : null,
     version: release.version,
-    label: `Windows Alpha · ${release.version}`,
+    label: `${edition} · ${release.version}`,
     platform: "Windows x64",
     sizeBytes: release.sizeBytes,
     size: formatFileSize(release.sizeBytes),
@@ -96,6 +129,64 @@ async function getJson(url, fetchImpl) {
   return response.json();
 }
 
+function githubAssetDigest(asset) {
+  const digest = typeof asset?.digest === "string" ? asset.digest.match(/^sha256:([a-f0-9]{64})$/i) : null;
+  if (!digest) throw new Error("Release 安装包校验信息不完整");
+  return digest[1];
+}
+
+function compareCandidateTags(left, right) {
+  const leftParts = left.match(/^v(\d+)\.(\d+)\.(\d+)-rc\.(\d+)$/)?.slice(1).map(Number);
+  const rightParts = right.match(/^v(\d+)\.(\d+)\.(\d+)-rc\.(\d+)$/)?.slice(1).map(Number);
+  if (!leftParts || !rightParts) return 0;
+  for (let index = 0; index < leftParts.length; index += 1) {
+    if (leftParts[index] !== rightParts[index]) return rightParts[index] - leftParts[index];
+  }
+  return 0;
+}
+
+export async function loadVerifiedCandidateRelease({ fetchImpl = fetch, sourceUrl = candidateReleasesUrl } = {}) {
+  const releases = await getJson(sourceUrl, fetchImpl);
+  if (!Array.isArray(releases)) throw new Error("候选版本列表无效");
+
+  const release = releases
+    .filter((candidate) => candidate?.prerelease === true && candidate?.draft === false && /^v\d+\.\d+\.\d+-rc\.\d+$/.test(candidate?.tag_name ?? ""))
+    .sort((left, right) => compareCandidateTags(left.tag_name, right.tag_name))[0];
+  if (!release) throw new Error("没有可用的候选版本");
+
+  const manifestAsset = release.assets?.find((asset) => asset?.name === "alpha.yml");
+  if (typeof manifestAsset?.browser_download_url !== "string") throw new Error("候选版本缺少 alpha.yml");
+  const manifestResponse = await fetchImpl(manifestAsset.browser_download_url, {
+    headers: { Accept: "text/yaml, text/plain" },
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!manifestResponse.ok) throw new Error(`无法读取候选清单（${manifestResponse.status}）`);
+
+  const manifest = parseCandidateReleaseManifest(await manifestResponse.text());
+  const tag = `v${manifest.version}`;
+  const downloadUrl = `https://github.com/${releaseRepository}/releases/download/${tag}/${manifest.fileName}`;
+  const releaseUrl = `https://github.com/${releaseRepository}/releases/tag/${tag}`;
+  const asset = release.assets?.find((candidate) => candidate?.name === manifest.fileName && candidate?.browser_download_url === downloadUrl);
+
+  if (
+    release.tag_name !== tag
+    || release.html_url !== releaseUrl
+    || !asset
+    || !Number.isSafeInteger(asset.size)
+    || asset.size <= 0
+  ) throw new Error("候选 Release 与清单不一致");
+
+  return toPublicRelease({
+    version: manifest.version,
+    downloadUrl,
+    releaseUrl,
+    sizeBytes: asset.size,
+    sha256: githubAssetDigest(asset),
+    sha512: manifest.sha512,
+    releaseDate: manifest.releaseDate,
+  }, "verified", null);
+}
+
 export async function loadVerifiedManifestRelease({ fetchImpl = fetch, sourceUrl = manifestUrl } = {}) {
   const response = await fetchImpl(sourceUrl, {
     headers: { Accept: "text/yaml, text/plain" },
@@ -111,10 +202,8 @@ export async function loadVerifiedManifestRelease({ fetchImpl = fetch, sourceUrl
   const asset = release.assets?.find(
     (candidate) => candidate?.name === fileName && candidate?.browser_download_url === manifest.downloadUrl,
   );
-  const digest = typeof asset?.digest === "string" ? asset.digest.match(/^sha256:([a-f0-9]{64})$/i) : null;
   if (
     !asset
-    || !digest
     || asset.size !== manifest.sizeBytes
     || release.tag_name !== tag
     || release.html_url !== `https://github.com/${owner}/${repository}/releases/tag/${tag}`
@@ -122,7 +211,7 @@ export async function loadVerifiedManifestRelease({ fetchImpl = fetch, sourceUrl
 
   return toPublicRelease({
     ...manifest,
-    sha256: digest[1],
+    sha256: githubAssetDigest(asset),
     releaseUrl: release.html_url,
     releaseDate: manifest.releaseDate,
   }, "verified", null);
@@ -132,19 +221,24 @@ export async function resolveWindowsRelease({
   fetchImpl = fetch,
   fallback,
   sourceUrl = manifestUrl,
+  candidateSourceUrl = candidateReleasesUrl,
   deployedFallbackUrl = liveFallbackUrl,
 } = {}) {
   if (!fallback) throw new Error("缺少本地回退版本信息");
 
   try {
-    return await loadVerifiedManifestRelease({ fetchImpl, sourceUrl });
-  } catch (primaryError) {
+    return await loadVerifiedCandidateRelease({ fetchImpl, sourceUrl: candidateSourceUrl });
+  } catch {
     try {
-      const deployed = normalizeFallback(await getJson(deployedFallbackUrl, fetchImpl));
-      return toPublicRelease(deployed, "fallback", fallbackNotice);
+      return await loadVerifiedManifestRelease({ fetchImpl, sourceUrl });
     } catch {
-      const checkedIn = normalizeFallback(fallback);
-      return toPublicRelease(checkedIn, "fallback", fallbackNotice);
+      try {
+        const deployed = normalizeFallback(await getJson(deployedFallbackUrl, fetchImpl));
+        return toPublicRelease(deployed, "fallback", fallbackNotice);
+      } catch {
+        const checkedIn = normalizeFallback(fallback);
+        return toPublicRelease(checkedIn, "fallback", fallbackNotice);
+      }
     }
   }
 }

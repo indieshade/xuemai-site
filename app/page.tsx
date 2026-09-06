@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ContactCard from "./ContactCard";
-import DomainWorkspace from "./DomainWorkspace";
 import { product } from "./product-config";
 import { siteAsset } from "./site-path";
 import SiteHeader from "./SiteHeader";
@@ -60,7 +59,10 @@ export default function Home() {
           <div><span className="home-section-label">领域工作台</span><h2>围绕领域持续构建理解</h2></div>
           <p>理解一个领域往往要经过多次讨论。领域工作台把相关学习旅程放在一起，让你回看联系、比较冲突观点，并从新问题继续学习。</p>
         </div>
-        <DomainWorkspace />
+        <figure className="home-domain-product-shot">
+          <img src={siteAsset("/screenshots/domain-workspace-rc3-safe.png")} alt="学脉领域工作台演示：同一领域内有多条学习脉络，可切换对话、认知地图和领域记录" />
+          <figcaption>演示数据：同一领域下可以放多条学习脉络；切到认知地图，能回看它们之间的关系。</figcaption>
+        </figure>
         <div className="home-domain-action"><Link className="home-button-secondary" href="/domains/">了解领域工作台 <span aria-hidden="true">→</span></Link></div>
       </section>
 
@@ -71,7 +73,7 @@ export default function Home() {
             <span className="home-way-type">学脉桌面端</span>
             <h3>把学习放在一起管理</h3>
             <p>集中管理学习旅程、领域、资料和个人认知库，也可以按自己的习惯选择 AI 引擎。</p>
-            <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>
+            <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>
           </article>
           <article className="home-way-card">
             <span className="home-way-type">HelpLearn Skill</span>
@@ -94,10 +96,11 @@ export default function Home() {
         <aside className="home-download-panel" id="download">
           <span>{product.windows.label}</span>
           <h3>先装起来，从一段对话开始。</h3>
+          {product.windows.prereleaseNote ? <p className="home-prerelease-note">{product.windows.prereleaseNote}</p> : null}
           <p><strong>桌面端提供年度版与永久版。</strong>{product.licensing.annualTerm}，{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
           <div className="home-download-warning">安装包当前未进行代码签名，Windows 可能会提示风险。请确认下载来源和 SHA256 后再安装。</div>
           <div className="home-download-meta"><div><span>平台</span><strong>{product.windows.platform}</strong></div><div><span>大小</span><strong>{product.windows.size}</strong></div><div><span>版本</span><strong>{product.windows.version}</strong></div></div>
-          <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>
+          <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>
           <ContactCard />
         </aside>
       </section>

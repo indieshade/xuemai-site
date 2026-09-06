@@ -5,8 +5,8 @@ import InfoPage from "../InfoPage";
 import { product } from "../product-config";
 
 export const metadata: Metadata = {
-  title: "下载 Windows Alpha",
-  description: "下载学脉 HelpLearn Windows Alpha，查看版本、SHA256、桌面端授权方案和安装提示。",
+  title: `下载 ${product.windows.edition}`,
+  description: `下载学脉 HelpLearn ${product.windows.edition}，查看版本、SHA256、桌面端授权方案和安装提示。`,
   alternates: { canonical: "/download/" },
 };
 
@@ -15,18 +15,19 @@ export default function DownloadPage() {
     <InfoPage
       current="download"
       eyebrow="学脉 HelpLearn · 下载"
-      title="下载学脉 Windows Alpha"
-      description="当前提供 Windows x64 测试版。桌面端可选择年度版或永久版：年度版从首次激活起计算 365 天，同一购买者可激活 2 台设备。"
-      updated="2026 年 8 月 30 日"
+      title={`下载学脉 ${product.windows.edition}`}
+      description="当前提供 Windows x64 预发布版本。桌面端可选择年度版或永久版：年度版从首次激活起计算 365 天，同一购买者可激活 2 台设备。"
+      updated={product.windows.releasedOn}
     >
       <section className="info-highlight">
         <div>
           <span>{product.windows.label}</span>
           <h2>先装起来，从一段对话开始。</h2>
-          <p>这是公开测试版本。安装前请确认系统平台、下载来源与校验值。</p>
+          <p>这是公开预发布版本。安装前请确认系统平台、下载来源与校验值。</p>
+          {product.windows.prereleaseNote ? <p>{product.windows.prereleaseNote}</p> : null}
           {product.windows.refreshNote ? <p>{product.windows.refreshNote}</p> : null}
         </div>
-        <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>
+        <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>
       </section>
 
       <section className="info-section" aria-labelledby="download-details">

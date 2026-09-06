@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import DomainWorkspace from "../DomainWorkspace";
 import { product } from "../product-config";
+import { siteAsset } from "../site-path";
 import SiteHeader from "../SiteHeader";
 
 const skillUrl = "https://github.com/indieshade/helplearn-skill#readme";
@@ -23,7 +23,7 @@ export default function DomainsPage() {
           <h1>把相关的学习，放回同一个问题里。</h1>
           <p>一条旅程可以从一本书或一个问题开始，也可以在后来加入领域。领域不是课程表，它只是把彼此有关的讨论放在一起，方便你回头看，也方便从新问题继续。</p>
           <div className="home-actions">
-            <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a>
+            <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>
             <Link className="home-button-secondary" href="/">返回首页</Link>
           </div>
         </div>
@@ -31,13 +31,16 @@ export default function DomainsPage() {
 
       <section className="domains-showcase">
         <div className="domains-section-heading"><span>工作台示例</span><h2>一本书、一份研究和一次争论，都可以回到同一个领域。</h2></div>
-        <DomainWorkspace />
+        <figure className="domains-product-shot">
+          <img src={siteAsset("/screenshots/domain-workspace-rc3-safe.png")} alt="学脉领域工作台演示：顶部可切换对话、认知地图和领域记录" />
+          <figcaption>演示数据。先从资料创建一条学习脉络，再在认知地图里查看概念之间为什么会连起来。</figcaption>
+        </figure>
       </section>
 
       <section className="domains-steps" aria-label="领域工作台的使用步骤">
-        <article><span>01</span><h2>先开一条旅程</h2><p>从读一本书、整理一份 PDF，或是工作里冒出来的疑问开始。先聊起来，不必先把整个领域列成计划。</p></article>
-        <article><span>02</span><h2>需要时放进领域</h2><p>当新的讨论和旧问题有关，把它们放进同一个领域。资料、来源和已经做出的判断仍然能找回来。</p></article>
-        <article><span>03</span><h2>从枢纽对话继续</h2><p>回看几条旅程时，矛盾和遗漏会变得明显。把它写成一个新问题，就能开出下一条学习分支。</p></article>
+        <article><span>01</span><h2>先开一条旅程</h2><p>从读一本书、整理一份 PDF，或是工作里冒出来的疑问开始。可以直接从资料创建脉络，不必先把整个领域列成计划。</p></article>
+        <article><span>02</span><h2>放进同一个领域</h2><p>当新的讨论和旧问题有关，就把它们放在一起。资料、来源和已经做出的判断仍然能找回来。</p></article>
+        <article><span>03</span><h2>点开关系继续想</h2><p>认知地图会把概念之间的关联列出来。点开一条关系，能回看它来自哪段讨论，再从那里提出新问题。</p></article>
       </section>
 
       <section className="domains-case">
@@ -47,7 +50,7 @@ export default function DomainsPage() {
 
       <section className="domains-cta">
         <div><span>{product.windows.label}</span><h2>从一段对话开始，把以后还想回看的问题放进领域。</h2><p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p></div>
-        <div><a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows Alpha <span aria-hidden="true">↓</span></a><a className="home-button-secondary" href={skillUrl} target="_blank" rel="noreferrer">安装免费 Skill <span aria-hidden="true">↗</span></a></div>
+        <div><a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a><a className="home-button-secondary" href={skillUrl} target="_blank" rel="noreferrer">安装免费 Skill <span aria-hidden="true">↗</span></a></div>
       </section>
     </main>
   );

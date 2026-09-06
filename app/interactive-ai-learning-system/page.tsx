@@ -180,7 +180,7 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>现在可以下载吗？</summary>
-            <p>可以。当前提供 Windows Alpha {product.windows.version}，文件大小 {product.windows.size}。它尚未进行代码签名，Windows 可能会提示风险；请从官网或 GitHub Release 下载并核对 SHA256。</p>
+            <p>可以。当前提供 {product.windows.edition} {product.windows.version}，文件大小 {product.windows.size}。它尚未进行代码签名，Windows 可能会提示风险；请从官网或 GitHub Release 下载并核对 SHA256。</p>
           </details>
           <details>
             <summary>桌面端授权包含哪些内容？</summary>
