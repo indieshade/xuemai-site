@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   candidateReleasesUrl,
+  loadVerifiedCandidateRelease,
   parseCandidateReleaseManifest,
   parseWindowsAlphaManifest,
   resolveWindowsRelease,
@@ -29,8 +30,9 @@ sha512: ${alphaSha512}
 releaseDate: '2026-08-31T08:00:00.000Z'
 `;
 
-const candidateVersion = "0.2.0-rc.3";
-const candidateFileName = "Xuemai-Setup-0.2.0-rc.3-x64.exe";
+const blockedCandidateVersion = "0.2.0-rc.3";
+const candidateVersion = "0.2.0-rc.4";
+const candidateFileName = `Xuemai-Setup-${candidateVersion}-x64.exe`;
 const candidateSha512 = "PAeskJ4xXnUopd8xo642WB2GftTzWIS6vBG3pYh4Kt7sc8b2VgKFVXuJ40BfMn6MRNkOenKNOUhYM3UzTOZJ4w==";
 const candidateDownloadUrl = `https://github.com/indieshade/xuemai-site/releases/download/v${candidateVersion}/${candidateFileName}`;
 const candidateManifestUrl = `https://github.com/indieshade/xuemai-site/releases/download/v${candidateVersion}/alpha.yml`;
@@ -99,6 +101,15 @@ test("uses the latest verified candidate release and its bundled alpha.yml", asy
   assert.equal(release.sha512, candidateSha512);
   assert.equal(release.sha256, "8772AEB87D5DEE4295087C5E8F15DF5CB18253E07A5521EA151C00696CC55617");
   assert.equal(release.prereleaseNote, "这是候选预发布包，不是稳定版。");
+});
+
+test("does not select a candidate that was stopped from public download", async () => {
+  const fetchImpl = async (url) => {
+    if (url === candidateReleasesUrl) return new Response(JSON.stringify([candidateRelease(blockedCandidateVersion)]));
+    throw new Error(`Unexpected URL: ${url}`);
+  };
+
+  await assert.rejects(() => loadVerifiedCandidateRelease({ fetchImpl }), /没有可用的候选版本/);
 });
 
 test("uses the alpha manifest URL and matching GitHub Release digest when no candidate is available", async () => {

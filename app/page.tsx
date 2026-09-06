@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ContactCard from "./ContactCard";
-import { DomainCognitiveMapDemo, DomainRecordsDemo } from "./DomainWorkspaceDemos";
+import DomainWorkspaceCarousel from "./DomainWorkspaceCarousel";
 import { product } from "./product-config";
 import { siteAsset } from "./site-path";
 import SiteHeader from "./SiteHeader";
@@ -60,20 +60,7 @@ export default function Home() {
           <div><span className="home-section-label">领域工作台</span><h2>围绕领域持续构建理解</h2></div>
           <p>理解一个领域往往要经过多次讨论。领域工作台把相关学习旅程放在一起，让你回看联系、比较冲突观点，并从新问题继续学习。</p>
         </div>
-        <figure className="home-domain-product-shot">
-          <img src={siteAsset("/screenshots/domain-workspace-rc3-safe.png")} alt="学脉领域工作台演示：同一领域内有多条学习脉络，可切换对话、认知地图和领域记录" />
-          <figcaption><strong>对话</strong>演示数据：同一领域下可以放多条学习脉络；从一个问题接着往下聊。</figcaption>
-        </figure>
-        <div className="home-domain-gallery" aria-label="领域工作台的更多界面演示">
-          <figure className="home-domain-demo-shot">
-            <DomainCognitiveMapDemo />
-            <figcaption><strong>认知地图</strong>把概念、它们之间的关系和仍待验证的问题放在一起。</figcaption>
-          </figure>
-          <figure className="home-domain-demo-shot">
-            <DomainRecordsDemo />
-            <figcaption><strong>领域记录</strong>回看跨旅程的判断、依据和下一步要继续追问的地方。</figcaption>
-          </figure>
-        </div>
+        <DomainWorkspaceCarousel />
         <div className="home-domain-action"><Link className="home-button-secondary" href="/domains/">了解领域工作台 <span aria-hidden="true">→</span></Link></div>
       </section>
 

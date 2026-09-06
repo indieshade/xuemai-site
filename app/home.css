@@ -305,6 +305,27 @@
 .home-domain-section { padding-top: 155px; padding-bottom: 145px; background: linear-gradient(180deg, transparent, rgba(28, 50, 42, 0.12) 20%, rgba(28, 50, 42, 0.12) 80%, transparent); }
 .home-domain-intro { display: grid; grid-template-columns: minmax(0, 0.83fr) minmax(250px, 0.42fr); gap: 58px; align-items: end; margin-bottom: 54px; }
 .home-domain-intro p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+
+/* One real workspace is shown at a time, so the three views read as a product flow. */
+.domain-carousel { overflow: hidden; margin: 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #0d0f0e; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); outline: none; }
+.domain-carousel:focus-visible { box-shadow: 0 0 0 3px rgba(120, 184, 154, 0.62), 0 30px 90px rgba(0, 0, 0, 0.28); }
+.domain-carousel-stage { position: relative; z-index: 0; display: grid; min-height: 0; aspect-ratio: 2193 / 1386; place-items: center; background: #090b0a; }
+.domain-carousel-stage::after { position: absolute; inset: 0; border: 1px solid rgba(235, 224, 204, 0.04); content: ""; pointer-events: none; }
+.domain-carousel-stage img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.domain-carousel-caption { position: relative; z-index: 1; border-top: 1px solid rgba(235, 224, 204, 0.09); }
+.domain-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 18px 12px; }
+.domain-carousel-tabs { display: flex; flex-wrap: wrap; gap: 5px; }
+.domain-carousel-tabs button { min-height: 31px; padding: 0 11px; border: 1px solid transparent; border-radius: 7px; color: rgba(225, 218, 205, 0.52); background: transparent; cursor: pointer; font: inherit; font-size: 12px; transition: color 180ms ease, border-color 180ms ease, background 180ms ease; }
+.domain-carousel-tabs button:hover { color: var(--cream); background: rgba(235, 224, 204, 0.06); }
+.domain-carousel-tabs button[aria-pressed="true"] { border-color: rgba(120, 184, 154, 0.38); color: var(--green); background: rgba(55, 126, 91, 0.12); }
+.domain-carousel-tabs button:focus-visible,
+.domain-carousel-arrow:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.domain-carousel-navigation { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; color: rgba(225, 218, 205, 0.45); font-family: var(--font-mono), monospace; font-size: 10px; white-space: nowrap; }
+.domain-carousel-arrow { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid rgba(235, 224, 204, 0.14); border-radius: 50%; color: var(--cream); background: transparent; cursor: pointer; font: inherit; font-size: 16px; line-height: 1; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
+.domain-carousel-arrow:hover { border-color: rgba(120, 184, 154, 0.56); color: var(--green); background: rgba(55, 126, 91, 0.12); }
+.domain-carousel-caption p { margin: 0; padding: 0 20px 17px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.domain-carousel-caption p strong { margin-right: 9px; color: var(--orange-light); font-family: var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.08em; }
+
 .home-domain-product-shot,
 .domains-product-shot { overflow: hidden; margin: 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #111310; box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28); }
 .home-domain-product-shot img,
@@ -537,6 +558,12 @@
   .home-domain-section { padding-top: 100px; padding-bottom: 92px; }
   .home-domain-intro { margin-bottom: 33px; }
   .home-domain-intro h2 { font-size: clamp(32px, 8.7vw, 40px); letter-spacing: -0.06em; }
+  .domain-carousel { border-radius: 16px; }
+  .domain-carousel-controls { display: grid; gap: 9px; padding: 11px 13px 10px; }
+  .domain-carousel-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .domain-carousel-tabs button { min-width: 0; padding: 0 4px; font-size: 11px; }
+  .domain-carousel-navigation { justify-self: end; }
+  .domain-carousel-caption p { padding: 0 14px 14px; font-size: 11px; }
   .home-domain-product-shot,
   .domains-product-shot { border-radius: 16px; }
   .home-domain-product-shot figcaption,

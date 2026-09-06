@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DomainCognitiveMapDemo, DomainRecordsDemo } from "../DomainWorkspaceDemos";
+import DomainWorkspaceCarousel from "../DomainWorkspaceCarousel";
 import { product } from "../product-config";
-import { siteAsset } from "../site-path";
 import SiteHeader from "../SiteHeader";
 
 const skillUrl = "https://github.com/indieshade/helplearn-skill#readme";
@@ -32,20 +31,7 @@ export default function DomainsPage() {
 
       <section className="domains-showcase">
         <div className="domains-section-heading"><span>工作台示例</span><h2>一本书、一份研究和一次争论，都可以回到同一个领域。</h2></div>
-        <figure className="domains-product-shot">
-          <img src={siteAsset("/screenshots/domain-workspace-rc3-safe.png")} alt="学脉领域工作台演示：顶部可切换对话、认知地图和领域记录" />
-          <figcaption><strong>对话</strong>演示数据。先从资料创建一条学习脉络，再把相关讨论带回领域。</figcaption>
-        </figure>
-        <div className="domains-product-gallery" aria-label="认知地图与领域记录界面演示">
-          <figure className="domains-demo-shot">
-            <DomainCognitiveMapDemo />
-            <figcaption><strong>认知地图</strong>关系都能连回来源，方便区分已经形成的判断和仍要验证的问题。</figcaption>
-          </figure>
-          <figure className="domains-demo-shot">
-            <DomainRecordsDemo />
-            <figcaption><strong>领域记录</strong>把不同旅程带回来的新发现放进当前综合，方便继续追问。</figcaption>
-          </figure>
-        </div>
+        <DomainWorkspaceCarousel />
       </section>
 
       <section className="domains-steps" aria-label="领域工作台的使用步骤">

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -43,12 +43,11 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /先聊起来，整理交给学脉/);
   assert.match(html, /围绕领域持续构建理解/);
   assert.match(html, /domain-workspace-rc3-safe\.png/);
-  assert.match(html, /同一领域下可以放多条学习脉络/);
+  assert.match(html, /从一个具体问题开始，在同一条学习脉络里继续讨论/);
   assert.match(html, /认知地图/);
-  assert.match(html, /把概念、它们之间的关系和仍待验证的问题放在一起/);
-  assert.match(html, /回看跨旅程的判断、依据和下一步要继续追问的地方/);
-  assert.match(html, /幸存者偏差会如何误导产品决策？/);
-  assert.match(html, /用户满意度为什么可能失真/);
+  assert.match(html, /领域记录/);
+  assert.match(html, /查看上一张界面/);
+  assert.match(html, /查看下一张界面/);
   assert.match(html, /资料放在哪里，由你决定/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
@@ -88,14 +87,30 @@ test("renders the domain workspace page", async () => {
   const html = await response.text();
   assert.match(html, /把相关的学习，放回同一个问题里/);
   assert.match(html, /domain-workspace-rc3-safe\.png/);
-  assert.match(html, /关系都能连回来源/);
-  assert.match(html, /不同旅程带回来的新发现放进当前综合/);
+  assert.match(html, /选择领域工作台展示界面/);
+  assert.match(html, /查看下一张界面/);
   assert.match(html, /产品研究与决策/);
   assert.match(html, /从资料创建脉络/);
   assert.match(html, /点开关系继续想/);
   assert.match(html, /认知地图会把概念之间的关联列出来/);
   assert.match(html, /点开一条关系/);
   assert.match(html, /一条旅程可以从一本书或一个问题开始/);
+});
+
+test("keeps the domain workspace screenshots and controls in one reusable carousel", async () => {
+  const carousel = await readSourceFile("app/DomainWorkspaceCarousel.tsx");
+  const mapImage = await stat(path.join(projectRoot, "out", "screenshots", "domain-cognitive-map.png"));
+  const recordsImage = await stat(path.join(projectRoot, "out", "screenshots", "domain-records.png"));
+
+  assert.match(carousel, /domain-workspace-rc3-safe\.png/);
+  assert.match(carousel, /domain-cognitive-map\.png/);
+  assert.match(carousel, /domain-records\.png/);
+  assert.match(carousel, /查看上一张界面/);
+  assert.match(carousel, /查看下一张界面/);
+  assert.match(carousel, /ArrowLeft/);
+  assert.match(carousel, /ArrowRight/);
+  assert.ok(mapImage.size > 100_000);
+  assert.ok(recordsImage.size > 100_000);
 });
 
 test("renders the promotional poster route", async () => {
@@ -113,7 +128,7 @@ test("renders the short-video product card route", async () => {
   const html = await response.text();
   assert.match(html, /short-video-card/);
   assert.match(html, asLiteralPattern(release.label.toUpperCase()));
-  assert.match(html, /候选预发布/);
+  assert.match(html, release.channel === "candidate" ? /候选预发布/ : /ALPHA 测试/);
   assert.match(html, /2590930875/);
 });
 
