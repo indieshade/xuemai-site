@@ -39,7 +39,13 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /screenshots\/learning-home\.png/);
   assert.match(html, /下载学脉桌面端/);
   assert.match(html, /免费安装 HelpLearn Skill/);
-  assert.match(html, /对话结束了，学习还可以继续/);
+  assert.match(html, /围绕一个话题或资料继续学习，形成自己的认知和思考/);
+  assert.match(html, /对话、学习地图、概念关系与资料记录会留在一起/);
+  assert.match(html, /learning-journey-dialogue\.png/);
+  assert.match(html, /learning-journey-map\.png/);
+  assert.match(html, /concept-graph\.png/);
+  assert.match(html, /资料与记录/);
+  assert.doesNotMatch(html, /对话结束了，学习还可以继续/);
   assert.match(html, /先聊起来，整理交给学脉/);
   assert.match(html, /围绕领域持续构建理解/);
   assert.match(html, /domain-workspace-rc3-safe\.png/);
@@ -115,6 +121,20 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.doesNotMatch(carousel, /当前查看/);
   assert.ok(mapImage.size > 100_000);
   assert.ok(recordsImage.size > 100_000);
+});
+
+test("shows the four concrete views of one learning journey", async () => {
+  const gallery = await readSourceFile("app/LearningJourneyGallery.tsx");
+  const dialogueImage = await stat(path.join(projectRoot, "out", "screenshots", "learning-journey-dialogue.png"));
+  const mapImage = await stat(path.join(projectRoot, "out", "screenshots", "learning-journey-map.png"));
+
+  assert.match(gallery, /学习地图/);
+  assert.match(gallery, /概念关系/);
+  assert.match(gallery, /资料与记录/);
+  assert.match(gallery, /type="radio"/);
+  assert.match(gallery, /loading="eager"/);
+  assert.ok(dialogueImage.size > 500_000);
+  assert.ok(mapImage.size > 500_000);
 });
 
 test("renders the promotional poster route", async () => {

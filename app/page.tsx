@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContactCard from "./ContactCard";
 import DomainWorkspaceCarousel from "./DomainWorkspaceCarousel";
+import LearningJourneyGallery from "./LearningJourneyGallery";
 import { product } from "./product-config";
 import { siteAsset } from "./site-path";
 import SiteHeader from "./SiteHeader";
@@ -28,17 +29,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-section home-continuity" id="product">
-        <div className="home-section-copy">
-          <span className="home-section-label">对话会留下来</span>
-          <h2>对话结束了，学习还可以继续</h2>
-          <p>AI 很会回答眼前的问题，但换个会话，之前的理解往往就断了。学脉会记住讨论过什么、想通了什么，还有哪些地方值得回头。再次打开时，可以接着原来的思路继续。</p>
+      <section className="home-section home-learning-journey" id="product">
+        <div className="home-learning-journey-intro">
+          <span className="home-section-label">学习脉络</span>
+          <h2>围绕一个话题或资料继续学习，形成自己的认知和思考。</h2>
+          <p>从读一份资料、提出一个问题开始，沿着同一条脉络不断追问、核对和修正。对话、学习地图、概念关系与资料记录会留在一起，下次可以从已经想过的地方继续。</p>
         </div>
-        <div className="continuity-line" aria-label="对话整理为学习脉络的示意">
-          <div className="continuity-card"><span>刚刚聊过</span><strong>“这份调研能说明用户真的需要它吗？”</strong><p>一个问题不必在会话结束时消失。</p></div>
-          <div className="continuity-arrow" aria-hidden="true">→</div>
-          <div className="continuity-thread"><span>学习脉络</span><strong>产品研究与决策</strong><i aria-hidden="true" /><strong>随机对照试验能证明什么</strong></div>
-        </div>
+        <LearningJourneyGallery />
       </section>
 
       <section className="home-section home-start">
