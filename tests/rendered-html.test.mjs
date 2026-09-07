@@ -172,9 +172,32 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /https:\/\/helplearn\.cn\/og\.png/);
   assert.match(html, /桌面端授权包含哪些内容/);
+  assert.match(html, /把产品解释放回具体问题里/);
+  assert.match(html, /what-is-xuemai/);
+  assert.match(html, /learn-from-materials/);
+  assert.match(html, /learning-map/);
+  assert.match(html, /下载 Windows 版/);
   assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
   assert.match(html, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
   assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
+});
+
+test("renders brand and learning resources for concrete search questions", async () => {
+  const brand = await (await render("/what-is-xuemai")).text();
+  const materials = await (await render("/learn-from-materials")).text();
+  const map = await (await render("/learning-map")).text();
+
+  assert.match(brand, /学脉是什么？/);
+  assert.match(brand, /AI 交互学习系统/);
+  assert.match(brand, /FAQPage/);
+  assert.match(brand, /默认保存在你指定的本地文件夹/);
+  assert.match(materials, /怎样用 AI 学一本书或一份 PDF？/);
+  assert.match(materials, /learning-journey-dialogue\.png/);
+  assert.match(materials, /别急着一轮问完/);
+  assert.match(map, /学习地图和概念关系有什么用？/);
+  assert.match(map, /learning-journey-concepts\.png/);
+  assert.match(map, /地图给的是入口，不是标准答案/);
+  assert.match(map, /领域工作台/);
 });
 
 test("renders download, pricing, privacy, and changelog as standalone product pages", async () => {
@@ -217,6 +240,9 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(robots, /Sitemap: https:\/\/helplearn\.cn\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/domains\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/interactive-ai-learning-system\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/what-is-xuemai\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/learn-from-materials\//);
+  assert.match(sitemap, /https:\/\/helplearn\.cn\/learning-map\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/download\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/pricing\//);
   assert.match(sitemap, /https:\/\/helplearn\.cn\/privacy\//);

@@ -59,7 +59,7 @@ export default function InteractiveAiLearningSystemPage() {
           <a href="#process">怎样推进</a>
           <a href="#faq">常见问题</a>
         </div>
-        <a className="nav-cta" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载测试版 <span aria-hidden="true">↓</span></a>
+        <a className="nav-cta" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 Windows 版 <span aria-hidden="true">↓</span></a>
       </nav>
 
       <article className="guide-article">
@@ -186,6 +186,17 @@ export default function InteractiveAiLearningSystemPage() {
             <summary>桌面端授权包含哪些内容？</summary>
             <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.desktopOnly} {product.licensing.futureServices} {product.licensing.independentAccess}</p>
           </details>
+        </section>
+
+        <section className="guide-section guide-related" aria-labelledby="related-heading">
+          <span className="guide-index">继续了解</span>
+          <h2 id="related-heading">把产品解释放回具体问题里</h2>
+          <p>如果你刚开始了解学脉，可以先看它到底解决什么问题；如果你已经有一本书、一份 PDF 或一个具体困惑，再从材料和学习地图开始会更直接。</p>
+          <div className="guide-related-links">
+            <Link href="/what-is-xuemai/">学脉是什么？</Link>
+            <Link href="/learn-from-materials/">怎样用 AI 学一本书或一份 PDF？</Link>
+            <Link href="/learning-map/">学习地图和概念关系有什么用？</Link>
+          </div>
         </section>
 
         <footer className="guide-footer">

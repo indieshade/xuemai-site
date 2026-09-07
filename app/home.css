@@ -708,6 +708,15 @@
 .info-callout { margin-top: 72px; padding: 51px 52px; border: 1px solid rgba(120, 184, 154, 0.2); border-radius: 22px; background: linear-gradient(135deg, rgba(40, 89, 68, 0.16), rgba(239, 109, 66, 0.08)); }
 .info-callout > p { margin-bottom: 0; }
 .info-text-link { display: inline-flex; margin-top: 25px; padding-bottom: 4px; border-bottom: 1px solid rgba(239, 109, 66, 0.65); color: var(--orange2); font-size: 13px; }
+.info-screenshot { margin: 31px 0 0; padding: 10px; border: 1px solid rgba(235, 224, 204, 0.12); border-radius: 20px; background: #10120f; }
+.info-screenshot img { display: block; width: 100%; border: 1px solid rgba(235, 224, 204, 0.08); border-radius: 13px; }
+.info-screenshot figcaption { padding: 13px 7px 3px; color: var(--muted); font-size: 11px; line-height: 1.65; }
+.info-faq details { max-width: 780px; padding: 20px 0; border-bottom: 1px solid rgba(235, 224, 204, 0.12); }
+.info-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--cream); cursor: pointer; font-family: var(--font-serif), Georgia, serif; font-size: 20px; line-height: 1.45; list-style: none; }
+.info-faq summary::-webkit-details-marker { display: none; }
+.info-faq summary::after { color: var(--orange2); content: "+"; font-family: var(--font-mono), monospace; font-size: 20px; }
+.info-faq details[open] summary::after { content: "−"; }
+.info-faq details p { max-width: 710px; margin: 15px 40px 0 0; color: var(--soft); font-size: 14px; line-height: 1.9; }
 .info-license-banner { display: grid; gap: 10px; padding: 38px 42px; border: 1px solid rgba(120, 184, 154, 0.27); border-radius: 21px; background: rgba(73, 146, 110, 0.09); }
 .info-license-banner > span { color: var(--green); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.1em; }
 .info-license-banner strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(31px, 3.7vw, 50px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.25; }
@@ -721,9 +730,9 @@
 .info-price-card p { margin: 15px 0 0; color: var(--soft); font-size: 14px; line-height: 1.75; }
 .info-price-card .home-button-primary { margin-top: auto; }
 .info-price-unavailable { display: inline-flex; align-items: center; min-height: 50px; margin-top: auto; color: var(--gold); font-size: 13px; }
-.info-numbered-list { display: grid; gap: 1px; margin: 31px 0 0; padding: 1px; list-style: none; border: 1px solid rgba(235, 224, 204, 0.1); border-radius: 18px; overflow: hidden; background: rgba(235, 224, 204, 0.1); }
-.info-numbered-list li { position: relative; display: grid; gap: 8px; min-height: 102px; padding: 22px 24px 22px 78px; background: #151613; }
-.info-numbered-list li::before { content: counter(list-item, decimal-leading-zero); position: absolute; top: 24px; left: 24px; color: var(--orange2); font-family: var(--font-mono), monospace; font-size: 11px; }
+.info-numbered-list { display: grid; gap: 1px; margin: 31px 0 0; padding: 1px; list-style: none; counter-reset: info-step; border: 1px solid rgba(235, 224, 204, 0.1); border-radius: 18px; overflow: hidden; background: rgba(235, 224, 204, 0.1); }
+.info-numbered-list li { position: relative; display: grid; gap: 8px; min-height: 102px; padding: 22px 24px 22px 78px; counter-increment: info-step; background: #151613; }
+.info-numbered-list li::before { content: counter(info-step, decimal-leading-zero); position: absolute; top: 24px; left: 24px; color: var(--orange2); font-family: var(--font-mono), monospace; font-size: 11px; }
 .info-numbered-list strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: 21px; font-weight: 600; }
 .info-numbered-list span { color: var(--soft); font-size: 14px; line-height: 1.7; }
 .info-release { margin-bottom: 0; border-color: rgba(120, 184, 154, 0.25); background: linear-gradient(135deg, rgba(41, 90, 68, 0.2), rgba(255, 255, 255, 0.015)); }
@@ -735,6 +744,10 @@
 .info-footer > div { display: flex; flex-wrap: wrap; gap: 17px; }
 .info-footer a { color: var(--soft); }
 .info-footer a:hover { color: var(--orange2); }
+.guide-related-links { display: grid; gap: 1px; margin-top: 30px; border: 1px solid var(--line); border-radius: 17px; overflow: hidden; background: var(--line); }
+.guide-related-links a { display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 14px 20px; color: var(--bone); background: #151613; font-family: "STSong", "Songti SC", serif; font-size: 18px; }
+.guide-related-links a::after { color: var(--orange); content: "↗"; font-family: Consolas, monospace; font-size: 14px; }
+.guide-related-links a:hover { background: #1b1e1a; color: var(--orange2); }
 
 @media (max-width: 820px) {
   .home-footer-links { gap: 14px; }
@@ -758,6 +771,9 @@
   .info-hash-block code { font-size: 11px; }
   .info-copy-button { width: max-content; }
   .info-callout { margin-top: 58px; padding: 33px 25px; border-radius: 18px; }
+  .info-screenshot { border-radius: 16px; }
+  .info-faq summary { font-size: 18px; }
+  .info-faq details p { margin-right: 0; font-size: 13px; }
   .info-license-banner { padding: 29px 25px; border-radius: 18px; }
   .info-license-banner strong { font-size: clamp(30px, 8.6vw, 39px); line-height: 1.32; }
   .info-price-card { min-height: 255px; padding: 24px; }
