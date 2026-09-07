@@ -3,8 +3,8 @@ import Link from "next/link";
 import InfoPage from "../InfoPage";
 import { siteAsset, siteUrl } from "../site-path";
 
-const title = "学习地图和概念关系有什么用？";
-const description = "学脉的学习地图把同一条学习旅程中的概念、来源、相邻问题和已有判断放在一起，帮助学习者回看关系并继续追问。";
+const title = "学习地图和概念关系有什么用？把学习记录连成可回看的脉络";
+const description = "学脉的学习地图把同一条学习旅程里的概念、来源、相邻问题和已有判断放在一起，帮助学习者看见关系、核对依据，并从卡住的地方继续追问。";
 
 export const metadata: Metadata = {
   title,

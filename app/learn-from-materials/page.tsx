@@ -3,8 +3,8 @@ import Link from "next/link";
 import InfoPage from "../InfoPage";
 import { siteAsset, siteUrl } from "../site-path";
 
-const title = "怎样用 AI 学一本书或一份 PDF？";
-const description = "从一本书、一份 PDF 或一段材料开始，学脉把连续对话、资料来源、概念和待继续的问题放进同一条学习旅程。";
+const title = "怎样用 AI 学一本书或 PDF？让对话、资料与问题持续相连";
+const description = "从一本书、一份 PDF 或一段材料开始，学脉把连续对话、资料来源、概念和待继续的问题放进同一条学习旅程，让下一次讨论能接着已有理解展开。";
 
 export const metadata: Metadata = {
   title,

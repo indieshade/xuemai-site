@@ -3,8 +3,8 @@ import Link from "next/link";
 import InfoPage from "../InfoPage";
 import { siteUrl } from "../site-path";
 
-const title = "学脉是什么？";
-const description = "学脉（HelpLearn）是一套 AI 交互学习系统，把围绕书、PDF 和问题展开的对话整理成可继续的学习旅程，并放回自己的领域。";
+const title = "学脉是什么？AI 交互学习系统如何整理学习旅程";
+const description = "学脉（HelpLearn）是一套 AI 交互学习系统：它把围绕书、PDF 和问题展开的对话整理成可继续的学习旅程，再放进自己的领域中回看与延伸。";
 
 export const metadata: Metadata = {
   title,

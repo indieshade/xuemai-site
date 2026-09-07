@@ -3,8 +3,8 @@ import InfoPage from "../InfoPage";
 import { product } from "../product-config";
 
 export const metadata: Metadata = {
-  title: "桌面端授权与定价",
-  description: "查看学脉 HelpLearn 年度版与永久版的桌面端授权范围、购买入口与数据归属说明。",
+  title: "学脉桌面端授权与价格：年度版、永久版、激活与设备说明",
+  description: "了解学脉 HelpLearn 年度版与永久版的价格、激活方式、两台设备规则、桌面端授权边界与数据归属。",
   alternates: { canonical: "/pricing/" },
 };
 

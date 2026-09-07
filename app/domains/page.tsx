@@ -7,8 +7,8 @@ import SiteHeader from "../SiteHeader";
 const skillUrl = "https://github.com/indieshade/helplearn-skill#readme";
 
 export const metadata: Metadata = {
-  title: "领域工作台：把多条学习旅程放回同一个问题",
-  description: "学脉的领域工作台把彼此有关的学习旅程、资料和待解决的问题放在一起，方便回看联系，也方便从新问题继续。",
+  title: "学脉领域工作台：连接学习旅程、资料、概念与长期问题",
+  description: "学脉的领域工作台把有关的学习旅程、资料、概念关系和待解决的问题放在一起，方便回看依据、比较观点，并从新问题继续。",
   alternates: { canonical: "/domains/" },
 };
 

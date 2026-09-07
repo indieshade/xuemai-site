@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import InfoPage from "../InfoPage";
 
 export const metadata: Metadata = {
-  title: "隐私与数据说明",
-  description: "了解学脉 HelpLearn 的学习记录、本地文件夹、AI 服务请求和数据迁移边界。",
+  title: "学脉隐私与本地数据说明：学习记录、AI 服务与备份迁移",
+  description: "了解学脉 HelpLearn 学习记录的本地存放位置、AI 服务请求范围、API Key 安全，以及资料备份与迁移方式。",
   alternates: { canonical: "/privacy/" },
 };
 

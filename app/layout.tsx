@@ -10,7 +10,7 @@ const siteDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "学脉 HelpLearn｜AI 交互学习系统",
+    default: "学脉 HelpLearn｜AI 交互学习系统：整理学习旅程与领域",
     template: "%s｜学脉 HelpLearn",
   },
   description: siteDescription,
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     url: "/",
     siteName: "学脉 HelpLearn",
-    title: "学脉 HelpLearn｜AI 交互学习系统",
+    title: "学脉 HelpLearn｜AI 交互学习系统：整理学习旅程与领域",
     description: siteDescription,
     images: [{ url: siteAsset("/og.png"), width: 1731, height: 909, alt: "学脉交互式学习脉络示意" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "学脉 HelpLearn｜AI 交互学习系统",
+    title: "学脉 HelpLearn｜AI 交互学习系统：整理学习旅程与领域",
     description: siteDescription,
     images: [siteAsset("/og.png")],
   },

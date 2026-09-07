@@ -249,6 +249,30 @@ test("publishes crawl instructions and the public sitemap", async () => {
   assert.match(sitemap, /https:\/\/helplearn\.cn\/changelog\//);
 });
 
+test("gives every public search page a substantial title and description", async () => {
+  const publicPaths = [
+    "/",
+    "/domains",
+    "/interactive-ai-learning-system",
+    "/what-is-xuemai",
+    "/learn-from-materials",
+    "/learning-map",
+    "/download",
+    "/pricing",
+    "/privacy",
+    "/changelog",
+  ];
+
+  for (const pathname of publicPaths) {
+    const html = await (await render(pathname)).text();
+    const title = html.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+    const description = html.match(/<meta name="description" content="([^"]+)"/i)?.[1] ?? "";
+
+    assert.ok(title.length >= 24, `${pathname} needs a more descriptive title`);
+    assert.ok(description.length >= 50, `${pathname} needs a more descriptive meta description`);
+  }
+});
+
 test("publishes the same verified Windows release data used by the pages", async () => {
   const publicRelease = JSON.parse(await readOutputFile("windows-release.json"));
 

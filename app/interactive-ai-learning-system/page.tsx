@@ -3,7 +3,7 @@ import Link from "next/link";
 import { product } from "../product-config";
 import { siteAsset, siteUrl } from "../site-path";
 
-const title = "什么是交互式 AI 学习系统？";
+const title = "什么是交互式 AI 学习系统？学脉如何组织学习旅程";
 const description =
   "交互式 AI 学习系统会根据学习材料和学习者的回答，决定下一步该解释、追问、练习还是复习。了解学脉（HelpLearn）如何用领域与学习旅程整理学习脉络。";
 

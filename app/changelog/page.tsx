@@ -4,8 +4,8 @@ import InfoPage from "../InfoPage";
 import { product } from "../product-config";
 
 export const metadata: Metadata = {
-  title: "更新记录与已知问题",
-  description: "查看学脉 HelpLearn 当前 Windows 预发布版本、激活能力、已知问题和下一步计划。",
+  title: "学脉更新记录：Windows 版改动、已知问题与安装说明",
+  description: "查看学脉 HelpLearn Windows 桌面端的版本改动、已知问题、下载校验方式，以及后续更新安排。",
   alternates: { canonical: "/changelog/" },
 };
 

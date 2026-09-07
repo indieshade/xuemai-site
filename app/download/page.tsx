@@ -5,8 +5,8 @@ import InfoPage from "../InfoPage";
 import { product } from "../product-config";
 
 export const metadata: Metadata = {
-  title: `下载 ${product.windows.edition}`,
-  description: `下载学脉 HelpLearn ${product.windows.edition}，查看版本、SHA256、桌面端授权方案和安装提示。`,
+  title: `下载学脉 Windows 版：安装包、版本、SHA256 与安装说明`,
+  description: `在此下载学脉 HelpLearn ${product.windows.edition} Windows x64 安装包，查看版本号、文件大小、SHA256 校验值、桌面端授权方式和未签名提示。`,
   alternates: { canonical: "/download/" },
 };
 
