@@ -19,8 +19,8 @@ const views = [
     id: "concepts",
     label: "概念关系",
     note: "从一个概念回到它的来源、相邻概念和具体使用情境。",
-    image: "/screenshots/concept-graph.png",
-    alt: "学脉桌面端的概念关系图，展示概念之间的连接和来源。",
+    image: "/screenshots/learning-journey-concepts.png",
+    alt: "学脉桌面端的 Concept Constellation 概念关系图，展示一个概念与相邻概念和资料来源的连接。",
   },
   {
     id: "records",

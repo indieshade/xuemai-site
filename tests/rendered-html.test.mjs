@@ -43,7 +43,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /对话、学习地图、概念关系与资料记录会留在一起/);
   assert.match(html, /learning-journey-dialogue\.png/);
   assert.match(html, /learning-journey-map\.png/);
-  assert.match(html, /concept-graph\.png/);
+  assert.match(html, /learning-journey-concepts\.png/);
   assert.match(html, /资料与记录/);
   assert.doesNotMatch(html, /对话结束了，学习还可以继续/);
   assert.match(html, /先聊起来，整理交给学脉/);
@@ -127,6 +127,7 @@ test("shows the four concrete views of one learning journey", async () => {
   const gallery = await readSourceFile("app/LearningJourneyGallery.tsx");
   const dialogueImage = await stat(path.join(projectRoot, "out", "screenshots", "learning-journey-dialogue.png"));
   const mapImage = await stat(path.join(projectRoot, "out", "screenshots", "learning-journey-map.png"));
+  const conceptsImage = await stat(path.join(projectRoot, "out", "screenshots", "learning-journey-concepts.png"));
 
   assert.match(gallery, /学习地图/);
   assert.match(gallery, /概念关系/);
@@ -135,6 +136,7 @@ test("shows the four concrete views of one learning journey", async () => {
   assert.match(gallery, /loading="eager"/);
   assert.ok(dialogueImage.size > 500_000);
   assert.ok(mapImage.size > 500_000);
+  assert.ok(conceptsImage.size > 300_000);
 });
 
 test("renders the promotional poster route", async () => {
