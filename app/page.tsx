@@ -102,7 +102,7 @@ export default function Home() {
 
       <footer className="home-footer">
         <div className="home-footer-brand"><img src={siteAsset("/xuemai-icon.png")} alt="" /><span>学脉 · HelpLearn</span></div>
-        <div className="home-footer-links"><Link href="/privacy/">隐私说明</Link><Link href="/changelog/">更新记录</Link></div>
+        <div className="home-footer-links"><Link href="/what-is-xuemai/">学脉是什么</Link><Link href="/learn-from-materials/">围绕资料学习</Link><Link href="/learning-map/">学习地图</Link><Link href="/privacy/">隐私说明</Link><Link href="/changelog/">更新记录</Link></div>
         <a href="https://qm.qq.com/cgi-bin/qm/qr?k=2590930875" target="_blank" rel="noreferrer">激活、反馈与版本通知：QQ {product.feedbackQQ}</a>
         <span>© 2026 影下独作</span>
       </footer>

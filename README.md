@@ -1,10 +1,14 @@
-# 学脉产品落地页
+# 学脉 HelpLearn｜AI 交互学习系统
 
-学脉（HelpLearn）是一套交互式 AI 学习系统。这个仓库包含官网、公开产品截图和用于图文平台宣传的独立海报画布；不包含桌面端产品源码或安装包。
+学脉是产品的中文名，HelpLearn 是国际名称，由影下独作开发。围绕书、PDF 或问题展开的 AI 对话，会整理成可继续的学习旅程；相关旅程可以放进同一个领域，用学习地图回看概念关系与资料来源。
+
+这个仓库包含官网、公开产品截图和宣传画布。Windows 安装包通过本仓库的 GitHub Releases 提供，桌面端源码不在此仓库中。
 
 ## 在线访问
 
-[https://helplearn.cn/](https://helplearn.cn/)
+[学脉 HelpLearn 官网](https://helplearn.cn/) · [学脉是什么](https://helplearn.cn/what-is-xuemai/) · [下载 Windows 版](https://helplearn.cn/download/) · [领域工作台](https://helplearn.cn/domains/)
+
+[HelpLearn Skill](https://github.com/indieshade/helplearn-skill) 可免费安装到兼容 Agent，独立于桌面端使用。
 
 网站通过 GitHub Actions 自动构建，并发布到 GitHub Pages。Windows 安装包作为 GitHub Release 资产发布，下载链接集中配置在 `app/product-config.ts`，不会提交到本仓库。
 

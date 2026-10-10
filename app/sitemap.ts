@@ -4,7 +4,8 @@ import { siteUrl } from "./site-path";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const homeLastModified = new Date("2026-09-07T00:00:00.000Z");
+  const homeLastModified = new Date("2026-10-11T00:00:00.000Z");
+  const resourceLastModified = new Date("2026-09-07T00:00:00.000Z");
   const productLastModified = new Date("2026-08-25T00:00:00.000Z");
 
   return [
@@ -34,13 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/learn-from-materials/`,
-      lastModified: homeLastModified,
+      lastModified: resourceLastModified,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
       url: `${siteUrl}/learning-map/`,
-      lastModified: homeLastModified,
+      lastModified: resourceLastModified,
       changeFrequency: "monthly",
       priority: 0.85,
     },

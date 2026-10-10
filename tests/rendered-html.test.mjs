@@ -3,6 +3,7 @@ import test from "node:test";
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { indexNowPayload } from "../scripts/notify-indexnow.mjs";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const release = JSON.parse(await readFile(path.join(projectRoot, "app", "windows-release.generated.json"), "utf8"));
@@ -291,11 +292,23 @@ test("publishes brand schema and notifies IndexNow after Pages deploy", async ()
   assert.match(layout, /\"@type\": \"WebSite\"/);
   assert.match(layout, /\"@type\": \"Organization\"/);
   assert.match(layout, /AI 交互学习系统/);
-  assert.match(workflow, /api\.indexnow\.org\/indexnow/);
+  assert.match(workflow, /node scripts\/notify-indexnow\.mjs/);
   assert.match(workflow, /needs: deploy/);
   assert.match(workflow, /release:\s+types: \[published\]/);
   assert.match(workflow, /cron: "17 \*\/6 \* \* \*"/);
   assert.equal(key.trim(), "2797c545ab105d2403b1bd326352838f");
+});
+
+test("IndexNow submits every sitemap page and rejects foreign hosts", async () => {
+  const sitemap = await readOutputFile("sitemap.xml");
+  const key = (await readOutputFile("2797c545ab105d2403b1bd326352838f.txt")).trim();
+  const payload = indexNowPayload(sitemap, key);
+  assert.equal(payload.urlList.length, 10);
+  for (const route of ["what-is-xuemai", "learn-from-materials", "learning-map"]) {
+    assert.ok(payload.urlList.includes(`https://helplearn.cn/${route}/`));
+  }
+  assert.throws(() => indexNowPayload("<loc>https://example.com/</loc>", key));
+  assert.throws(() => indexNowPayload("", key));
 });
 
 test("centralizes release data and keeps download entry points free of hardcoded release URLs", async () => {

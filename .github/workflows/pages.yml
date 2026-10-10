@@ -63,10 +63,11 @@ jobs:
     needs: deploy
     if: github.event_name != 'pull_request'
     steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
       - name: Tell IndexNow about the published pages
         env:
           INDEXNOW_KEY: 2797c545ab105d2403b1bd326352838f
-        run: |
-          curl --fail-with-body --request POST 'https://api.indexnow.org/indexnow' \
-            --header 'Content-Type: application/json; charset=utf-8' \
-            --data "{\"host\":\"helplearn.cn\",\"key\":\"${INDEXNOW_KEY}\",\"keyLocation\":\"https://helplearn.cn/${INDEXNOW_KEY}.txt\",\"urlList\":[\"https://helplearn.cn/\",\"https://helplearn.cn/domains/\",\"https://helplearn.cn/interactive-ai-learning-system/\",\"https://helplearn.cn/download/\",\"https://helplearn.cn/pricing/\",\"https://helplearn.cn/privacy/\",\"https://helplearn.cn/changelog/\"]}"
+        run: node scripts/notify-indexnow.mjs

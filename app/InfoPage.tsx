@@ -25,6 +25,7 @@ export default function InfoPage({ current, eyebrow, title, description, updated
         <footer className="info-footer">
           <span>更新于 {updated} · 学脉 HelpLearn · 影下独作</span>
           <div>
+            <Link href="/what-is-xuemai/">学脉是什么</Link>
             <Link href="/privacy/">隐私说明</Link>
             <Link href="/changelog/">更新记录</Link>
             <Link href="/">返回首页</Link>

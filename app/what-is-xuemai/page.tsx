@@ -19,7 +19,8 @@ const articleSchema = {
   description,
   inLanguage: "zh-CN",
   datePublished: "2026-09-07",
-  dateModified: "2026-09-07",
+  dateModified: "2026-10-11",
+  about: { "@id": `${siteUrl}/#software` },
   mainEntityOfPage: `${siteUrl}/what-is-xuemai/`,
   author: { "@type": "Organization", name: "影下独作", url: siteUrl },
   publisher: { "@type": "Organization", name: "影下独作", url: siteUrl },
@@ -56,8 +57,16 @@ export default function WhatIsXuemaiPage() {
         eyebrow="学脉 HelpLearn · 产品说明"
         title="学脉是什么？"
         description="学脉（HelpLearn）是一套 AI 交互学习系统。它把围绕一本书、一份 PDF 或一个问题的讨论整理成学习旅程，让你下次能从已经想过的地方继续。"
-        updated="2026 年 9 月 7 日"
+        updated="2026 年 10 月 11 日"
       >
+        <section className="info-section" aria-labelledby="name-heading">
+          <span className="info-index">产品与官网</span>
+          <h2 id="name-heading">学脉与 HelpLearn 是同一个产品</h2>
+          <p>学脉是产品的中文名，HelpLearn 是国际名称，由影下独作开发。官网是 <a href={siteUrl}>helplearn.cn</a>，提供 Windows 桌面端下载、授权说明和学习案例。</p>
+          <p>你可以围绕一本书、PDF 或一个问题和 AI 讨论。学脉把对话与来源保存在学习旅程中，用学习地图回看概念关系，再把相关旅程放进领域工作台。再次打开时，可以沿着原来的问题继续。</p>
+          <div className="home-actions"><Link className="home-button-primary" href="/download/">下载学脉 Windows 版 →</Link><a className="home-button-secondary" href="https://github.com/indieshade/helplearn-skill#readme">免费安装 HelpLearn Skill ↗</a></div>
+        </section>
+
         <section className="info-section" aria-labelledby="journey-heading">
           <span className="info-index">从对话开始</span>
           <h2 id="journey-heading">一次对话可以变成一条学习旅程</h2>
