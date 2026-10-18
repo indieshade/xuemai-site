@@ -3,8 +3,8 @@ import InfoPage from "../InfoPage";
 import { product } from "../product-config";
 
 export const metadata: Metadata = {
-  title: "学脉桌面端授权与价格：年度版、永久版、激活与设备说明",
-  description: "了解学脉 HelpLearn 年度版与永久版的价格、激活方式、两台设备规则、桌面端授权边界与数据归属。",
+  title: "学脉免费版与价格：一个学习脉络、一个领域免费使用",
+  description: "学脉 HelpLearn 免费使用 1 个学习脉络和 1 个领域，新增更多时再选择年度版或永久版。查看价格、激活方式、两台设备规则与数据归属。",
   alternates: { canonical: "/pricing/" },
 };
 
@@ -13,19 +13,20 @@ export default function PricingPage() {
     <InfoPage
       current="pricing"
       eyebrow="学脉 HelpLearn · 桌面端授权"
-      title="按使用周期选择桌面端授权"
-      description="年度版从首次激活起计算 365 天；永久版永久解锁本地桌面能力；同一购买者可激活 2 台设备。"
-      updated="2026 年 9 月 4 日"
+      title="先免费学习，需要更多空间时再升级"
+      description={`${product.licensing.freeTier}${product.licensing.expansion}`}
+      updated="2026 年 10 月 18 日"
     >
-      <section className="info-license-banner" aria-label="桌面端授权">
-        <span>桌面端授权</span>
-        <strong>年度版或永久版</strong>
-        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
+      <section className="info-license-banner" aria-label="桌面免费版">
+        <span>桌面免费版</span>
+        <strong>1 个学习脉络 + 1 个领域</strong>
+        <p>用自己的问题和资料开始学习，对话、资料阅读、理解练习、概念地图和成果整理均可使用。模型费用独立计算。</p>
       </section>
 
       <section className="info-section" aria-labelledby="activation-options">
         <span className="info-index">授权方案</span>
-        <h2 id="activation-options">按需要选择，再输入激活码</h2>
+        <h2 id="activation-options">新增更多脉络和领域，不限数量</h2>
+        <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。两种授权解锁相同的本地桌面能力。</p>
         <div className="info-price-grid">
           {product.desktopLicenses.map((option) => (
             <article className="info-price-card" key={option.id}>

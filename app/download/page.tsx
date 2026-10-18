@@ -16,14 +16,14 @@ export default function DownloadPage() {
       current="download"
       eyebrow="学脉 HelpLearn · 下载"
       title={`下载学脉 ${product.windows.edition}`}
-      description="当前提供 Windows x64 预发布版本。桌面端可选择年度版或永久版：年度版从首次激活起计算 365 天，同一购买者可激活 2 台设备。"
+      description={`当前提供 Windows x64 版。${product.licensing.freeTier}${product.licensing.expansion}`}
       updated={product.windows.releasedOn}
     >
       <section className="info-highlight">
         <div>
           <span>{product.windows.label}</span>
           <h2>先装起来，从一段对话开始。</h2>
-          <p>这是公开预发布版本。安装前请确认系统平台、下载来源与校验值。</p>
+          <p>安装前请确认系统平台、下载来源与校验值；模型费用独立计算。</p>
           {product.windows.prereleaseNote ? <p>{product.windows.prereleaseNote}</p> : null}
           {product.windows.refreshNote ? <p>{product.windows.refreshNote}</p> : null}
         </div>
@@ -37,7 +37,7 @@ export default function DownloadPage() {
           <div><dt>平台</dt><dd>{product.windows.platform}</dd></div>
           <div><dt>版本</dt><dd>{product.windows.version}</dd></div>
           <div><dt>文件大小</dt><dd>{product.windows.size}</dd></div>
-          <div><dt>授权</dt><dd>年度版与永久版</dd></div>
+          <div><dt>授权</dt><dd>免费版；年度版与永久版可新增更多脉络与领域</dd></div>
         </dl>
         <div className="info-hash-block">
           <div><span>SHA256</span><code>{product.windows.sha256}</code></div>
@@ -54,7 +54,8 @@ export default function DownloadPage() {
 
       <section className="info-section info-callout" aria-labelledby="desktop-license">
         <span className="info-index">桌面端授权</span>
-        <h2 id="desktop-license">选择适合自己的授权方式</h2>
+        <h2 id="desktop-license">先用自己的问题和资料免费学习</h2>
+        <p>{product.licensing.freeTier}{product.licensing.expansion}</p>
         <p>{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.futureServices}</p>
         <Link className="info-text-link" href="/pricing/">查看授权方案与购买入口 →</Link>
       </section>

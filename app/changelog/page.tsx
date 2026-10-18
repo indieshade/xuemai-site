@@ -28,10 +28,10 @@ export default function ChangelogPage() {
         <h2 id="released">{product.windows.version}</h2>
         <ul className="info-check-list">
           <li>{product.windows.edition}安装包已更新至 {product.windows.version}。</li>
-          <li>领域工作台新增对话、认知地图和领域记录入口；可以从资料新建学习脉络。</li>
-          <li>认知地图里的概念关系可以点开查看说明。</li>
-          <li>支持输入激活码、重新校验、设备解绑与移除本机凭据。</li>
-          <li>被授权拦住的操作，会在激活成功后恢复。</li>
+          <li>免费持续使用 1 个学习脉络和 1 个领域，新增更多时再选择年度版或永久版；模型费用独立计算。</li>
+          <li>改善菜单遮挡、下拉选择器与按钮提示；取消升级后保留输入。</li>
+          <li>修复带资料页链接的收藏、稍后复习同步及原文跳转，重启后恢复记录与阅读位置。</li>
+          <li>联网工具接入 Pi，支持搜索、网页阅读与引用；改善理解反馈和概念地图纠错同步。</li>
         </ul>
       </section>
 
@@ -44,7 +44,7 @@ export default function ChangelogPage() {
       <section className="info-section info-callout" aria-labelledby="next-version">
         <span className="info-index">当前更新方式</span>
         <h2 id="next-version">发现新版本后，由你决定是否安装</h2>
-        <p>候选包中包含更新提示、后台下载进度和确认后安装的逻辑。RC3 的安装、快捷方式和完整升级链路还在验收，暂不视为已验证完成。</p>
+        <p>可以在桌面端设置中检查新版本，或从官网下载页获取安装包。安装前请保存当前工作并备份重要资料。</p>
         <Link className="info-text-link" href="/download/">查看当前可下载版本 →</Link>
       </section>
     </InfoPage>

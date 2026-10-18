@@ -63,7 +63,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, asLiteralPattern(release.size));
   assert.match(html, asLiteralPattern(release.sha256));
   assert.match(html, asLiteralPattern(release.downloadUrl));
-  assert.match(html, /年度版与永久版 · 同一购买者 2 台设备/);
+  assert.match(html, /1 个学习脉络 \+ 1 个领域免费/);
   assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
   assert.match(html, /永久版永久解锁本地桌面能力/);
   assert.match(html, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
@@ -79,7 +79,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /"offers":\[\{"@type":"Offer","name":"年度版","price":"68"/);
   assert.match(html, /"name":"永久版","price":"199","priceCurrency":"CNY","availability":"https:\/\/schema\.org\/InStock","url":"https:\/\/wzyp\.cn\/item\/vgxadp"/);
   assert.match(html, /年度版与永久版都只覆盖学脉桌面端授权/);
-  assert.match(html, /个人认知库，不会因桌面端授权到期或失效而被锁定/);
+  assert.match(html, /已有内容可继续学习、阅读、整理、导出和备份/);
   assert.match(html, /2590930875/);
   assert.match(html, /添加微信咨询/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
@@ -221,17 +221,23 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(pricing, /购买(?:<!-- -->)?永久版/);
   assert.match(pricing, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
   assert.match(pricing, /桌面端授权和在线服务分开/);
-  assert.match(pricing, /个人认知库，不会因桌面端授权到期或失效而被锁定/);
+  assert.match(pricing, /已有内容可继续学习、阅读、整理、导出和备份/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
   assert.match(changelog, asLiteralPattern(release.version));
-  assert.match(changelog, /候选包中包含更新提示/);
-  assert.match(changelog, /完整升级链路还在验收/);
+  assert.match(changelog, /可以在桌面端设置中检查新版本/);
   assert.doesNotMatch(changelog, /下一版本重点：更新提醒与自动更新/);
 
   for (const html of [download, pricing, changelog]) {
     assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
   }
+  for (const html of [download, pricing]) {
+    assert.match(html, /免费创建并持续使用 1 个学习脉络和 1 个领域/);
+    assert.match(html, /需要新增更多学习脉络或领域时，再选择年度版或永久版/);
+  }
+  assert.match(pricing, /没有体验倒计时/);
+  assert.match(pricing, /模型费用独立计算/);
+  assert.match(pricing, /新增更多脉络和领域，不限数量/);
 });
 
 test("publishes crawl instructions and the public sitemap", async () => {
