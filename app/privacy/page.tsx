@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       eyebrow="学脉 HelpLearn · 数据说明"
       title="资料放在哪里，由你决定"
       description="学脉把学习记录放在你指定的本地文件夹。你可以备份和迁移，也可以在不再使用桌面端时继续保留这些文件。"
-      updated="2026 年 8 月 25 日"
+      updated="2026 年 10 月 21 日"
     >
       <section className="info-section" aria-labelledby="local-data">
         <span className="info-index">学习记录</span>
@@ -35,10 +35,16 @@ export default function PrivacyPage() {
         <p>如果你自行配置 AI 服务，请不要把 API Key 发给他人、写进公开截图或提交到代码仓库。需要更换密钥时，应当在对应服务商后台完成撤销和新建。</p>
       </section>
 
+      <section className="info-section" aria-labelledby="voice-input">
+        <span className="info-index">语音听写</span>
+        <h2 id="voice-input">麦克风录音在本机转为文字</h2>
+        <p>点击麦克风后开始听写，首次使用需联网下载识别模型。语音识别在本机运行，不把录音作为识别请求发送给云端服务。听写文字先进入输入框，你可以修改后再发送；发送后的文字按所选 AI 引擎的请求规则处理。</p>
+      </section>
+
       <section className="info-section info-callout" aria-labelledby="alpha-boundary">
-        <span className="info-index">测试版本</span>
+        <span className="info-index">备份与迁移</span>
         <h2 id="alpha-boundary">重要资料请保留自己的备份</h2>
-        <p>当前提供的是 Windows 预发布版本。我们会继续修复问题，但不把测试软件当成唯一存档位置。对你重要的学习资料，请定期复制或备份到你信任的位置。</p>
+        <p>我们会持续改进 Windows 版。对你重要的学习资料，请定期复制或备份到你信任的位置。</p>
       </section>
     </InfoPage>
   );

@@ -29,9 +29,10 @@ export default function ChangelogPage() {
         <ul className="info-check-list">
           <li>{product.windows.edition}安装包已更新至 {product.windows.version}。</li>
           <li>免费持续使用 1 个学习脉络和 1 个领域，新增更多时再选择年度版或永久版；模型费用独立计算。</li>
-          <li>改善菜单遮挡、下拉选择器与按钮提示；取消升级后保留输入。</li>
-          <li>修复带资料页链接的收藏、稍后复习同步及原文跳转，重启后恢复记录与阅读位置。</li>
-          <li>联网工具接入 Pi，支持搜索、网页阅读与引用；改善理解反馈和概念地图纠错同步。</li>
+          <li>输入区支持实时语音听写，停顿后在原处补标点；手动修改后可继续口述，校对后再发送。</li>
+          <li>思考提示可展开独立讨论，收起后继续正文；只有主动选择才带回正式对话，并保留来源入口。</li>
+          <li>新增讨论缩略导航与回合颜色标记，方便回看；区分模型整理的概念与自己表达的理解依据。</li>
+          <li>提问保留选择题与自由回答，均可跳过；改善 AI 进程退出时的异常处理和诊断。</li>
         </ul>
       </section>
 
@@ -39,6 +40,7 @@ export default function ChangelogPage() {
         <span className="info-index">已知情况</span>
         <h2 id="known-issues">安装时可能看到 Windows 风险提示</h2>
         <p>当前安装包尚未进行代码签名。请从官网或 GitHub Release 下载，并在安装前核对 SHA256。其他使用问题可以通过 QQ 2590930875 或官网微信入口反馈。</p>
+        <p>语音听写首次使用需下载本地模型；英文、专名和数字可能识别有误，请发送前校对。模型整理和理解记录也不代表已经掌握。</p>
       </section>
 
       <section className="info-section info-callout" aria-labelledby="next-version">
