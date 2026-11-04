@@ -12,7 +12,8 @@
     "sync:windows-release": "node scripts/sync-windows-release.mjs",
     "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs tests/windows-release.test.mjs",
-    "lint": "eslint app tests"
+    "lint": "eslint app tests",
+    "images:optimize": "node scripts/optimize-screenshots.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -27,7 +28,8 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "4.2.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "sharp": "0.34.5"
   },
   "type": "module"
 }

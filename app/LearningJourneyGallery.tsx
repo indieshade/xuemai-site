@@ -1,4 +1,4 @@
-import { siteAsset } from "./site-path";
+import ProductScreenshot from "./ProductScreenshot";
 
 const views = [
   {
@@ -51,7 +51,7 @@ export default function LearningJourneyGallery() {
       <div className="learning-journey-stage">
         {views.map((view) => (
           <div className="learning-journey-slide" data-view={view.id} key={view.id}>
-            <img alt={view.alt} decoding="async" loading="eager" src={siteAsset(view.image)} />
+            <ProductScreenshot alt={view.alt} src={view.image} />
           </div>
         ))}
       </div>

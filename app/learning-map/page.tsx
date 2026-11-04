@@ -1,3 +1,4 @@
+import ProductScreenshot from "../ProductScreenshot";
 import type { Metadata } from "next";
 import Link from "next/link";
 import InfoPage from "../InfoPage";
@@ -57,7 +58,7 @@ export default function LearningMapPage() {
           <h2 id="constellation-heading">全景与局部阅读，帮助看清概念之间的联系</h2>
           <p>这个例子围绕《Rules of Play》中的 meaningful play 展开。右侧保留概念的解释、出现位置和相邻概念；中间的连线让学习者知道下一次该回到哪里。</p>
           <figure className="info-screenshot">
-            <img src={siteAsset("/screenshots/learning-journey-concepts.png")} alt="学脉 Concept Constellation 概念关系图，以 meaningful play 为中心展示相邻概念和来源" loading="lazy" decoding="async" />
+            <ProductScreenshot src="/screenshots/learning-journey-concepts.png" alt="学脉 Concept Constellation 概念关系图，以 meaningful play 为中心展示相邻概念和来源"  />
             <figcaption>界面示例：点击概念回到说明、来源和相邻关系；不同版本的布局可能略有变化。</figcaption>
           </figure>
         </section>

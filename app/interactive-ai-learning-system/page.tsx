@@ -1,3 +1,4 @@
+import ProductScreenshot from "../ProductScreenshot";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { product } from "../product-config";
@@ -155,7 +156,7 @@ export default function InteractiveAiLearningSystemPage() {
             <Link className="guide-link" href="/#how">查看产品如何辅助学习 <span aria-hidden="true">↓</span></Link>
           </div>
           <figure>
-            <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉根据学习者回答推进《国富论》学习对话的界面" />
+            <ProductScreenshot src="/screenshots/learning-dialogue.png" alt="学脉根据学习者回答推进《国富论》学习对话的界面"  />
             <figcaption>示意界面：对话、学习目标与已经形成的理解在同一处继续。</figcaption>
           </figure>
         </section>

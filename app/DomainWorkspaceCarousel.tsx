@@ -1,4 +1,4 @@
-import { siteAsset } from "./site-path";
+import ProductScreenshot from "./ProductScreenshot";
 
 const slides = [
   {
@@ -60,13 +60,7 @@ export default function DomainWorkspaceCarousel({ className = "" }: DomainWorksp
       <div className="domain-carousel-stage">
         {slides.map((slide) => (
           <div className="domain-carousel-slide" data-view={slide.id} key={slide.id}>
-            <img
-              alt={slide.alt}
-              decoding="sync"
-              fetchPriority="high"
-              loading="eager"
-              src={siteAsset(slide.image)}
-            />
+            <ProductScreenshot alt={slide.alt} src={slide.image} />
           </div>
         ))}
         <div className="domain-carousel-stage-nav" aria-label="图片切换">

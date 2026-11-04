@@ -1,3 +1,4 @@
+import ProductScreenshot from "../ProductScreenshot";
 import type { Metadata } from "next";
 import Link from "next/link";
 import InfoPage from "../InfoPage";
@@ -57,7 +58,7 @@ export default function LearnFromMaterialsPage() {
           <h2 id="dialogue-heading">材料、对话与当前问题留在一起</h2>
           <p>下面这段对话从《Rules of Play》的迭代设计展开。学习者没有停在“第二章讲了什么”，而是继续问这套方法为什么必须放进制作过程检验。</p>
           <figure className="info-screenshot">
-            <img src={siteAsset("/screenshots/learning-journey-dialogue.png")} alt="学脉桌面端围绕 Rules of Play 学习材料展开讨论的界面" loading="lazy" decoding="async" />
+            <ProductScreenshot src="/screenshots/learning-journey-dialogue.png" alt="学脉桌面端围绕 Rules of Play 学习材料展开讨论的界面"  />
             <figcaption>材料中的原文、当下的讨论和下一步输入在同一条学习旅程中。</figcaption>
           </figure>
         </section>

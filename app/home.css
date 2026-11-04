@@ -252,7 +252,7 @@
 .learning-journey-gallery { overflow: hidden; margin: 54px 0 0; border: 1px solid rgba(235, 224, 204, 0.13); border-radius: 23px; background: #0b0d0c; box-shadow: 0 35px 90px rgba(0, 0, 0, 0.3); }
 .learning-journey-input { position: absolute; width: 1px; height: 1px; margin: -1px; clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
 .learning-journey-stage { position: relative; min-height: 0; aspect-ratio: 1800 / 1150; background: #090b0a; }
-.learning-journey-slide { position: absolute; inset: 0; visibility: hidden; opacity: 0; pointer-events: none; }
+.learning-journey-slide { position: absolute; inset: 0; display: none; visibility: hidden; opacity: 0; pointer-events: none; }
 .learning-journey-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .learning-journey-caption { border-top: 1px solid rgba(235, 224, 204, 0.1); }
 .learning-journey-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; padding: 1px; background: rgba(235, 224, 204, 0.1); }
@@ -265,7 +265,7 @@
 #learning-journey-dialogue:checked ~ .learning-journey-stage .learning-journey-slide[data-view="dialogue"],
 #learning-journey-map:checked ~ .learning-journey-stage .learning-journey-slide[data-view="map"],
 #learning-journey-concepts:checked ~ .learning-journey-stage .learning-journey-slide[data-view="concepts"],
-#learning-journey-records:checked ~ .learning-journey-stage .learning-journey-slide[data-view="records"] { visibility: visible; opacity: 1; }
+#learning-journey-records:checked ~ .learning-journey-stage .learning-journey-slide[data-view="records"] { display: block; visibility: visible; opacity: 1; }
 #learning-journey-dialogue:checked ~ .learning-journey-caption label[for="learning-journey-dialogue"],
 #learning-journey-map:checked ~ .learning-journey-caption label[for="learning-journey-map"],
 #learning-journey-concepts:checked ~ .learning-journey-caption label[for="learning-journey-concepts"],
@@ -304,7 +304,7 @@
 .domain-carousel-header b { display: none; color: var(--orange-light); font-size: 18px; font-weight: 500; }
 .domain-carousel-stage { position: relative; z-index: 0; min-height: 0; aspect-ratio: 2193 / 1386; background: #090b0a; }
 .domain-carousel-stage::after { position: absolute; z-index: 2; inset: 0; border: 1px solid rgba(235, 224, 204, 0.04); content: ""; pointer-events: none; }
-.domain-carousel-slide { position: absolute; inset: 0; visibility: hidden; opacity: 0; pointer-events: none; }
+.domain-carousel-slide { position: absolute; inset: 0; display: none; visibility: hidden; opacity: 0; pointer-events: none; }
 .domain-carousel-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .domain-carousel-stage-nav { position: absolute; z-index: 3; right: 18px; bottom: 18px; left: 18px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
 .domain-carousel-arrow { display: none; width: 48px; height: 48px; place-items: center; border: 1px solid rgba(235, 224, 204, 0.2); border-radius: 12px; color: var(--cream); background: rgba(9, 12, 10, 0.84); box-shadow: 0 9px 28px rgba(0, 0, 0, 0.28); cursor: pointer; font: inherit; font-size: 22px; line-height: 1; pointer-events: auto; transition: color 150ms ease, background 150ms ease, border-color 150ms ease; }
@@ -327,7 +327,7 @@
 #domain-workspace-records:checked ~ .domain-carousel-header b[data-view="records"] { display: inline; }
 #domain-workspace-dialogue:checked ~ .domain-carousel-stage .domain-carousel-slide[data-view="dialogue"],
 #domain-workspace-map:checked ~ .domain-carousel-stage .domain-carousel-slide[data-view="map"],
-#domain-workspace-records:checked ~ .domain-carousel-stage .domain-carousel-slide[data-view="records"] { z-index: 1; visibility: visible; opacity: 1; }
+#domain-workspace-records:checked ~ .domain-carousel-stage .domain-carousel-slide[data-view="records"] { display: block; z-index: 1; visibility: visible; opacity: 1; }
 #domain-workspace-dialogue:checked ~ .domain-carousel-stage .domain-carousel-arrow[data-view="dialogue"],
 #domain-workspace-map:checked ~ .domain-carousel-stage .domain-carousel-arrow[data-view="map"],
 #domain-workspace-records:checked ~ .domain-carousel-stage .domain-carousel-arrow[data-view="records"] { display: grid; }

@@ -1,3 +1,4 @@
+import ProductScreenshot from "../ProductScreenshot";
 import { siteAsset } from "../site-path";
 import { product } from "../product-config";
 
@@ -20,7 +21,7 @@ export default function Poster() {
         </div>
         <div className="poster-window">
           <div className="poster-window-bar"><span><img src={siteAsset("/xuemai-icon.png")} alt="" />学脉</span><small>学习阶段 3 / 4 · 尝试应用</small><i>● AI 可用</i></div>
-          <img src={siteAsset("/screenshots/learning-dialogue.png")} alt="学脉学习界面" />
+          <ProductScreenshot src="/screenshots/learning-dialogue.png" alt="学脉学习界面"  />
         </div>
         <div className="poster-features"><span>领域与学习旅程</span><span>资料伴读与摘录</span><span>个人认知库</span><span>跨 Agent 记录</span></div>
         <footer className="poster-footer"><span>Indie Shade Product · Created by 影下独作</span><strong>Windows 版 · QQ 2590930875</strong></footer>

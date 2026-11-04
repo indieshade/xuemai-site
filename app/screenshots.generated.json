@@ -1,0 +1,161 @@
+{
+  "/screenshots/learning-home.png": {
+    "width": 1802,
+    "height": 1153,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/learning-home-640-e53376625b.webp",
+        "bytes": 77184
+      },
+      {
+        "width": 1802,
+        "src": "/screenshots/optimized/learning-home-1802-26abcc010c.webp",
+        "bytes": 277296
+      }
+    ]
+  },
+  "/screenshots/value-compass.png": {
+    "width": 1360,
+    "height": 1040,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/value-compass-640-58d50b287f.webp",
+        "bytes": 78622
+      },
+      {
+        "width": 1360,
+        "src": "/screenshots/optimized/value-compass-1360-4fbb42ddd7.webp",
+        "bytes": 106490
+      }
+    ]
+  },
+  "/screenshots/learning-journey-dialogue.png": {
+    "width": 1802,
+    "height": 1153,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/learning-journey-dialogue-640-378b6018dd.webp",
+        "bytes": 76544
+      },
+      {
+        "width": 1802,
+        "src": "/screenshots/optimized/learning-journey-dialogue-1802-37ba1220f2.webp",
+        "bytes": 206568
+      }
+    ]
+  },
+  "/screenshots/learning-journey-map.png": {
+    "width": 1802,
+    "height": 1153,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/learning-journey-map-640-62b793f33f.webp",
+        "bytes": 72692
+      },
+      {
+        "width": 1280,
+        "src": "/screenshots/optimized/learning-journey-map-1280-4c1d068d32.webp",
+        "bytes": 232424
+      },
+      {
+        "width": 1802,
+        "src": "/screenshots/optimized/learning-journey-map-1802-6956ee6d0f.webp",
+        "bytes": 294664
+      }
+    ]
+  },
+  "/screenshots/learning-journey-concepts.png": {
+    "width": 1802,
+    "height": 1153,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/learning-journey-concepts-640-23f7365a8c.webp",
+        "bytes": 87202
+      },
+      {
+        "width": 1802,
+        "src": "/screenshots/optimized/learning-journey-concepts-1802-b29258adb8.webp",
+        "bytes": 154614
+      }
+    ]
+  },
+  "/screenshots/domain-records.png": {
+    "width": 2199,
+    "height": 1388,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/domain-records-640-7463cd91f7.webp",
+        "bytes": 47230
+      },
+      {
+        "width": 2199,
+        "src": "/screenshots/optimized/domain-records-2199-929d0c9aa4.webp",
+        "bytes": 110870
+      }
+    ]
+  },
+  "/screenshots/domain-workspace-rc3-safe.png": {
+    "width": 1583,
+    "height": 1048,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/domain-workspace-rc3-safe-640-a94d25d41b.webp",
+        "bytes": 36402
+      },
+      {
+        "width": 1583,
+        "src": "/screenshots/optimized/domain-workspace-rc3-safe-1583-372cba6c03.webp",
+        "bytes": 49854
+      }
+    ]
+  },
+  "/screenshots/domain-cognitive-map.png": {
+    "width": 2193,
+    "height": 1386,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/domain-cognitive-map-640-4512b47768.webp",
+        "bytes": 108848
+      },
+      {
+        "width": 1280,
+        "src": "/screenshots/optimized/domain-cognitive-map-1280-22c09b7756.webp",
+        "bytes": 419728
+      },
+      {
+        "width": 2193,
+        "src": "/screenshots/optimized/domain-cognitive-map-2193-ba075351f9.webp",
+        "bytes": 576014
+      }
+    ]
+  },
+  "/screenshots/learning-dialogue.png": {
+    "width": 2560,
+    "height": 1439,
+    "variants": [
+      {
+        "width": 640,
+        "src": "/screenshots/optimized/learning-dialogue-640-b3fbb02b34.webp",
+        "bytes": 63456
+      },
+      {
+        "width": 1280,
+        "src": "/screenshots/optimized/learning-dialogue-1280-2a278b7a8b.webp",
+        "bytes": 194538
+      },
+      {
+        "width": 2560,
+        "src": "/screenshots/optimized/learning-dialogue-2560-1c5e4d120c.webp",
+        "bytes": 359358
+      }
+    ]
+  }
+}

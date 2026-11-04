@@ -37,19 +37,19 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /学习系统。/);
   assert.doesNotMatch(html, /学脉：AI交互式/);
   assert.match(html, /在学脉，围绕一本书、一份资料或一个问题展开的讨论/);
-  assert.match(html, /screenshots\/learning-home\.png/);
+  assert.match(html, /screenshots\/optimized\/learning-home-[\d]+-[a-f0-9]+\.webp/);
   assert.match(html, /下载学脉桌面端/);
   assert.match(html, /免费安装 HelpLearn Skill/);
   assert.match(html, /围绕一个话题或资料继续学习，形成自己的认知和思考/);
   assert.match(html, /对话、学习地图、概念关系与资料记录会留在一起/);
-  assert.match(html, /learning-journey-dialogue\.png/);
-  assert.match(html, /learning-journey-map\.png/);
-  assert.match(html, /learning-journey-concepts\.png/);
+  assert.match(html, /learning-journey-dialogue-[\d]+-[a-f0-9]+\.webp/);
+  assert.match(html, /learning-journey-map-[\d]+-[a-f0-9]+\.webp/);
+  assert.match(html, /learning-journey-concepts-[\d]+-[a-f0-9]+\.webp/);
   assert.match(html, /资料与记录/);
   assert.doesNotMatch(html, /对话结束了，学习还可以继续/);
   assert.match(html, /找到值得持续探索的方向/);
   assert.match(html, /围绕领域持续构建理解/);
-  assert.match(html, /domain-workspace-rc3-safe\.png/);
+  assert.match(html, /domain-workspace-rc3-safe-[\d]+-[a-f0-9]+\.webp/);
   assert.match(html, /从一个具体问题开始，在同一条学习脉络里继续讨论/);
   assert.match(html, /认知地图/);
   assert.match(html, /领域记录/);
@@ -93,7 +93,7 @@ test("renders the domain workspace page", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /把相关的学习，放回同一个问题里/);
-  assert.match(html, /domain-workspace-rc3-safe\.png/);
+  assert.match(html, /domain-workspace-rc3-safe-[\d]+-[a-f0-9]+\.webp/);
   assert.match(html, /选择领域工作台展示界面/);
   assert.match(html, /查看下一张界面/);
   assert.match(html, /产品研究与决策/);
@@ -112,8 +112,8 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.match(carousel, /domain-workspace-rc3-safe\.png/);
   assert.match(carousel, /domain-cognitive-map\.png/);
   assert.match(carousel, /domain-records\.png/);
-  assert.match(carousel, /loading="eager"/);
-  assert.match(carousel, /fetchPriority="high"/);
+  assert.match(carousel, /ProductScreenshot/);
+  assert.doesNotMatch(carousel, /fetchPriority="high"/);
   assert.match(carousel, /type="radio"/);
   assert.match(carousel, /domain-workspace-map/);
   assert.match(carousel, /htmlFor/);
@@ -134,7 +134,7 @@ test("shows the four concrete views of one learning journey", async () => {
   assert.match(gallery, /概念关系/);
   assert.match(gallery, /资料与记录/);
   assert.match(gallery, /type="radio"/);
-  assert.match(gallery, /loading="eager"/);
+  assert.match(gallery, /ProductScreenshot/);
   assert.ok(dialogueImage.size > 500_000);
   assert.ok(mapImage.size > 500_000);
   assert.ok(conceptsImage.size > 300_000);
@@ -193,10 +193,10 @@ test("renders brand and learning resources for concrete search questions", async
   assert.match(brand, /FAQPage/);
   assert.match(brand, /默认保存在你指定的本地文件夹/);
   assert.match(materials, /怎样用 AI 学一本书或一份 PDF？/);
-  assert.match(materials, /learning-journey-dialogue\.png/);
+  assert.match(materials, /learning-journey-dialogue-[\d]+-[a-f0-9]+\.webp/);
   assert.match(materials, /别急着一轮问完/);
   assert.match(map, /学习地图和概念关系有什么用？/);
-  assert.match(map, /learning-journey-concepts\.png/);
+  assert.match(map, /learning-journey-concepts-[\d]+-[a-f0-9]+\.webp/);
   assert.match(map, /地图给的是入口，不是标准答案/);
   assert.match(map, /领域工作台/);
 });
@@ -375,3 +375,28 @@ test("shows the 30-day offer and current learning interactions", async () => {
   assert.match(home, /只有主动选择带回/);
   assert.doesNotMatch(home, /screenshots\/interest-compass/);
  });
+
+test("prioritizes only the hero and serves bounded responsive screenshots", async () => {
+  const html = await (await render()).text();
+  const screenshots = [...html.matchAll(/<img\b[^>]*src="[^"]*\/screenshots\/optimized\/[^>]+>/g)].map(m => m[0]);
+  assert.equal(screenshots.length, 9);
+  assert.equal(screenshots.filter(tag => /fetchPriority="high"/i.test(tag)).length, 1);
+  for (const tag of screenshots) {
+    assert.match(tag, /srcSet=/i);
+    assert.match(tag, /sizes=/);
+    assert.match(tag, /width="\d+"/);
+    assert.match(tag, /height="\d+"/);
+    assert.match(tag, /decoding="async"/);
+    assert.match(tag, /loading="(?:lazy|eager)"/);
+    if (!tag.includes('learning-home-')) assert.match(tag, /loading="lazy"/);
+  }
+  const manifest = JSON.parse(await readSourceFile('app/screenshots.generated.json'));
+  for (const [original, image] of Object.entries(manifest)) {
+    for (const variant of image.variants) {
+      const asset = await stat(path.join(projectRoot, 'out', variant.src));
+      assert.equal(asset.size, variant.bytes);
+    }
+    const originalFile = await stat(path.join(projectRoot, 'public', original));
+    assert.ok(image.variants.at(-1).bytes < originalFile.size * 0.65, original);
+  }
+});

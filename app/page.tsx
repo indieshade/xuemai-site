@@ -1,3 +1,4 @@
+import ProductScreenshot from "./ProductScreenshot";
 import Link from "next/link";
 import ContactCard from "./ContactCard";
 import DomainWorkspaceCarousel from "./DomainWorkspaceCarousel";
@@ -25,7 +26,7 @@ export default function Home() {
           <div className="home-hero-notes"><span>{product.windows.label}</span><span>1 个学习脉络 + 1 个领域免费</span><span>Skill 可单独使用</span></div>
         </div>
         <div className="home-screenshot-frame">
-          <img src={siteAsset("/screenshots/learning-home.png")} alt="学脉桌面端首页，展示领域、学习旅程和复习内容" />
+          <ProductScreenshot src="/screenshots/learning-home.png" sizes="(max-width: 820px) calc(100vw - 40px), (max-width: 1599px) 600px, 736px" alt="学脉桌面端首页，展示领域、学习旅程和复习内容"  priority />
         </div>
       </section>
 
@@ -39,7 +40,7 @@ export default function Home() {
       </section>
 
       <section className="home-section home-start">
-        <div className="home-start-visual"><img src={siteAsset("/screenshots/value-compass.png")} alt="价值罗盘界面示例：选择传播学、叙事学等方向，展开长期命题与学习切口" /></div>
+        <div className="home-start-visual"><ProductScreenshot src="/screenshots/value-compass.png" sizes="(max-width: 820px) calc(100vw - 40px), 560px" alt="价值罗盘界面示例：选择传播学、叙事学等方向，展开长期命题与学习切口"  /></div>
         <div className="home-section-copy">
           <span className="home-section-label">价值罗盘</span>
           <h2>找到值得持续探索的方向</h2>
