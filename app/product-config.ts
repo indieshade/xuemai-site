@@ -20,6 +20,8 @@ export const product = {
     {
       id: "monthly",
       name: "30 天版",
+      duration: "首次激活起 30 天",
+      devices: "1 台设备",
       price: "¥9.9",
       purchaseUrl: "https://wzyp.cn/item/kuzroo",
       availability: "可购买" as const,
@@ -30,6 +32,8 @@ export const product = {
     {
       id: "annual",
       name: "年度版",
+      duration: "首次激活起 365 天",
+      devices: "同一购买者 · 2 台设备",
       price: "¥68",
       purchaseUrl: "https://wzyp.cn/item/jdzmo2",
       availability: "可购买" as const,
@@ -40,6 +44,8 @@ export const product = {
     {
       id: "permanent",
       name: "永久版",
+      duration: "永久使用",
+      devices: "同一购买者 · 2 台设备",
       price: "¥199",
       purchaseUrl: "https://wzyp.cn/item/vgxadp",
       availability: "可购买" as const,

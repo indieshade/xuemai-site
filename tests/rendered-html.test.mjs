@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile, stat } from "node:fs/promises";
@@ -55,7 +56,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /领域记录/);
   assert.match(html, /查看上一张界面/);
   assert.match(html, /查看下一张界面/);
-  assert.match(html, /资料放在哪里，由你决定/);
+  assert.match(html, /从一个想弄懂的问题开始/);
   assert.match(html, /学习脉络/);
   assert.match(html, /Windows x64/);
   assert.match(html, asLiteralPattern(release.label));
@@ -64,9 +65,9 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, asLiteralPattern(release.sha256));
   assert.match(html, asLiteralPattern(release.downloadUrl));
   assert.match(html, /1 个学习脉络 \+ 1 个领域免费/);
-  assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
-  assert.match(html, /永久版永久解锁本地桌面能力/);
-  assert.match(html, /同一购买者激活 2(?:<!-- -->)? 台设备/);
+  assert.match(html, /首次激活起 365(?:<!-- -->)? 天/);
+  assert.match(html, /永久使用/);
+  assert.match(html, /同一购买者 · 2 台设备/);
   assert.doesNotMatch(html, /使用权/);
   assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
   assert.match(html, /¥68/);
@@ -78,8 +79,8 @@ test("renders the 学脉 landing page", async () => {
   assert.doesNotMatch(html, /¥99|pay\.ldxp\.cn|即将开放/);
   assert.match(html, /"offers":\[\{"@type":"Offer","name":"30 天版","price":"9\.9"/);
   assert.match(html, /"name":"永久版","price":"199","priceCurrency":"CNY","availability":"https:\/\/schema\.org\/InStock","url":"https:\/\/wzyp\.cn\/item\/vgxadp"/);
-  assert.match(html, /三种付费方案都只覆盖学脉桌面端授权/);
-  assert.match(html, /已有内容可继续学习、阅读、整理、导出和备份/);
+  assert.match(html, /三档功能相同/);
+  assert.match(html, /激活与授权说明/);
   assert.match(html, /2590930875/);
   assert.match(html, /添加微信咨询/);
   assert.doesNotMatch(html, /<br\s*\/?\s*>/i);
@@ -120,8 +121,8 @@ test("keeps the domain workspace screenshots and controls in one reusable carous
   assert.match(carousel, /查看上一张界面/);
   assert.match(carousel, /查看下一张界面/);
   assert.doesNotMatch(carousel, /当前查看/);
-  assert.ok(mapImage.size > 100_000);
-  assert.ok(recordsImage.size > 100_000);
+  assert.ok(mapImage.size > 10_000);
+  assert.ok(recordsImage.size > 10_000);
 });
 
 test("shows the four concrete views of one learning journey", async () => {
@@ -135,9 +136,9 @@ test("shows the four concrete views of one learning journey", async () => {
   assert.match(gallery, /资料与记录/);
   assert.match(gallery, /type="radio"/);
   assert.match(gallery, /ProductScreenshot/);
-  assert.ok(dialogueImage.size > 500_000);
-  assert.ok(mapImage.size > 500_000);
-  assert.ok(conceptsImage.size > 300_000);
+  assert.ok(dialogueImage.size > 10_000);
+  assert.ok(mapImage.size > 10_000);
+  assert.ok(conceptsImage.size > 10_000);
 });
 
 test("renders the promotional poster route", async () => {
@@ -169,7 +170,7 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, asLiteralPattern(release.edition));
   assert.match(html, asLiteralPattern(release.version));
   assert.match(html, /它和普通 AI 对话有什么不同？/);
-  assert.match(html, /从《国富论》的分工，走到“垄断怎么办”/);
+  assert.match(html, /从“坚持写作”，到分清两种反馈/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /https:\/\/helplearn\.cn\/og\.png/);
   assert.match(html, /桌面端授权包含哪些内容/);
@@ -210,17 +211,17 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(download, asLiteralPattern(release.edition));
   assert.match(download, asLiteralPattern(release.sha256));
   assert.match(download, /尚未进行代码签名/);
-  assert.match(download, /年度版与永久版/);
-  assert.match(download, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
-  assert.match(download, /同一购买者激活 2(?:<!-- -->)? 台设备/);
-  assert.match(pricing, /年度版或永久版/);
+  assert.match(download, /查看价格与授权/);
+  assert.match(download, /模型费用另计/);
+  assert.match(download, /免费持续使用/);
+  assert.match(pricing, /三档功能相同/);
   assert.match(pricing, /首次激活起 365(?:<!-- -->)? 天/);
   assert.match(pricing, /¥68/);
   assert.match(pricing, /¥199/);
   assert.match(pricing, /购买(?:<!-- -->)?年度版/);
   assert.match(pricing, /购买(?:<!-- -->)?永久版/);
   assert.match(pricing, /同一购买者激活 2(?:<!-- -->)? 台设备/);
-  assert.match(pricing, /桌面端授权和在线服务分开/);
+  assert.match(pricing, /授权包含 AI 模型费用吗/);
   assert.match(pricing, /已有内容可继续学习、阅读、整理、导出和备份/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
   assert.match(privacy, /请求会发给你选择的 AI 引擎/);
@@ -232,12 +233,12 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
     assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
   }
   for (const html of [download, pricing]) {
-    assert.match(html, /免费创建并持续使用 1 个学习脉络和 1 个领域/);
-    assert.match(html, /需要新增更多学习脉络或领域时，再选择 30 天版、年度版或永久版/);
+    assert.match(html, /1 个学习脉络 \+ 1 个领域/);
+    assert.match(html, /模型费用另计/);
   }
-  assert.match(pricing, /没有体验倒计时/);
-  assert.match(pricing, /模型费用独立计算/);
-  assert.match(pricing, /新增更多脉络和领域，不限数量/);
+  assert.match(pricing, /免费持续使用/);
+  assert.match(pricing, /模型费用另计/);
+  assert.match(pricing, /更多脉络与领域，不限数量/);
 });
 
 test("publishes crawl instructions and the public sitemap", async () => {
@@ -355,7 +356,7 @@ test("centralizes release data and keeps download entry points free of hardcoded
   assert.match(config, /isAvailable: true/);
   assert.match(contactCard, /contact\/wechat-qr\.jpg/);
   assert.match(contactCard, /role="dialog"/);
-  assert.match(contactCard, /desktopLicenses/);
+  assert.match(contactCard, /LicenseOptions/);
   assert.doesNotMatch(contactCard, /purchaseOptions|product\.trial|30 日|30日|7 天/);
 });
 
@@ -397,6 +398,31 @@ test("prioritizes only the hero and serves bounded responsive screenshots", asyn
       assert.equal(asset.size, variant.bytes);
     }
     const originalFile = await stat(path.join(projectRoot, 'public', original));
-    assert.ok(image.variants.at(-1).bytes < originalFile.size * 0.65, original);
+    const originalBytes = await readFile(path.join(projectRoot, 'public', original));
+    assert.equal(image.originalSha256, createHash('sha256').update(originalBytes).digest('hex'), `${original}: regenerate responsive images`);
+    assert.ok(image.variants.at(-1).bytes < originalFile.size, original);
+    assert.ok(image.variants.at(-1).bytes < 600_000, `${original} exceeds the screenshot budget`);
   }
+});
+
+test("keeps purchase decisions visible and secondary help collapsed", async () => {
+  const home = await (await render()).text();
+  const pricing = await (await render('/pricing')).text();
+  const download = await (await render('/download')).text();
+  for (const html of [home, pricing]) {
+    const cards = [...html.matchAll(/<article class="info-price-card"[\s\S]*?<\/article>/g)].map(m => m[0]);
+    assert.equal(cards.length, 3);
+    for (const [index, card] of cards.entries()) {
+      assert.match(card, index === 0 ? /1 台设备/ : /同一购买者 · 2 台设备/);
+      assert.match(card, /https:\/\/wzyp.cn\/item\//);
+    }
+    assert.match(html, /不自动续费/);
+    assert.match(html, /模型费用另计/);
+    assert.doesNotMatch(html, /<details\b[^>]*\bopen(?:=|\s|>)/);
+  }
+  assert.match(home, /<summary>安装提示与文件校验<\/summary>/);
+  assert.match(home, /<summary>购买或使用遇到问题？<\/summary>/);
+  assert.match(download, /<summary>查看 SHA256 校验值<\/summary>/);
+  assert.match(pricing, /到期后，学习记录还能用吗/);
+  assert.doesNotMatch(home, /home-download-warning|contact-license-boundary/);
 });

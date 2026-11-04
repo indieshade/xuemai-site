@@ -56,9 +56,9 @@ export default function LearnFromMaterialsPage() {
         <section className="info-section" aria-labelledby="dialogue-heading">
           <span className="info-index">真实界面</span>
           <h2 id="dialogue-heading">材料、对话与当前问题留在一起</h2>
-          <p>下面这段对话从《Rules of Play》的迭代设计展开。学习者没有停在“第二章讲了什么”，而是继续问这套方法为什么必须放进制作过程检验。</p>
+          <p>这段示例从持续写作的问题展开。学习者结合阅读笔记，区分“能否按时开始”与“作品是否有效”，再讨论该观察哪些反馈。</p>
           <figure className="info-screenshot">
-            <ProductScreenshot src="/screenshots/learning-journey-dialogue.png" alt="学脉桌面端围绕 Rules of Play 学习材料展开讨论的界面"  />
+            <ProductScreenshot src="/screenshots/learning-journey-dialogue.png" alt="学脉桌面端围绕习惯、反馈与复盘展开讨论的界面示例"  />
             <figcaption>材料中的原文、当下的讨论和下一步输入在同一条学习旅程中。</figcaption>
           </figure>
         </section>

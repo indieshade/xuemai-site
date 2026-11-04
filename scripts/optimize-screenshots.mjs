@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile, unlink } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 // Keep original screenshots for editing; publish responsive, lossless WebP assets.
-const names = ['learning-home', 'value-compass', 'learning-journey-dialogue', 'learning-journey-map', 'learning-journey-concepts', 'domain-records', 'domain-workspace-rc3-safe', 'domain-cognitive-map', 'learning-dialogue'];
+const names = ['learning-home', 'value-compass', 'learning-journey-dialogue', 'learning-journey-map', 'learning-journey-records', 'learning-journey-concepts', 'domain-records', 'domain-workspace-rc3-safe', 'domain-cognitive-map', 'learning-dialogue'];
 await mkdir('public/screenshots/optimized', { recursive: true });
 const manifest = {};
 for (const name of names) {
@@ -21,7 +21,7 @@ for (const name of names) {
   // smaller rendition when a sharper, larger one costs fewer bytes.
   const efficient = variants.filter((v, i) => !variants.slice(i + 1).some(larger => larger.bytes <= v.bytes));
   for (const variant of variants.filter(v => !efficient.includes(v))) await unlink(`public${variant.src}`);
-  manifest[`/screenshots/${name}.png`] = { width, height, variants: efficient };
+  manifest[`/screenshots/${name}.png`] = { width, height, originalSha256: createHash('sha256').update(input).digest('hex'), variants: efficient };
   console.log(`${name}: ${input.length} → ${variants.at(-1).bytes} bytes (full size)`);
 }
 await writeFile('app/screenshots.generated.json', JSON.stringify(manifest, null, 2) + '\n');

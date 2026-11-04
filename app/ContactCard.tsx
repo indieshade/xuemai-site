@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { product } from "./product-config";
+import LicenseOptions from "./LicenseOptions";
+import Link from "next/link";
 import { siteAsset } from "./site-path";
 
 async function copyText(value: string) {
@@ -23,7 +25,7 @@ async function copyText(value: string) {
 }
 
 export default function ContactCard() {
-  const [copied, setCopied] = useState<"qq" | "hash" | null>(null);
+  const [copied, setCopied] = useState<"qq" | null>(null);
   const [failed, setFailed] = useState(false);
   const [wechatOpen, setWechatOpen] = useState(false);
 
@@ -38,7 +40,7 @@ export default function ContactCard() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [wechatOpen]);
 
-  const handleCopy = async (kind: "qq" | "hash", value: string) => {
+  const handleCopy = async (kind: "qq", value: string) => {
     try {
       await copyText(value);
       setCopied(kind);
@@ -51,24 +53,14 @@ export default function ContactCard() {
 
   return (
     <div className="contact-card" id="contact">
-      <span className="contact-kicker">激活与反馈</span>
-      <h3>选择桌面端授权</h3>
-      <p>
-        {product.licensing.monthlyTerm}；{product.licensing.annualTerm}，{product.licensing.permanentTerm}。{product.licensing.deviceLimit}。{product.licensing.desktopOnly}
-      </p>
-      <div className="purchase-options" aria-label="桌面端授权方案">
-        {product.desktopLicenses.map((option) => (
-          <div className="purchase-state" key={option.id}>
-            <span>{option.price ? <small>{option.price}</small> : null}{option.name}</span>
-            {option.isAvailable && option.purchaseUrl ? (
-              <a href={option.purchaseUrl} target="_blank" rel="noreferrer">购买{option.name}</a>
-            ) : (
-              <a href={`https://qm.qq.com/cgi-bin/qm/qr?k=${product.feedbackQQ}`} target="_blank" rel="noreferrer">{option.availability}</a>
-            )}
-          </div>
-        ))}
-      </div>
-      <p className="contact-license-boundary">{product.licensing.futureServices} {product.licensing.independentAccess}</p>
+      <span className="contact-kicker">解锁更多学习空间</span>
+      <h3>多个方向，一起学下去</h3>
+      <p>不限学习脉络与领域数量，三档功能相同。</p>
+      <LicenseOptions />
+      <p className="purchase-note">不自动续费 · 自备 AI 引擎，模型费用另计</p>
+      <Link className="info-text-link" href="/pricing/">激活与授权说明 →</Link>
+      <details className="purchase-details">
+        <summary>购买或使用遇到问题？</summary>
       <button className="contact-copy" type="button" onClick={() => handleCopy("qq", product.feedbackQQ)}>
         <span><small>QQ</small>{product.feedbackQQ}</span>
         <strong>{copied === "qq" ? "已复制 ✓" : failed ? "请手动复制" : "复制号码"}</strong>
@@ -82,15 +74,9 @@ export default function ContactCard() {
           ? "已复制到剪贴板，现在可以打开 QQ 添加好友。"
           : failed
             ? "浏览器未允许自动复制，请选中号码手动复制。"
-            : "激活、使用反馈和版本通知可通过 QQ 或微信联系。"}
+            : ""}
       </div>
-      <div className="download-hash">
-        <span>SHA256</span>
-        <code>{product.windows.sha256}</code>
-        <button type="button" onClick={() => handleCopy("hash", product.windows.sha256)}>
-          {copied === "hash" ? "已复制 ✓" : "复制校验值"}
-        </button>
-      </div>
+      </details>
       {wechatOpen && typeof document !== "undefined" ? createPortal(
         <div className="contact-modal" role="presentation">
           <button className="contact-modal-backdrop" type="button" aria-label="关闭微信二维码" onClick={() => setWechatOpen(false)} />

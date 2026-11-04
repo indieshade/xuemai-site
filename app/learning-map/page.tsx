@@ -56,9 +56,9 @@ export default function LearningMapPage() {
         <section className="info-section" aria-labelledby="constellation-heading">
           <span className="info-index">真实界面</span>
           <h2 id="constellation-heading">全景与局部阅读，帮助看清概念之间的联系</h2>
-          <p>这个例子围绕《Rules of Play》中的 meaningful play 展开。右侧保留概念的解释、出现位置和相邻概念；中间的连线让学习者知道下一次该回到哪里。</p>
+          <p>这个界面示例把反馈回路的组成与相关概念放在同一张图里。可以先看整体，再进入区域，逐层查看概念和它们的联系。</p>
           <figure className="info-screenshot">
-            <ProductScreenshot src="/screenshots/learning-journey-concepts.png" alt="学脉 Concept Constellation 概念关系图，以 meaningful play 为中心展示相邻概念和来源"  />
+            <ProductScreenshot src="/screenshots/learning-journey-concepts.png" alt="学脉概念关系图示例，展示习惯回路的组成区域与相关概念"  />
             <figcaption>界面示例：点击概念回到说明、来源和相邻关系；不同版本的布局可能略有变化。</figcaption>
           </figure>
         </section>

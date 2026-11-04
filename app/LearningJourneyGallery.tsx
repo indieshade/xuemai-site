@@ -4,9 +4,9 @@ const views = [
   {
     id: "dialogue",
     label: "对话",
-    note: "围绕《Rules of Play》的一段材料继续追问，不必从头再说一遍。",
+    note: "从“如何坚持写作”开始，区分行动习惯与作品效果。",
     image: "/screenshots/learning-journey-dialogue.png",
-    alt: "学脉桌面端的学习对话界面，围绕 Rules of Play 中的迭代设计展开讨论。",
+    alt: "学脉桌面端的学习对话界面，围绕写作习惯、反馈与复盘展开讨论；内容为演示样例。",
   },
   {
     id: "map",
@@ -20,13 +20,13 @@ const views = [
     label: "概念关系",
     note: "从一个概念回到它的来源、相邻概念和具体使用情境。",
     image: "/screenshots/learning-journey-concepts.png",
-    alt: "学脉桌面端的 Concept Constellation 概念关系图，展示一个概念与相邻概念和资料来源的连接。",
+    alt: "学脉桌面端的分层概念关系图，展示一个概念与相邻概念和资料来源的连接。",
   },
   {
     id: "records",
     label: "资料与记录",
     note: "读过的资料、留下的判断和待继续的问题，都可以回头核对。",
-    image: "/screenshots/domain-records.png",
+    image: "/screenshots/learning-journey-records.png",
     alt: "学脉桌面端的资料与记录界面，展示学习过程中的综合记录。",
   },
 ] as const;

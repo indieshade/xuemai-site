@@ -20,7 +20,7 @@ export default function Poster() {
           <div className="poster-path-node pn-1"><i /><span>兴趣</span></div><div className="poster-path-node pn-2"><i /><span>理解</span></div><div className="poster-path-node pn-3"><i /><span>应用</span></div><div className="poster-path-node pn-4"><i /><span>脉络</span></div>
         </div>
         <div className="poster-window">
-          <div className="poster-window-bar"><span><img src={siteAsset("/xuemai-icon.png")} alt="" />学脉</span><small>学习阶段 3 / 4 · 尝试应用</small><i>● AI 可用</i></div>
+          <div className="poster-window-bar"><span><img src={siteAsset("/xuemai-icon.png")} alt="" />学脉</span><small>对话 · 阅读 · 思考</small><i>界面示例</i></div>
           <ProductScreenshot src="/screenshots/learning-dialogue.png" alt="学脉学习界面"  />
         </div>
         <div className="poster-features"><span>领域与学习旅程</span><span>资料伴读与摘录</span><span>个人认知库</span><span>跨 Agent 记录</span></div>

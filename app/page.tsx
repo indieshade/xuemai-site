@@ -1,5 +1,6 @@
 import ProductScreenshot from "./ProductScreenshot";
 import Link from "next/link";
+import CopyHashButton from "./CopyHashButton";
 import ContactCard from "./ContactCard";
 import DomainWorkspaceCarousel from "./DomainWorkspaceCarousel";
 import LearningJourneyGallery from "./LearningJourneyGallery";
@@ -91,23 +92,21 @@ export default function Home() {
       </section>
 
       <section className="home-final" id="pricing">
-        <div className="home-final-copy">
-          <span className="home-section-label">你的资料</span>
-          <h2>资料放在哪里，由你决定</h2>
-          <p>学习记录默认保存在你指定的本地文件夹，可以备份和迁移。学脉不把你的资料绑在某个模型上；即使不再使用桌面端，数据也不会因此被锁住。</p>
-          <div className="home-facts"><span>本地文件夹</span><span>可备份迁移</span><span>可选择 AI 引擎</span></div>
-          <Link href="/interactive-ai-learning-system/">查看产品与开放组件文档 →</Link>
+        <div className="home-final-copy" id="download">
+          <span className="home-section-label">免费开始</span>
+          <h2>从一个想弄懂的问题开始</h2>
+          <p>1 个学习脉络 + 1 个领域，免费持续使用。</p>
+          <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">免费下载 Windows 版 <span aria-hidden="true">↓</span></a>
+          <p className="download-version">{product.windows.platform} · v{product.windows.version} · {product.windows.size}</p>
+          <p className="purchase-note">连接你自己的 API 或兼容 Agent，即可开始。学习资料保存在本地。</p>
+          {product.windows.prereleaseNote ? <p>{product.windows.prereleaseNote}</p> : null}
+          <details className="purchase-details">
+            <summary>安装提示与文件校验</summary>
+            <p>安装包尚未进行代码签名，Windows 可能提示风险。请从官网下载，并核对下方 SHA256。</p>
+            <div className="download-hash"><code>{product.windows.sha256}</code><CopyHashButton value={product.windows.sha256} /></div>
+          </details>
         </div>
-        <aside className="home-download-panel" id="download">
-          <span>{product.windows.label}</span>
-          <h3>先装起来，从一段对话开始。</h3>
-          {product.windows.prereleaseNote ? <p className="home-prerelease-note">{product.windows.prereleaseNote}</p> : null}
-          <p><strong>先免费使用一个脉络与一个领域。</strong>{product.licensing.expansion}{product.licensing.monthlyTerm}；{product.licensing.annualTerm}，{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
-          <div className="home-download-warning">安装包当前未进行代码签名，Windows 可能会提示风险。请确认下载来源和 SHA256 后再安装。</div>
-          <div className="home-download-meta"><div><span>平台</span><strong>{product.windows.platform}</strong></div><div><span>大小</span><strong>{product.windows.size}</strong></div><div><span>版本</span><strong>{product.windows.version}</strong></div></div>
-          <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>
-          <ContactCard />
-        </aside>
+        <aside className="home-purchase-panel"><ContactCard /></aside>
       </section>
 
       <footer className="home-footer">

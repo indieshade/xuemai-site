@@ -146,18 +146,18 @@ export default function InteractiveAiLearningSystemPage() {
         <section className="guide-section guide-case" aria-labelledby="case-heading">
           <div className="guide-case-copy">
             <span className="guide-index">04 · 一个学习片段</span>
-            <h2 id="case-heading">从《国富论》的分工，走到“垄断怎么办”</h2>
+            <h2 id="case-heading">从“坚持写作”，到分清两种反馈</h2>
             <p>
-              在一次《国富论》学习中，学习者先用“把串行任务拆解成更高效的小任务”解释分工。系统没有重复定义，而是把这个判断接到熟练度、切换成本与工具改进上。
+              这个界面示例从一个实际问题开始：怎样持续写作？先讨论如何降低启动难度，再请学习者区分“按时开始”和“作品效果”。
             </p>
             <p>
-              随后问题从“分工为什么提效”走向“市场范围为什么限制分工”，再走到“政府退场后会不会出现垄断”。一段学习因此不是同一问题的反复回答，而是一条逐步展开的论证链。
+              学习者提出分别记录完成情况、定期回看内容。讨论便沿着这个判断，继续区分及时反馈与定期复盘的作用，形成下一步可以检验的做法。
             </p>
-            <Link className="guide-link" href="/#how">查看产品如何辅助学习 <span aria-hidden="true">↓</span></Link>
+            <Link className="guide-link" href="/#product">查看产品如何辅助学习 <span aria-hidden="true">↓</span></Link>
           </div>
           <figure>
-            <ProductScreenshot src="/screenshots/learning-dialogue.png" alt="学脉根据学习者回答推进《国富论》学习对话的界面"  />
-            <figcaption>示意界面：对话、学习目标与已经形成的理解在同一处继续。</figcaption>
+            <ProductScreenshot src="/screenshots/learning-dialogue.png" alt="学脉围绕学习者的写作习惯问题继续讨论的界面示例"  />
+            <figcaption>当前界面 · 示例对话，不代表学习效果承诺。</figcaption>
           </figure>
         </section>
 
