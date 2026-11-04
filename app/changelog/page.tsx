@@ -23,6 +23,11 @@ export default function ChangelogPage() {
         <a className="home-button-primary" href={product.windows.releaseUrl} target="_blank" rel="noreferrer">查看 GitHub Release <span aria-hidden="true">↗</span></a>
       </section>
 
+      <section className="info-section" aria-labelledby="monthly-launch">
+        <span className="info-index">2026 年 11 月 4 日 · 授权更新</span><h2 id="monthly-launch">新增 ¥9.9／30 天版</h2>
+        <p>首次激活起 30 天，一个激活码绑定 1 台设备，不自动续费。年度版与永久版继续提供；三种方案解锁相同的本地桌面能力，模型费用独立。当前 0.5.1 已支持这种期限授权。</p>
+      </section>
+
       <section className="info-section" aria-labelledby="released">
         <span className="info-index">已发布</span>
         <h2 id="released">{product.windows.version}</h2>

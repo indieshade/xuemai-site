@@ -721,7 +721,7 @@
 .info-license-banner > span { color: var(--green); font-family: var(--font-mono), monospace; font-size: 11px; letter-spacing: 0.1em; }
 .info-license-banner strong { color: var(--cream); font-family: var(--font-serif), Georgia, serif; font-size: clamp(31px, 3.7vw, 50px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.25; }
 .info-license-banner p { margin: 0; color: var(--soft); font-size: 14px; line-height: 1.75; }
-.info-price-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 31px; }
+.info-price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 31px; }
 .info-price-card { display: flex; min-height: 286px; flex-direction: column; align-items: start; padding: 28px; border: 1px solid rgba(235, 224, 204, 0.12); border-radius: 18px; background: rgba(255, 255, 255, 0.02); }
 .info-price-card:nth-child(2) { border-color: rgba(239, 109, 66, 0.3); background: linear-gradient(145deg, rgba(144, 55, 24, 0.13), rgba(255, 255, 255, 0.015)); }
 .info-price-card > span { color: var(--muted); font-size: 13px; }

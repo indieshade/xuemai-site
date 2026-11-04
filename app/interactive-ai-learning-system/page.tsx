@@ -33,7 +33,7 @@ const articleSchema = {
   description,
   inLanguage: "zh-CN",
   datePublished: "2026-08-11",
-  dateModified: "2026-08-23",
+  dateModified: "2026-11-04",
   mainEntityOfPage: `${siteUrl}/interactive-ai-learning-system/`,
   author: { "@type": "Organization", name: "Indie Shade" },
   publisher: { "@type": "Organization", name: "Indie Shade", url: siteUrl },
@@ -83,7 +83,7 @@ export default function InteractiveAiLearningSystemPage() {
             普通聊天工具很适合查一个概念、改一段文字或快速讨论一个想法。但学习常常不是这样结束的：你会理解一部分、误解一部分，再在一个新例子里发现自己并没有真的会用。
           </p>
           <p>
-            学脉把这些回应当成学习过程的一部分。它根据当前状态安排一个合适的动作，再把已经形成的理解保留下来，让下一次学习能接着往前走。
+            学脉把这些回应当成学习过程的一部分。它可以邀请你辨析、复述或应用，允许跳过。思考旁支按需展开，模型整理与用户表达依据分开记录，让下一次学习能接着往前走。
           </p>
         </section>
 
@@ -184,7 +184,7 @@ export default function InteractiveAiLearningSystemPage() {
           </details>
           <details>
             <summary>桌面端授权包含哪些内容？</summary>
-            <p>{product.licensing.freeTier}{product.licensing.expansion}{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.desktopOnly} {product.licensing.futureServices} {product.licensing.independentAccess}</p>
+            <p>{product.licensing.freeTier}{product.licensing.expansion}{product.licensing.monthlyTerm}；{product.licensing.annualTerm}；{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。{product.licensing.desktopOnly} {product.licensing.futureServices} {product.licensing.independentAccess}</p>
           </details>
         </section>
 

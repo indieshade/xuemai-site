@@ -4,7 +4,7 @@ import { siteUrl } from "./site-path";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const homeLastModified = new Date("2026-10-11T00:00:00.000Z");
+  const homeLastModified = new Date("2026-11-04T00:00:00.000Z");
   const resourceLastModified = new Date("2026-09-07T00:00:00.000Z");
   const productLastModified = new Date("2026-08-25T00:00:00.000Z");
 
@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/interactive-ai-learning-system/`,
-      lastModified: productLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.9,
     },
@@ -41,19 +41,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/learning-map/`,
-      lastModified: resourceLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.85,
     },
     {
       url: `${siteUrl}/download/`,
-      lastModified: productLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${siteUrl}/pricing/`,
-      lastModified: productLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -65,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${siteUrl}/changelog/`,
-      lastModified: productLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "weekly",
       priority: 0.7,
     },

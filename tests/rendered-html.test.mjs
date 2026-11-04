@@ -47,7 +47,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /learning-journey-concepts\.png/);
   assert.match(html, /资料与记录/);
   assert.doesNotMatch(html, /对话结束了，学习还可以继续/);
-  assert.match(html, /先聊起来，整理交给学脉/);
+  assert.match(html, /找到值得持续探索的方向/);
   assert.match(html, /围绕领域持续构建理解/);
   assert.match(html, /domain-workspace-rc3-safe\.png/);
   assert.match(html, /从一个具体问题开始，在同一条学习脉络里继续讨论/);
@@ -66,7 +66,7 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /1 个学习脉络 \+ 1 个领域免费/);
   assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
   assert.match(html, /永久版永久解锁本地桌面能力/);
-  assert.match(html, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
+  assert.match(html, /同一购买者激活 2(?:<!-- -->)? 台设备/);
   assert.doesNotMatch(html, /使用权/);
   assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
   assert.match(html, /¥68/);
@@ -76,9 +76,9 @@ test("renders the 学脉 landing page", async () => {
   assert.match(html, /https:\/\/wzyp\.cn\/item\/jdzmo2/);
   assert.match(html, /https:\/\/wzyp\.cn\/item\/vgxadp/);
   assert.doesNotMatch(html, /¥99|pay\.ldxp\.cn|即将开放/);
-  assert.match(html, /"offers":\[\{"@type":"Offer","name":"年度版","price":"68"/);
+  assert.match(html, /"offers":\[\{"@type":"Offer","name":"30 天版","price":"9\.9"/);
   assert.match(html, /"name":"永久版","price":"199","priceCurrency":"CNY","availability":"https:\/\/schema\.org\/InStock","url":"https:\/\/wzyp\.cn\/item\/vgxadp"/);
-  assert.match(html, /年度版与永久版都只覆盖学脉桌面端授权/);
+  assert.match(html, /三种付费方案都只覆盖学脉桌面端授权/);
   assert.match(html, /已有内容可继续学习、阅读、整理、导出和备份/);
   assert.match(html, /2590930875/);
   assert.match(html, /添加微信咨询/);
@@ -179,7 +179,7 @@ test("renders the search-ready interactive learning guide", async () => {
   assert.match(html, /learning-map/);
   assert.match(html, /下载 Windows 版/);
   assert.match(html, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
-  assert.match(html, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
+  assert.match(html, /同一购买者激活 2(?:<!-- -->)? 台设备/);
   assert.doesNotMatch(html, /免费试用|试用期|7(?:<!-- -->)? 天|30(?:<!-- -->)? 日激活码|30日激活码|b2bxj2|Pro/);
 });
 
@@ -212,14 +212,14 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   assert.match(download, /尚未进行代码签名/);
   assert.match(download, /年度版与永久版/);
   assert.match(download, /年度版从首次激活起计算 365(?:<!-- -->)? 天/);
-  assert.match(download, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
+  assert.match(download, /同一购买者激活 2(?:<!-- -->)? 台设备/);
   assert.match(pricing, /年度版或永久版/);
   assert.match(pricing, /首次激活起 365(?:<!-- -->)? 天/);
   assert.match(pricing, /¥68/);
   assert.match(pricing, /¥199/);
   assert.match(pricing, /购买(?:<!-- -->)?年度版/);
   assert.match(pricing, /购买(?:<!-- -->)?永久版/);
-  assert.match(pricing, /同一购买者可激活 2(?:<!-- -->)? 台设备/);
+  assert.match(pricing, /同一购买者激活 2(?:<!-- -->)? 台设备/);
   assert.match(pricing, /桌面端授权和在线服务分开/);
   assert.match(pricing, /已有内容可继续学习、阅读、整理、导出和备份/);
   assert.match(privacy, /默认写入你选择的本地文件夹/);
@@ -233,7 +233,7 @@ test("renders download, pricing, privacy, and changelog as standalone product pa
   }
   for (const html of [download, pricing]) {
     assert.match(html, /免费创建并持续使用 1 个学习脉络和 1 个领域/);
-    assert.match(html, /需要新增更多学习脉络或领域时，再选择年度版或永久版/);
+    assert.match(html, /需要新增更多学习脉络或领域时，再选择 30 天版、年度版或永久版/);
   }
   assert.match(pricing, /没有体验倒计时/);
   assert.match(pricing, /模型费用独立计算/);
@@ -343,7 +343,7 @@ test("centralizes release data and keeps download entry points free of hardcoded
   assert.match(config, /id: "annual"/);
   assert.match(config, /name: "年度版"/);
   assert.match(config, /annualTerm: "年度版从首次激活起计算 365 天"/);
-  assert.match(config, /deviceLimit: "同一购买者可激活 2 台设备"/);
+  assert.match(config, /deviceLimit: "30 天版限 1 台设备；年度版与永久版支持同一购买者激活 2 台设备"/);
   assert.match(config, /id: "permanent"/);
   assert.match(config, /name: "永久版"/);
   assert.match(config, /https:\/\/wzyp\.cn\/item\/jdzmo2/);
@@ -358,3 +358,20 @@ test("centralizes release data and keeps download entry points free of hardcoded
   assert.match(contactCard, /desktopLicenses/);
   assert.doesNotMatch(contactCard, /purchaseOptions|product\.trial|30 日|30日|7 天/);
 });
+
+test("shows the 30-day offer and current learning interactions", async () => {
+  const home = await (await render()).text();
+  const pricing = await (await render('/pricing')).text();
+  for (const html of [home, pricing]) {
+    assert.match(html, /¥9\.9/);
+    assert.match(html, /30 天版/);
+    assert.match(html, /不自动续费/);
+  }
+  assert.match(pricing, /多个激活码不叠加时长/);
+  assert.match(pricing, /https:\/\/wzyp\.cn\/item\/kuzroo/);
+  assert.match(pricing, /30 天版限 1 台设备/);
+  assert.match(home, /价值罗盘/);
+  assert.match(home, /思考旁支/);
+  assert.match(home, /只有主动选择带回/);
+  assert.doesNotMatch(home, /screenshots\/interest-compass/);
+ });

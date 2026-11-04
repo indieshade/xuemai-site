@@ -37,7 +37,7 @@ export default function DownloadPage() {
           <div><dt>平台</dt><dd>{product.windows.platform}</dd></div>
           <div><dt>版本</dt><dd>{product.windows.version}</dd></div>
           <div><dt>文件大小</dt><dd>{product.windows.size}</dd></div>
-          <div><dt>授权</dt><dd>免费版；年度版与永久版可新增更多脉络与领域</dd></div>
+          <div><dt>授权</dt><dd>免费版；30 天版、年度版与永久版可新增更多脉络与领域</dd></div>
         </dl>
         <div className="info-hash-block">
           <div><span>SHA256</span><code>{product.windows.sha256}</code></div>

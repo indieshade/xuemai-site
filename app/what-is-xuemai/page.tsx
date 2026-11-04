@@ -19,7 +19,7 @@ const articleSchema = {
   description,
   inLanguage: "zh-CN",
   datePublished: "2026-09-07",
-  dateModified: "2026-10-11",
+  dateModified: "2026-11-04",
   about: { "@id": `${siteUrl}/#software` },
   mainEntityOfPage: `${siteUrl}/what-is-xuemai/`,
   author: { "@type": "Organization", name: "影下独作", url: siteUrl },
@@ -57,7 +57,7 @@ export default function WhatIsXuemaiPage() {
         eyebrow="学脉 HelpLearn · 产品说明"
         title="学脉是什么？"
         description="学脉（HelpLearn）是一套 AI 交互学习系统。它把围绕一本书、一份 PDF 或一个问题的讨论整理成学习旅程，让你下次能从已经想过的地方继续。"
-        updated="2026 年 10 月 11 日"
+        updated="2026 年 11 月 4 日"
       >
         <section className="info-section" aria-labelledby="name-heading">
           <span className="info-index">产品与官网</span>
@@ -79,6 +79,13 @@ export default function WhatIsXuemaiPage() {
           <h2 id="workspace-heading">相关旅程可以放进同一个领域</h2>
           <p>一本书讲不完一个领域。你可能从产品研究里的幸存者偏差开始，后来又读到实验设计和市场判断。领域工作台把这些旅程放在一起，方便比较、补充，或者从旧问题接着问。</p>
           <Link className="info-text-link" href="/domains/">查看领域工作台的具体样子 →</Link>
+        </section>
+
+        <section className="info-section" aria-labelledby="understanding-heading">
+          <span className="info-index">自己形成理解</span><h2 id="understanding-heading">方向、思考与记录，可以连起来</h2>
+          <p>价值罗盘帮助你从学科或当前困惑中选择一个长期方向，查看具体学习价值、案例与起步方式，再接到领域和学习脉络。</p>
+          <p>对话中的思考提示按需展开成独立旁支。你可以辨析一个判断、解释一个概念，或试着应用；允许跳过，收起后继续原来的学习。只有主动带回，旁支才进入正文。</p>
+          <p>地图区分模型整理的知识与用户表达留下的理解依据。关系可以继续修正；有记录不代表已经掌握。</p>
         </section>
 
         <section className="info-section" aria-labelledby="ways-heading">

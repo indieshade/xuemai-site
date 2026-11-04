@@ -39,15 +39,15 @@ export default function Home() {
       </section>
 
       <section className="home-section home-start">
-        <div className="home-start-visual"><img src={siteAsset("/screenshots/interest-compass.png")} alt="学脉根据一个学习想法给出继续探索的方向" /></div>
+        <div className="home-start-visual"><img src={siteAsset("/screenshots/value-compass.png")} alt="价值罗盘界面示例：选择传播学、叙事学等方向，展开长期命题与学习切口" /></div>
         <div className="home-section-copy">
-          <span className="home-section-label">从问题开始</span>
-          <h2>先聊起来，整理交给学脉</h2>
-          <p>你可以从一本书、PDF、概念，或一句还说不清的想法开始。Agent 负责读、解释、追问和核对；学脉在背后整理记录、来源和关联。先把问题说出来，再决定要走到哪里。</p>
+          <span className="home-section-label">价值罗盘</span>
+          <h2>找到值得持续探索的方向</h2>
+          <p>按学科查看推荐，或说说自己的想法。先了解一个方向能带来什么，再展开知识范围、案例和起步方式。值得长期研究的命题，可以留在领域工作台，接着学下去。</p>
           <div className="home-start-flow" aria-label="学习流程">
-            <div><b>01</b><div><strong>抛出一个起点</strong><span>书、资料、概念或工作中的疑问都可以。</span></div></div>
-            <div><b>02</b><div><strong>在对话里把问题说清</strong><span>需要解释、追问或核对时，就从眼前内容继续。</span></div></div>
-            <div><b>03</b><div><strong>留下以后还能接上的记录</strong><span>讨论、来源和待回看的地方会回到对应旅程。</span></div></div>
+            <div><b>01</b><div><strong>选择一个方向</strong><span>从学科与主题逐步探索，也可以直接描述困惑。</span></div></div>
+            <div><b>02</b><div><strong>看看能学到什么</strong><span>概述说清学习价值，详情提供案例与起步方式。</span></div></div>
+            <div><b>03</b><div><strong>回到自己的学习里</strong><span>继续已有脉络、在领域中开始，或先保存待探索。</span></div></div>
           </div>
         </div>
       </section>
@@ -59,6 +59,15 @@ export default function Home() {
         </div>
         <DomainWorkspaceCarousel />
         <div className="home-domain-action"><Link className="home-button-secondary" href="/domains/">了解领域工作台 <span aria-hidden="true">→</span></Link></div>
+      </section>
+
+      <section className="home-section home-understanding">
+        <div className="home-section-heading"><span className="home-section-label">在对话中形成理解</span><h2>把一个听懂的解释，变成自己的判断</h2></div>
+        <div className="home-way-grid">
+          <article className="home-way-card"><span className="home-way-type">思考旁支</span><h3>值得多想一步时，再展开</h3><p>对话旁的轻提示可以打开一段独立讨论。复述、辨析或换个例子应用，都可以跳过或收起；只有主动选择带回，才回到正文。</p></article>
+          <article className="home-way-card"><span className="home-way-type">概念与依据</span><h3>地图留下关系，也留下你的表达</h3><p>模型整理的知识与自己表达过的理解会区分展示。回看概念、关系和对应回答，继续补充或纠正；模型的补充不等于你已经掌握。</p></article>
+        </div>
+        <p>资料阅读可跳回引用页；开启联网后可以搜索、阅读网页并追溯引用。输入区支持实时语音听写，也能随时手动修改。</p>
       </section>
 
       <section className="home-section home-ways">
@@ -92,7 +101,7 @@ export default function Home() {
           <span>{product.windows.label}</span>
           <h3>先装起来，从一段对话开始。</h3>
           {product.windows.prereleaseNote ? <p className="home-prerelease-note">{product.windows.prereleaseNote}</p> : null}
-          <p><strong>先免费使用一个脉络与一个领域。</strong>{product.licensing.expansion}{product.licensing.annualTerm}，{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
+          <p><strong>先免费使用一个脉络与一个领域。</strong>{product.licensing.expansion}{product.licensing.monthlyTerm}；{product.licensing.annualTerm}，{product.licensing.permanentTerm}；{product.licensing.deviceLimit}。</p>
           <div className="home-download-warning">安装包当前未进行代码签名，Windows 可能会提示风险。请确认下载来源和 SHA256 后再安装。</div>
           <div className="home-download-meta"><div><span>平台</span><strong>{product.windows.platform}</strong></div><div><span>大小</span><strong>{product.windows.size}</strong></div><div><span>版本</span><strong>{product.windows.version}</strong></div></div>
           <a className="home-button-primary" href={product.windows.downloadUrl} target="_blank" rel="noreferrer">下载 {product.windows.edition} <span aria-hidden="true">↓</span></a>

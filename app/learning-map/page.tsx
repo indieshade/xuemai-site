@@ -39,7 +39,7 @@ export default function LearningMapPage() {
           <span className="info-index">看关系</span>
           <h2 id="map-heading">你不必记住每一段对话，但应该找得回一个判断从哪里来</h2>
           <p>学习时很容易留下一个结论，却忘了它来自哪篇材料、哪个例子，或者哪次反驳。概念关系把这些线索接起来，让你回看时不只看见一个孤立的名词。</p>
-          <p>这不等于自动替你画出一张“正确地图”。连接来自实际学习过程，仍然可以继续补充、修正或推翻。</p>
+          <p>地图中的模型整理与用户表达依据会区分展示。全景适合看整体，有区域时可逐层展开；局部阅读突出选中概念的联系。连接仍然可以补充、修正或推翻，出现概念不代表已经掌握。</p>
         </section>
 
         <section className="info-section" aria-labelledby="relationship-heading">
@@ -54,11 +54,11 @@ export default function LearningMapPage() {
 
         <section className="info-section" aria-labelledby="constellation-heading">
           <span className="info-index">真实界面</span>
-          <h2 id="constellation-heading">概念星图把一个学习片段展开</h2>
+          <h2 id="constellation-heading">全景与局部阅读，帮助看清概念之间的联系</h2>
           <p>这个例子围绕《Rules of Play》中的 meaningful play 展开。右侧保留概念的解释、出现位置和相邻概念；中间的连线让学习者知道下一次该回到哪里。</p>
           <figure className="info-screenshot">
             <img src={siteAsset("/screenshots/learning-journey-concepts.png")} alt="学脉 Concept Constellation 概念关系图，以 meaningful play 为中心展示相邻概念和来源" loading="lazy" decoding="async" />
-            <figcaption>概念星图：点击一个概念，可以回到它的说明、来源和相邻关系。</figcaption>
+            <figcaption>界面示例：点击概念回到说明、来源和相邻关系；不同版本的布局可能略有变化。</figcaption>
           </figure>
         </section>
 

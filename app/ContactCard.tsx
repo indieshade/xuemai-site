@@ -54,7 +54,7 @@ export default function ContactCard() {
       <span className="contact-kicker">激活与反馈</span>
       <h3>选择桌面端授权</h3>
       <p>
-        {product.licensing.annualTerm}，{product.licensing.permanentTerm}。{product.licensing.deviceLimit}。{product.licensing.desktopOnly}
+        {product.licensing.monthlyTerm}；{product.licensing.annualTerm}，{product.licensing.permanentTerm}。{product.licensing.deviceLimit}。{product.licensing.desktopOnly}
       </p>
       <div className="purchase-options" aria-label="桌面端授权方案">
         {product.desktopLicenses.map((option) => (
@@ -63,7 +63,7 @@ export default function ContactCard() {
             {option.isAvailable && option.purchaseUrl ? (
               <a href={option.purchaseUrl} target="_blank" rel="noreferrer">购买{option.name}</a>
             ) : (
-              <strong>{option.availability}</strong>
+              <a href={`https://qm.qq.com/cgi-bin/qm/qr?k=${product.feedbackQQ}`} target="_blank" rel="noreferrer">{option.availability}</a>
             )}
           </div>
         ))}
